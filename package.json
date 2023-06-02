@@ -1,0 +1,23 @@
+{
+  "name": "petfindr",
+  "version": "1.0.0",
+  "description": "PetFindr: Unite Lost Pets with Their Families",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniellmadi/PetFindr.git"
+  },
+  "author": "Daniel Madi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daniellmadi/PetFindr/issues"
+  },
+  "homepage": "https://github.com/daniellmadi/PetFindr#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "live-server": "^1.2.2"
+  }
+}
