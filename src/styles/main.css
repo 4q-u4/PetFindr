@@ -23,7 +23,7 @@
     margin-left: 15px;
   }
   .hero {
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     padding: 40px 0;
     text-align: center; /* Center the content horizontally */
   }
@@ -125,7 +125,7 @@
   }
   
   .header {
-    background-color: #fff;
+    background-color: #f8f8f8;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px 0;
   }
@@ -159,6 +159,9 @@
     color: #333;
     font-weight: bold;
     transition: color 0.3s;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
+
   }
   
   .menu a:hover {
@@ -177,6 +180,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    /* padding-right: 70%; */
   }
   
   .highlight-text {
@@ -195,6 +199,74 @@
   }
   
   .hero-image img {
-    width: 250px; /* Adjust the width to your preference */
+    height: 300px;
+    width: 350px; /* Adjust the width to your preference */
     border-radius: 10px;
+    
+  }
+
+  .report-section {
+    background-color: #ffffff;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .carousel-content {
+    padding: 20px;
+  }
+  
+  .carousel-title {
+    color: #000;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .carousel-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .carousel-list {
+    text-align: left;
+    list-style: disc;
+    padding-left: 40px;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #0BCCFE;
+    padding: 10px;
+    border-radius: 50%;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    background-color: #0BCCFE;
+    opacity: 0.7;
+  }
+  
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background-color: #0BCCFE;
+    opacity: 1;
+  }
+  .report-section {
+    background-color: #f8f8f8;
+    padding: 40px 0;
+  }
+  
+  .rounded-box {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .rounded-box:hover {
+    transform: scale(1.05);
+    background-color: #0BCCFE;
+    color: ;
+
   }
