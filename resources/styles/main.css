@@ -1,3 +1,7 @@
+.index-background {
+  background-color: #ffffff;
+}
+
 /* Style for responsive design */
 @media (max-width: 767px) {
   .link-body-emphasis {
@@ -5,69 +9,11 @@
   }
 }
 
-/* Style for the container */
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Style for the header */
-.header {
-  background-color: #f8f9fa;
-}
-
-/* Style for the logo and text */
-.link-body-emphasis {
-  color: #007bff;
-}
-
-/* Style for the navigation links */
-.nav-pills .nav-link {
-  color: #343a40;
-  border-radius: 0.25rem;
-  margin-right: 0.5rem;
-}
-
-.nav-pills .nav-link.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-
-.background {
-    background: linear-gradient(to bottom, #ffffff, #ffffff), repeating-linear-gradient(-45deg, #8a2be2 0, #8a2be2 10px, #4b0082 10px, #4b0082 20px);
-}
-  .logo {
-    width: 30px;
-    height: 20px;
-    margin-right: 20px;
-    margin-top: -20px;
-  }
-  
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-nav {
-    margin-left: auto;
-  }
-  
-  .navbar-nav .nav-item {
-    margin-left: 15px;
-  }
   .hero {
-    background-color: #ffffff;
+    background-color: #9e2121;
     padding: 40px 0;
     text-align: center; /* Center the content horizontally */
   }
-  
-  /* .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  } */
   
   .text-center {
     text-align: center;
@@ -76,7 +22,8 @@
   .fw-bold {
     font-weight: bold;
   }
-  
+
+  /*! @@@@@@@@@@@@@@@@@@ 4 BUTTONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   .button-container {
     display: flex;
     flex-wrap: wrap;
@@ -153,56 +100,9 @@
     font-style: normal;
     line-height: normal;
   }
-  container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .header {
-    background-color: #f8f8f8;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-  }
-  
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo img{
-    width: 40px; /* Adjust the width as needed */
-    height: 40px; /* Automatically adjust the height to maintain aspect ratio */
-  }
-  
-  
-  .menu {
-    list-style: none;
-    display: flex;
-  }
-  
-  .menu li {
-    margin-right: 20px;
-  }
-  
-  .menu li:last-child {
-    margin-right: 0;
-  }
-  
-  .menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: large;
 
-  }
   
-  .menu a:hover {
-    color: #0BCCFE;
-  }
-
+  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   .hero-title {
     /*font-size: 36px;*/
     /*font-weight: bold;*/
@@ -246,6 +146,8 @@
     text-align: center;
   }
   
+  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
   .carousel-content {
     padding: 20px;
   }
@@ -305,6 +207,9 @@
     color: white;
 
   }
+
+  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*
   .footer {
     background-color: #4452CD;
     color: #fff;
@@ -357,6 +262,9 @@
   .footer-links a:hover {
     color: #0BCCFE;
   }
+
+  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
   .card-container {
@@ -457,6 +365,6 @@
     color: #ffffff;
   }
   
-  /* Add any custom styling here */
+
 
 

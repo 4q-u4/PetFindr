@@ -1,54 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--!  PETFINDR SENIOR PROJECT -->
-<!-- todo: CHANGE ALL ALTS AND IMAGE NAMES SEO SHIT-->
+
 
 <head> 
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetFindr</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="src/styles/main.css">
+    <title> Home - PetFindr</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!--! BOOTSTRAP V 5.3.0 -->
+    <link rel="stylesheet" href="/resources/styles/main.css">
+    <style>
+      .header {
+        background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+      }
+      .header-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 20px;
+        background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+      }
+      .navbar-nav .nav-item .nav-link.link-body-emphasis:hover { /* Style navigation links on hover */
+          padding-left: 12%;
+          border-radius: 10px; /* Add rounded edges */
+          background-color: lightgray; /* Change the background color on hover */
+      }   
+      .header-logo img{
+          width: 40px;
+          height: 35px;
+          margin-right: 15px;
+      }
+      .navbar-brand {
+          display: flex;
+          align-items: center;
+      }
+      .navbar-nav {
+          margin-left: auto; 
+      }
+      @media (min-width: 768px) {
+      .navbar-nav .nav-item {
+          margin-left: autopx;          
+          margin-right: 10px;
+      } }
+      .petfindr-text {
+        font-family:  Impact, Charcoal, sans-serif;
+        font-size: 30px;
+        color: #000000; 
+        font-weight: bolder;
+      }
+      .navbar-nav .nav-item .nav-link {
+        white-space: nowrap;
+        padding: 0.5rem 1rem; /* Adjust padding as needed */
+        transition: none; /* Smooth background color transition */
+      }
+    </style>
 </head>
 
-<body class="background">
-<!--
-    <header class="header"> <!--! HEADER (LOGO + MENU) 
-      <div class="container">
-        <nav class="navbar"> <!--todo: WHATS NAVBAR  
-
-          <div class="logo">
-            <img src="/src/images/PetFindr-Logo.png" alt="Pet Findr Logo"> <!--? PETFINDR LOGO
-          </div>
-
-          <ul class="menu">
-            <li><a href="#about">About Us</a></li>     <!--? MENU IN HEADER 
-            <li><a href="#contact">Contact Us</a></li> <!--todo: ADD LINKS 
-          </ul
-
-        </nav>
-      </div>
-    </header> -->
+<body class="index-background">
+  
 
     <header class="header">
-      <div class="container">
+      <div class="header-container">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <a class="navbar-brand" href="#">
-                  <div class="logo"><img src="/src/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
-                  <span class="fs-4">PetFindr</span>
+  
+              <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                  <div class="header-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
+                  <span class="fs-4 petfindr-text">PetFindr</span>
               </a>
+  
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
+  
               <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav ml-auto nav-pills"> <!-- Add nav-pills class here -->
-                      <li class="nav-item"><a href="#" class="nav-link link-body-emphasis active" aria-current="page">Home</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link link-body-emphasis">Features</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link link-body-emphasis">Pricing</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link link-body-emphasis">FAQs</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link link-body-emphasis">About</a></li>
+                  <ul class="navbar-nav ml-auto nav-pills">
+                      <li class="nav-item"><a href="/index.html" class="nav-link link-body-emphasis">Home</a></li>
+                      <li class="nav-item"><a href="/pages/faqs.html" class="nav-link link-body-emphasis">FAQs</a></li>
+                      <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
+                      <li class="nav-item"><a href="/pages/contact-us.html" class="nav-link link-body-emphasis">Contact Us</a></li>
                   </ul>
               </div>
           </nav>
@@ -56,6 +85,11 @@
   </header>
   
   
+  
+  
+  
+  
+  <main>
   <section class="hero"> <!-- todo: WHATS HERO-->
 
     <div class="container"> <!--! TEXT IN MIDDLE OF PAGE-->
@@ -193,7 +227,7 @@ test                </div>
     </div>
   </div>
     </div>
-
+</main>
 
   <footer class="footer">
   <div class="container">
@@ -226,9 +260,11 @@ test                </div>
       <!-- <footer class="bg-dark text-white text-center py-3"> 
         
       </footer> -->
+<!-- Include only one version of Bootstrap JavaScript -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="index.js"></script>
+<script src="index.js"></script>
+
     </div>
     </body>
     
