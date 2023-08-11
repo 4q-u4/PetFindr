@@ -103,50 +103,104 @@
 
   
   /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+  .container-fluid {
+    min-height: 100vh;
+  }
+  
+  /* Default styles */
+
+.hero-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.hero-title-highlight {
+  color: #0BCCFE;
+}
+
+.hero-slogan {
+  color: #000;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Small devices (phones in portrait mode) */
+@media (max-width: 576px) {
   .hero-title {
-    /*font-size: 36px;*/
-    /*font-weight: bold;*/
-    text-align: center; /* Center the text */
-    width: 80%; /* Set the width of the container to control line breaking */
-    margin: 0 auto; /* Center the container within its parent */
-    color: #000;
-    font-family: Inter;
-    font-size: 165px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    /* padding-right: 70%; */
-  }
-  
-  .highlight-text {
-    color: #0BCCFE;
-    white-space: pre-wrap; /* Preserve white spaces and allow wrapping */
-  }
-  
-  .hero-slogan{
-
-    color: #000;
-    font-family: Inter;
     font-size: 50px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-  
-  .hero-image img {
-    height: 300px;
-    width: 350px; /* Adjust the width to your preference */
-    border-radius: 10px;
-    
   }
 
-  .report-section {
+  .hero-slogan {
+    font-size: 16px;
+  }
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Medium devices (tablets or small laptops) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .hero-title {
+    font-size: 60px;
+  }
+
+  .hero-slogan {
+    font-size: 25px;
+  }
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Large devices (regular laptops and desktops) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .hero-title {
+    font-size: 179px;
+  }
+
+  .hero-slogan {
+    font-size: 50px;
+  }
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Extra large devices (larger screens) */
+@media (min-width: 993px) and (max-width: 1200px) {
+  /* No need to adjust font sizes further, use default */
+}
+
+/* XXL devices (largest screens) */
+@media (min-width: 1201px) {
+  /* No need to adjust font sizes further, use default */
+}
+
+
+  
+  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+  report-section {
     background-color: #ffffff;
     padding: 40px 0;
     text-align: center;
   }
   
-  /*! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
   .carousel-content {
     padding: 20px;

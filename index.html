@@ -10,7 +10,7 @@
     <title> Home - PetFindr</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!--! BOOTSTRAP V 5.3.0 -->
     <link rel="stylesheet" href="/resources/styles/main.css">
-    <style>
+    <style> /* STYLE FOR HEADER & FOOTER */
       .header {
         background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
       }
@@ -55,60 +55,57 @@
       }
       /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
-      /* Style for the social media icons */
-.bi {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.125em;
-  fill: currentColor;
-  overflow: hidden;
-}
+      
+      .bi { /* Style for the social media icons */
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.125em;
+        fill: currentColor;
+        overflow: hidden;
+      }
 
-/* Additional styles for icon colors */
-.text-body-secondary {
-  color: #6c757d; /* Bootstrap's secondary text color */
-}
+      .text-body-secondary { /* Additional styles for icon colors */
+        color: #6c757d; /* Bootstrap's secondary text color */
+      }
 
-.icon-twitter,
-.icon-instagram,
-.icon-facebook {
-  font-size: 24px; /* Adjust the size as needed */
-  transition: color 0.3s ease-in-out; /* Add a smooth color transition effect */
-}
+      .icon-twitter,
+      .icon-instagram,
+      .icon-facebook {
+        font-size: 24px; /* Adjust the size as needed */
+        transition: color 0.3s ease-in-out; /* Add a smooth color transition effect */
+      }
 
-.icon-twitter:hover {
-  color: #1da1f2; /* Twitter blue color on hover */
-}
+      .icon-twitter:hover {
+        color: #1da1f2; /* Twitter blue color on hover */
+      }
 
-.icon-instagram:hover {
-  color: #e1306c; /* Instagram gradient color on hover */
-}
+      .icon-instagram:hover {
+        color: #e1306c; /* Instagram gradient color on hover */
+      }
 
-.icon-facebook:hover {
-  color: #1877f2; /* Facebook blue color on hover */
-}
+      .icon-facebook:hover {
+        color: #1877f2; /* Facebook blue color on hover */
+      }
 
-/* Additional styles for footer */
-.footer {
-  background-color: #f8f9fa; /* Bootstrap's default background color */
-  border-top: 1px solid #dee2e6; /* Bootstrap's border color */
-  padding: 20px 0; /* Adjust padding as needed */
-}
+      .footer { /* Additional styles for footer */
 
-/* Center the footer content horizontally */
-.footer .d-flex {
-  justify-content: center;
-  flex-wrap: wrap-reverse; /* Wrap the content as needed */
-}
+        background-color: #f8f9fa; /* Bootstrap's default background color */
+        border-top: 1px solid #dee2e6; /* Bootstrap's border color */
+        padding: 20px 0; /* Adjust padding as needed */
+      }
 
-/* Center the social media icons vertically on larger screens */
-.footer .nav {
-  align-items: center;
-}
-.footer-logo img{
-    width: 22px;
-    height: 21px;
-}
+      .footer .d-flex { /* Center the footer content horizontally */
+        justify-content: center;
+        flex-wrap: wrap-reverse; /* Wrap the content as needed */
+      }
+
+      .footer .nav { /* Center the social media icons vertically on larger screens */
+        align-items: center;
+      }
+      .footer-logo img{
+         width: 22px;
+        height: 21px;
+      }
 
     </style>
 </head>
@@ -116,7 +113,7 @@
 <body class="index-background">
   
 
-    <header class="header">
+  <header class="header"><!--!  HEADER  -->
       <div class="header-container">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
   
@@ -142,23 +139,35 @@
   </header>
   
   
-  
-  
-  
-  
   <main>
-  <section class="hero"> <!-- todo: WHATS HERO-->
+  <section class="hero">
 
-    <div class="container"> <!--! TEXT IN MIDDLE OF PAGE-->
-      <h1 class="hero-title">Find Your <br>Lost <span class="highlight-text">Pet</span></h1>
-      
-      <p class="hero-slogan">Helping Lost<span class="highlight-text"> Pets </span>Find Their Way Home</p>
-      <div class="hero-image">
-        <img src="/src/images/PetFindr.png" alt="Pet Image"> <!--! IMAGE IN MIDDLE OF PAGE-->
+    <div class="container-fluid"> <!-- todo : FIX Alignment problem-->
+      <div class="row">
+        <div class="col-md-6 d-flex align-items-center">
+          <div class="text-center">
+            <h1 class="hero-title d-none d-md-block">
+              Find Your <br>
+              Lost <span class="hero-title-highlight">Pet</span>
+            </h1>
+            <h1 class="hero-title d-md-none">
+              Find Your Lost <span class="hero-title-highlight">Pet</span>
+            </h1>
+            <p class="hero-slogan">Helping Lost<span class="hero-title-highlight"> Pets </span>Find Their Way Home</p>
+          </div>
         </div>
-      <!-- <div class="hero-image">
-        <!-- <img src="/src/images/PetFindr.png" alt="Pet Image"> <!--! IMAGE IN MIDDLE OF PAGE-->
-      <!-- </div>  -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center hero-image">
+          <img class="img-fluid" src="/resources/images/PetFindr.png" alt="Pet Image">
+        </div>
+      </div>
+    </div>
+    
+    
+    
+ 
+        
+      
+     
 
 
       <div class="button-container">  <!--! BUTTONS -->
@@ -306,10 +315,6 @@ test                </div>
 
   
   
-      <!-- <footer class="bg-dark text-white text-center py-3"> 
-        
-      </footer> -->
-<!-- Include only one version of Bootstrap JavaScript -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="index.js"></script>
