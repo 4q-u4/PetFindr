@@ -1,7 +1,20 @@
-/*! @@@@@@@@@@@@@@@@@@@@@@@  BODY   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/***
+ *      _____     _   ______ _           _      
+ *     |  __ \   | | |  ____(_)         | |     
+ *     | |__) |__| |_| |__   _ _ __   __| |_ __ 
+ *     |  ___/ _ \ __|  __| | | '_ \ / _` | '__|
+ *     | |  |  __/ |_| |    | | | | | (_| | |   
+ *     |_|   \___|\__|_|    |_|_| |_|\__,_|_|   
+ *     SENIOR PROJECT BY DANIEL - BOOTSTRAP  V   5.3.0                                   
+ *                                              
+ */
+
+ @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
+
+ /*! @@@@@@@@@@@@@@@@@@@@@@@  BODY   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 .index-background {
-  background-color: #ffffff;
+  background-color: #fa9a27;
 }
 
 /*! @@@@@@@@@@@@@@@@@@@@@@@  HERO   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -11,38 +24,81 @@
   background-color: #ffffff;
   padding: 40px 0;
   text-align: center;
+  width: fit-content;
 }
 .container-fluid {
   min-height: 100vh;
 }
 .hero-title {
 color: #000;
-font-family: Inter;
+font-family: 'Rubik', sans-serif;
 font-weight: 700;
 margin-bottom: 10px;
 padding-left: 5%;
+font-size: 150px;
 }
 .hero-title-highlight {
 color: #0BCCFE;
 }
 .hero-slogan {
 color: #000;
-font-family: Inter;
+font-family: 'Rubik', sans-serif;
 font-weight: 700;
 line-height: 1;
 text-align: center;
 padding-left: 5%;
+font-size: 30px;
 }
-.scroll-button {   /*! BUTTON IN HERO - USED FOR SCROLLING */
-  background-color: #0BCCFE;
-  color: white;
-  padding: 10px 20px;
-  font-size: 20px;
-  border: none;
+
+
+/*! === GO Button - HERO === */
+
+
+.scroll-button {
+  position: relative;
+  display: inline-block;
   cursor: pointer;
-  border-radius: 20px;
-  margin-top: 20px;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 1em 3.5em;
+  background: #0BCCFE;
+  border: 4px solid #000000;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
 }
+.scroll-button::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 95%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ff68a0;
+  border-radius: 15px;
+  box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.scroll-button:hover {
+  background: #fa9a27;
+  transform: translate(0, 0.25em);
+}
+.scroll-button:hover::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+  transform: translate3d(0, 0.5em, -1em);
+}
+
+
+ /*! @@@@@@@@@@@@@@@@@@@@@ Responsivity @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 @media (max-width: 576px) { /* Small devices (phones in portrait mode) */
 .hero-title {
@@ -76,7 +132,7 @@ padding-left: 5%;
   font-size: 27px;
 }
 .hero-image img {
-  max-width: 90%;
+  max-width: 900%;
   height: auto;
 }
 }
@@ -104,168 +160,198 @@ padding-left: 5%;
     height: auto;
   }
 }
-
   /*! @@@@@@@@@@@@@@@@@@@@@@@  Buttons W/ Icons   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-
+  .button-box {
+    background-color: #fa9a27;
+    border-radius: 8px;
+    padding: 90px; /* Increase the padding to add more height */
+    margin: 0 auto;
+  }
   .button-container {
-    
     display: flex;
     justify-content: center;
     gap: 20px;
-    width: fit-content;
-    margin: 0 auto;
+    width: 100%;
+    padding: 40px 0; /* Increase the top and bottom padding to add more height */
+    box-sizing: border-box;
   }
-
-
+  .section-title {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 80px;
   }
-  
-  .button-one,  /* Default styles */
+  .button-one,
   .button-two,
   .button-three,
   .button-four {
     flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
     width: 200px;
-    transition: background-color 0.3s, transform 0.2s;
-    cursor: grab;
-}
-/*! Backgroundcolor for each button */
-.button-one { 
-    background-color: #4452CD;  
-}
-.button-two {
-    background-color: #FC64FF;
-}
-.button-three {
-    background-color: #00D1FF;
-}
-.button-four {
-    background-color: #A6A6A6;
-}
-
-
-.button:hover {
-    background-color: #0BCCFE;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 600;
+    color: #382b22;
+    text-transform: uppercase;
+    padding: 1.25em 2em;
+    background: #fff0f0;
+    border: 4px solid #020202;
+    border-radius: 16px;
+    transform-style: preserve-3d;
+  }
+  .button-one::before,
+  .button-two::before,
+  .button-three::before,
+  .button-four::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 95%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 0 2px #201f1f, 0 0.625em 0 0 #080808;
+    transform: translate3d(0, 0.75em, -1em);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  .button-one:hover,
+  .button-two:hover,
+  .button-three:hover,
+  .button-four:hover {
+    background-color: #fa9a27;
     transform: scale(1.05);
-}
-  
+  }
   .button-icon {
     width: 160px;
     height: 125px;
     margin-bottom: 10px;
+    display: block;
+    margin: 0 auto;
+    align-items: center;
   }
-  
   .button-text {
+    text-align: center;
     font-size: 19px;
-    font-weight: bold; 
-    color: #FFF;
+    font-weight: bold;
+    color: #fff;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: normal;
     line-height: normal;
   }
-  .options-section {
+  .button-one {   /* Additional styling for button colors */
+
+    background-color: #4452CD;
+  }
+  .button-two {
+    background-color: #FC64FF;
+  }
+  .button-three {
+    background-color: #00D1FF;
+  }
+  .button-four {
+    background-color: #A6A6A6;
+  }
+  .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+
+  /*! Learn More Button After 4 options */
+  .scroll-button-one {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 1em 3.5em;
+    background: #0BCCFE;
+    border: 4px solid #000000;
+    border-radius: 0.75em;
+    transform-style: preserve-3d;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  .scroll-button-one::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 95%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #030303;
+    border-radius: 15px;
+    box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #fa9a27;
+    transform: translate3d(0, 0.75em, -1em);
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+  }
+  .scroll-button-one:hover {
+    background: #fa9a27;
+    transform: translate(0, 0.25em);
+  }
+  /*
+  .scroll-button-one:hover::before {
+    box-shadow: 0 0 0 2px #000000, 0 0.5em 0 0 #050303;
+    transform: translate3d(0, 0.5em, -1em);
+  }
+  /*.options-section {
     background-color: #0BCCFE;
-    padding: 80px 0; /* Adjust padding for desired spacing */
+    padding: 80px 0; /* Adjust padding for desired spacing 
     text-align: center;
     border-radius: 20px;
   }
-
-  
-  /*! @@@@@@@@@@@@@@@@@@@@@@@  Infographcs   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-
-  report-section {
-    background-color: #ffffff;
-    padding: 40px 0;
-    text-align: center;
-  }
-  
-
-  .carousel-content {
-    padding: 20px;
-  }
-  
-  .carousel-title {
-    color: #000;
-    font-size: 32px;
-    font-weight: bold;
-  }
-  
-  .carousel-text {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .carousel-list {
-    text-align: left;
-    list-style: disc;
-    padding-left: 40px;
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: #0BCCFE;
-    padding: 10px;
-    border-radius: 50%;
-  }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    background-color: #0BCCFE;
-    opacity: 0.7;
-  }
-  
-  .carousel-control-prev:hover,
-  .carousel-control-next:hover {
-    background-color: #0BCCFE;
-    opacity: 1;
-  }
-  .report-section {
-    background-color: #1100ff;
-    padding: 40px 0;
-  }
-  
-  .rounded-box {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-  }
-  
-  .rounded-box:hover {
-    transform: scale(1.05);
-    background-color: #0BCCFE;
-    color: white;
-
-  }
-
+  */
   /*! @@@@@@@@@@@@@@@@@@@@@@@  CARDS   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
   
-
-
-  .card-container {
-    display: flex; /* Use flexbox for horizontal layout */
-    flex-wrap: wrap; /* Wrap cards if they exceed container width */
-    justify-content: flex-between; /* space-between Distribute space between cards - flex-between alogn cads to the left */
-    margin: -12px;
-  }
-  
-  
-  
-
+  .section-container {
+    .section-container {
+      text-align: center;
+      background-color: #fa9a27;
+      padding: 5% 0;
+    }
+  .section-title-cards {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 80px;
+    }
+    .card-container {
+      background-color: #fa9a27;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center-align cards horizontally */
+      margin: -12px;
+      padding-left: 5%;
+    }
   .card-title {
     color: #262626;
     font-size: 1.5em;
     line-height: normal;
     font-weight: 700;
     margin-bottom: 0.5em;
-  }
-  
+    }
   .small-desc {
     font-size: 1em;
     font-weight: 400;
@@ -276,7 +362,6 @@ padding-left: 5%;
   .small-desc {
     font-size: 1em;
   }
-  
   .go-corner {
     display: flex;
     align-items: center;
@@ -290,14 +375,12 @@ padding-left: 5%;
     background: linear-gradient(135deg, #6293c8, #384c6c);
     border-radius: 0 4px 0 32px;
   }
-  
   .go-arrow {
     margin-top: -4px;
     margin-right: -4px;
     color: white;
     font-family: courier, sans;
   }
-  
   .card {
     display: block;
     position: relative;
@@ -315,7 +398,6 @@ padding-left: 5%;
     flex: 0 0 calc(33.33% - 24px); /* Adjust width for three cards, or use calc(50% - 12px) for two cards */
     margin: 12px;
   }
-  
   .card:before {
     content: '';
     position: absolute;
@@ -331,21 +413,15 @@ padding-left: 5%;
     transform-origin: 50% 50%;
     transition: transform 0.35s ease-out;
   }
-  
   .card:hover:before {
     transform: scale(28);
   }
-  
   .card:hover .small-desc {
     transition: all 0.5s ease-out;
     color: rgba(255, 255, 255, 0.8);
   }
-  
   .card:hover .card-title {
     transition: all 0.5s ease-out;
     color: #ffffff;
   }
   
-
-
-

@@ -1,30 +1,37 @@
+<!--
+ *      _____     _   ______ _           _      
+ *     |  __ \   | | |  ____(_)         | |     
+ *     | |__) |__| |_| |__   _ _ __   __| |_ __ 
+ *     |  ___/ _ \ __|  __| | | '_ \ / _` | '__|
+ *     | |  |  __/ |_| |    | | | | | (_| | |   
+ *     |_|   \___|\__|_|    |_|_| |_|\__,_|_|   
+ *     SENIOR PROJECT BY DANIEL - BOOTSTRAP  V   5.3.0                                                                                     
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--!  PETFINDR SENIOR PROJECT -->
-
-
 <head> 
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Home - PetFindr</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> <!--! BOOTSTRAP V 5.3.0 -->
+    <title> Home - PetFindr </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="/resources/styles/main.css">
     <style> /* STYLE FOR HEADER & FOOTER */
+    /* ============= HEADER STYLE ====================================================================================== */
       .header {
-        background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
+        background-color: #fa9a27
       }
       .header-container {
-        max-width: 960px;
+        max-width: auto;
         margin: 0 auto;
         padding: 0 20px;
-        background-color: rgba(255, 255, 255, 0.8); /* Transparent white */
       }
       .navbar-nav .nav-item .nav-link.link-body-emphasis:hover { /* Style navigation links on hover */
           padding-left: 12%;
           border-radius: 10px; /* Add rounded edges */
           background-color: lightgray; /* Change the background color on hover */
-      }   
+      }
       .header-logo img{
           width: 40px;
           height: 35px;
@@ -33,6 +40,9 @@
       .navbar-brand {
           display: flex;
           align-items: center;
+        }
+      .nav-item{
+        font-weight: 700;
       }
       .navbar-nav {
           margin-left: auto; 
@@ -53,9 +63,7 @@
         padding: 0.5rem 1rem; /* Adjust padding as needed */
         transition: none; /* Smooth background color transition */
       }
-      /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-
-      
+    /* =========== FOOTER STYLE ======================================================================================== */
       .bi { /* Style for the social media icons */
         width: 1em;
         height: 1em;
@@ -63,42 +71,36 @@
         fill: currentColor;
         overflow: hidden;
       }
-
       .text-body-secondary { /* Additional styles for icon colors */
         color: #6c757d; /* Bootstrap's secondary text color */
       }
-
       .icon-twitter,
       .icon-instagram,
       .icon-facebook {
         font-size: 24px; /* Adjust the size as needed */
         transition: color 0.3s ease-in-out; /* Add a smooth color transition effect */
       }
-
       .icon-twitter:hover {
         color: #1da1f2; /* Twitter blue color on hover */
       }
-
       .icon-instagram:hover {
         color: #e1306c; /* Instagram gradient color on hover */
       }
-
       .icon-facebook:hover {
         color: #1877f2; /* Facebook blue color on hover */
       }
-
       .footer { /* Additional styles for footer */
-
-        background-color: #f8f9fa; /* Bootstrap's default background color */
-        border-top: 1px solid #dee2e6; /* Bootstrap's border color */
+        background-color: #fa9a27 !important; /* Bootstrap's default background color */
+        border-top: 1px solid #060607 !important; /* Bootstrap's border color */
         padding: 20px 0; /* Adjust padding as needed */
       }
-
+      .footer-custom {
+        background-color: #fa9a27;
+      }
       .footer .d-flex { /* Center the footer content horizontally */
         justify-content: center;
         flex-wrap: wrap-reverse; /* Wrap the content as needed */
       }
-
       .footer .nav { /* Center the social media icons vertically on larger screens */
         align-items: center;
       }
@@ -106,16 +108,15 @@
          width: 22px;
         height: 21px;
       }
-
     </style>
 </head>
 
 <body class="index-background">
   
 
-  <header class="header"><!--!  HEADER  -->
+  <header class="header"> <!--! ==== HEADER ==== -->
       <div class="header-container">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar navbar-expand-lg">
   
               <a class="navbar-brand d-flex align-items-center" href="/index.html">
                   <div class="header-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
@@ -131,7 +132,7 @@
                       <li class="nav-item"><a href="/index.html" class="nav-link link-body-emphasis">Home</a></li>
                       <li class="nav-item"><a href="/pages/faqs.html" class="nav-link link-body-emphasis">FAQs</a></li>
                       <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
-                      <li class="nav-item"><a href="/pages/contact-us.html" class="nav-link link-body-emphasis">Contact Us</a></li>
+                      <li class="nav-item"><a href="https://wa.me/qr/RDD222S4IZMQB1" class="nav-link link-body-emphasis">Contact Us</a></li>
                   </ul>
               </div>
           </nav>
@@ -139,7 +140,7 @@
   </header>
   
   
-  <main>
+  <main> <!--! ==== BODY ==== -->
 
   <section class="hero">
     <div class="container-fluid"> <!-- todo : FIX Alignment problem-->
@@ -147,59 +148,82 @@
         <div class="col-md-6 d-flex align-items-center">
           <div class="text-center">
             <h1 class="hero-title d-none d-md-block">
-              Find Your <br>
+              Find Your 
               Lost <span class="hero-title-highlight">Pet</span>
             </h1>
             <h1 class="hero-title d-md-none">
               Find Your Lost <span class="hero-title-highlight">Pet</span>
             </h1>
             <p class="hero-slogan">Helping Lost<span class="hero-title-highlight"> Pets </span>Find Their Way Home</p>
+            <br>
+
             <button class="scroll-button">Go</button>
 
           </div>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-center hero-image">
-          <img class="img-fluid" src="/resources/images/PetFindr.png" alt="Pet Image">
+          <img class="#" src="/resources/images/PetFindr.png" alt="Pet Image">
         </div>
       </div>
     </div>
-    
+  </section>
     
  
+  
+    
+      <section class="button-section"> <!--todo:  1) CHnage Post A Pet Icon 2) Remove Href underline for links in buttons-->
         
-      
-     
-<div>
-  <p class="section-description">
-  Explore the following options to get started:
-  </p>
-</div>
-
-      <div class="button-container">  <!--! BUTTONS -->
-
+        <div class="button-box">
+          <div class="section-content">
+            <br>
+            <h2 class="section-title">Explore Your Options:</h2>      
+          </div>
+        <div class="button-container">
           <div class="button-one">
+            <a href="/pages/search-for-a-pet.html">
             <img src="/resources/images/Search-for-a-lost-pet.png" alt="Search For Lost Pet Icon" class="button-icon">
             <p class="button-text">Search for a Lost Pet</p>
+          </a>
           </div>
-
+    
           <div class="button-two">
+            <a href="/pages/report-a-pet.html">
             <img src="/resources/images/Report-pet.png" alt="Report Pet Icon" class="button-icon">
             <p class="button-text">Report a Pet</p>
+            </a>
           </div>
-
+    
           <div class="button-three">
+            <a href="/pages/adopt-a-pet.html">
             <img src="/resources/images/Adopt-a-pet.png" alt="Adopt Pet Icon" class="button-icon">
             <p class="button-text">Adopt a Pet</p>
+            </a>
           </div>
-
+    
           <div class="button-four">
+            <a href="/pages/post-for-adoption.html">
             <img src="/resources/images/Adopt-a-pet.png" alt="Post Pet Icon" class="button-icon">
             <p class="button-text">Post For Adoption</p>
+            </a>
           </div>
+        </div>
+        
+        
+        <br>
+        <button class="scroll-button-one">Learn More</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr class="featurette-divider">
 
-      </div>
+        </div>
+      </section>
     </div>
-  </section>
+    
 
   
 <!-- 
@@ -232,7 +256,7 @@ test                </div>
       </div>
     </div>
   </section>  -->
-
+<!---
   <section class="report-section">
     <div class="container">
       <div class="row">
@@ -258,51 +282,61 @@ test                </div>
         </div>
       </div>
     </div>
-  </section>
-<!--! ))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))-->
- <div class="card-container">
-<div class="card">
-    <p class="card-title">Product Name</p>
-    <p class="small-desc">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
-      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
-      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
-      eum nihil itaque!
-    </p>
-    <!-- <div class="go-corner">
-      <div class="go-arrow">→</div>
-    </div> -->
-  </div>
+  </section> -->
 
-  <div class="card">
-    <p class="card-title">Product Name</p>
-    <p class="small-desc">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
-      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
-      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
-      eum nihil itaque!
-    </p>
-    <div class="go-corner">
-      <div class="go-arrow">→</div>
-    </div>
-  </div>
+  <!--! ))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))-->
+<section class="section-container">
+  <div class="card-container">
+    <h2 class="section-title">Explore Your Options:</h2>      
 
-  <div class="card">
-    <p class="card-title">Product Name</p>
-    <p class="small-desc">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
-      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
-      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
-      eum nihil itaque!
-    </p>
-    <div class="go-corner">
-      <div class="go-arrow">→</div>
+    <div class="card">
+      <p class="card-title">Search for a Lost Pet</p>
+      <p class="small-desc">
+        Use the power of PetFindr integrated with Google Maps to quickly locate and reunite with your lost pet. Our advanced search features make it easy to search for your beloved furry friend and get real-time directions to their location.
+      </p>
+      <div class="go-corner">
+        <div class="go-arrow">→</div>
+      </div>
     </div>
-  </div>
+    
+    <div class="card">
+      <p class="card-title">Post Your Pet for Adoption</p>
+      <p class="small-desc">
+        Want to find a loving home for your pet? PetFindr's seamless integration with Google Maps allows you to post your pet's profile and highlight their location on an interactive map. Connect with potential adopters nearby and ensure your pet finds a caring family.
+      </p>
+      <div class="go-corner">
+        <div class="go-arrow">→</div>
+      </div>
     </div>
+    
+    <div class="card">
+      <p class="card-title">Adopt a Pet</p>
+      <p class="small-desc">
+        Explore adorable pets available for adoption near you using PetFindr's Google Maps integration. Discover pets from local shelters and individuals, view their profiles, and make informed decisions to bring a new furry friend into your family.
+      </p>
+      <div class="go-corner">
+        <div class="go-arrow">→</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <p class="card-title">Post Your Pet for Help</p>
+      <p class="small-desc">
+        Need assistance finding your lost pet or seeking help for your pet? Utilize PetFindr's collaboration with Google Maps to share your pet's details and location with a supportive community. Connect with fellow pet lovers and receive the help you need.
+      </p>
+      <div class="go-corner">
+        <div class="go-arrow">→</div>
+      </div>
+    </div>
+
+    </div>
+    </section>
 </main>
 
-  <footer class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+
+<!--! =========================================================================== -->
+  
+<footer class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-custom"> <!--! ==== FOOTER ==== -->
     <div class="col-md-4 d-flex align-items-center">
       <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
         <div class="footer-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
@@ -322,11 +356,10 @@ test                </div>
 
   
   
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/resources/scripts/main.js"></script>
+<!--! ====== JAVASCRIPT ====== -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="/resources/scripts/main.js"></script>
 
     </div>
-    </body>
-    
-    </html>
+  </body>
+ </html>
