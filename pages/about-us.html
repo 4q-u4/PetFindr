@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!--Todo: Chnage buttons to 3D ((()))  Chnage Text-->
 <head> 
     <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> About Us - PetFindr </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="/resources/styles/main.css">
+    <link rel="stylesheet" href="/resources/styles/aboutus.css">
     <style> /* STYLE FOR HEADER & FOOTER */
     /* ============= HEADER STYLE ====================================================================================== */
       .header {
@@ -100,7 +100,8 @@
       }
     </style>
 </head>
-<body class="index-background">
+
+<body class="aboutus-body">
 <header class="header"> <!--! ==== HEADER ==== -->
   <div class="header-container">
       <nav class="navbar navbar-expand-lg">
@@ -119,15 +120,48 @@
                   <li class="nav-item"><a href="/index.html" class="nav-link link-body-emphasis">Home</a></li>
                   <li class="nav-item"><a href="/pages/faqs.html" class="nav-link link-body-emphasis">FAQs</a></li>
                   <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
-                  <li class="nav-item"><a href="/pages/contact-us.html" class="nav-link link-body-emphasis">Contact Us</a></li>
+                  <li class="nav-item"><a href="https://wa.me/qr/RDD222S4IZMQB1" class="nav-link link-body-emphasis">Contact Us</a></li>
               </ul>
           </div>
       </nav>
   </div>
 </header>
-<main>
 
+<main>
+<br>
+<br>
+  <div class="container">
+    <div class="row">
+    <div class="jumbotron">
+      <h2 class="display-4">About PetFindr</h2>
+      <p class="lead">Welcome to PetFindr! We are your trusted partner in reuniting lost pets with their owners and providing adoption services.</p>
+      <hr class="my-4">
+      <p>At PetFindr, we understand the deep bond between pets and their owners. Our mission is to make sure that every lost pet has a chance to come back home and every pet finds a loving forever home.</p>
+      <p>We offer a comprehensive platform that allows pet owners to report and search for lost pets, and also provides a seamless adoption process for those looking to add a new furry member to their family.</p>
+      <p>Our Values:</p>
+      <ul>
+        <li>Compassion for all animals</li>
+        <li>Commitment to reuniting families</li>
+        <li>Transparency and honesty</li>
+        <li>Creating a positive impact on communities</li>
+      </ul>
+      <p>Company History:</p>
+      <p>PetFindr was founded in 2023 with a simple goal: to help pet owners find their lost companions and provide a caring solution for pet adoption. Over the years, we have helped thousands of families reunite with their beloved pets and facilitated countless successful adoptions.</p>
+      
+      <div class="text-center"> <!-- Centered buttons -->
+        <div class="btn-group" role="group" aria-label="Button group">
+          <div class="mx-2 about-buttons">
+          <button class="btn btn-primary btn-lg faq" type="button" ><a href="/pages/faqs.html">FAQs</a></button>
+          </div>
+          <div class="mx-2">
+          <button class="btn btn-primary btn-lg contact" type="button" onclick="location.href='#contact'">Contact Us</button>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
 </main>
+
 <footer class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-custom"> <!--! ==== FOOTER ==== -->
   <div class="col-md-4 d-flex align-items-center">
     <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">

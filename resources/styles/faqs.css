@@ -1,0 +1,68 @@
+.faqs-body{
+    background-color: #fa9a27;
+
+}
+.faq-buttons a{
+    text-decoration: none;
+    color: black
+}
+.left{
+    background-color: #fa9a27;
+    color: #000000;
+    border: 4px solid #000000;
+    border-radius: 0.75em;
+}
+.right{
+    background-color: #fa9a27;
+    color: #000000;
+    border: 4px solid #000000;
+    border-radius: 0.75em;
+}
+.left:hover {
+    background-color: aqua;
+    border-color: #000000;
+    color: #000000;
+  }
+  .right:hover {
+    background-color: aqua;
+    border-color: #000000;
+    color: #000000;
+  }
+.round {
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    border-radius: 15px;
+}
+.nav-tabs-custom .nav-item .nav-link.active {
+    color: #6c6ff5;
+}
+.nav-tabs-custom .nav-item .nav-link {
+    border: none;
+}
+.text-muted {
+    color: #8ca3bd!important;
+}
+.nav-tabs-custom .nav-item {
+    position: relative;
+    color: #271050;
+}
+.nav-tabs-custom .nav-item .nav-link.active:after {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.nav-tabs-custom .nav-item .nav-link::after {
+    content: "";
+    background: #6c6ff5;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1px;
+    -webkit-transition: all 250ms ease 0s;
+    transition: all 250ms ease 0s;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
