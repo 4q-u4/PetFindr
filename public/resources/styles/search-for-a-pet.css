@@ -1,0 +1,10 @@
+#map { 
+    width: 60%;
+    height: 600px; /* Adjust the height as needed */
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+.searchforpet-body{
+    background-color: #fa9a27;
+}
