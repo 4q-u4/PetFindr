@@ -1,0 +1,41 @@
+.contactus-body {
+background-color: #fa9a27;
+}
+
+.title{
+    text-align: center;
+}
+main {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-form label, .whatsapp-button a {
+    display: block;
+    margin-top: 1em;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .contact-form button {
+    background-color: #333;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .whatsapp-button img {
+    vertical-align: middle;
+    margin-right: 0.5em;
+  }
