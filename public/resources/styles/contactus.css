@@ -1,29 +1,43 @@
-.contactus-body {
-background-color: #fa9a27;
-}
-
-.title{
-    text-align: center;
-}
 main {
     max-width: 800px;
     margin: 2em auto;
     padding: 1em;
-    background-color: white;
+    background-color: #fa9a27;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-form label, .whatsapp-button a {
+    border-radius: 20px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    border: 2px solid black;
+}
+
+.contactus-body {
+    background-color: #fa9a27;
+}
+
+.title{
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 900;
+}
+
+.contact-form label{
     display: block;
     margin-top: 1em;
-  }
+}
   
   .contact-form input,
   .contact-form textarea {
     width: 100%;
-    padding: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-family: 'Rubik', sans-serif;
+    border: 2px solid BLACK;
+    background-color: #FFF;
+    box-shadow: 4px 4px black;
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+    padding: 5px 10px;
+    outline: none;
   }
   
   .contact-form button {
@@ -35,7 +49,64 @@ main {
     cursor: pointer;
   }
   
-  .whatsapp-button img {
-    vertical-align: middle;
-    margin-right: 0.5em;
+
+  .button-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the middle */
+    justify-content: center; /* Align items horizontally in the middle */
+    margin-top: 20px; /* Add some space between the buttons */
   }
+  
+  .submit {
+    border: 2px solid black !important;
+    border-radius: 10px !important; /* Rounded edges */
+
+
+  }
+  
+  .whatsapp {
+    display: inline-block;
+    background-color: #4caf50 !important; /* Green color */
+    border-radius: 10px !important; /* Rounded edges */
+    padding: 10px; /* Padding around the button */
+    color: #fff;
+    border: 2px solid black !important;
+  }
+  
+  .whatsapp a{
+    text-decoration: none;
+    color: #fff;
+  }
+
+  /*! ========= Responsivity ========= */
+
+
+@media (max-width: 576px) {
+  main {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 577px) {
+  main {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 769px) {
+  main {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 993px) {
+  main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1201px) {
+  main {
+    max-width: 1140px;
+  }
+}

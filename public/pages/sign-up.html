@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/resources/styles/sign-up.css">
+
+</head>
+
+<body class="signup-body">
+
+
+    <div class="form-container">
+        <p class="form-title">Sign Up</p>
+        <form class="form" method="POST" action="/verify-captcha">
+            <div class="input-group">
+                <label for="signup-username">Username</label>
+                <input type="text" name="signup-username" id="signup-username" placeholder="">
+            </div>
+            <br>
+            <div class="input-group">
+                <label for="signup-email">Email</label>
+                <input type="email" name="signup-email" id="signup-email" placeholder="">
+            </div>
+            <br>
+            <div class="input-group">
+                <label for="signup-password">Password</label>
+                <input type="password" name="signup-password" id="signup-password" placeholder="">
+            </div>
+            <br>
+            <div class="input-group">
+                <div class="h-captcha" data-sitekey="ec829f94-dbd8-4e5a-a679-a5c1fb86515e"></div>
+            </div>
+
+            <br>
+            <button type="submit" class="signup-btn">Sign Up</button>
+
+        </form>
+        <br>
+        <p class="login">Already have an account?
+            <a rel="noopener noreferrer" href="login.html" class="">Login</a>
+        </p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="/resources/scripts/signup.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+</body>
+
+</html>

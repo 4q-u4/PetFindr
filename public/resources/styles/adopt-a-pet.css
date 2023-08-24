@@ -1,0 +1,140 @@
+/* Define common card styles */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: var(--bs-card-height);
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 0.375rem;
+  }
+  
+  /* Remove margins from horizontal rules within cards */
+  .card > hr {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  /* Apply consistent styling for list groups and card footer */
+  .card > .list-group,
+  .card > .card-footer {
+    border-top: inherit;
+  }
+  
+  /* Style the first item in the list group */
+  .card > .list-group:first-child {
+    border-top-width: 0;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+  }
+  
+  /* Style the last item in the list group */
+  .card > .list-group:last-child {
+    border-bottom-width: 0;
+    border-bottom-right-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+  }
+  
+  /* Style card headers and footers */
+  .card-header,
+  .card-footer {
+    padding: 0.5rem 1rem;
+    color: initial; /* Use the default color */
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.175);
+  }
+  
+  /* Style card content body */
+  .card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem; /* Apply spacing */
+    color: initial; /* Use the default color */
+  }
+  
+  /* Style card titles */
+  .card-title {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Style card subtitles */
+  .card-subtitle {
+    margin-top: -0.25rem; /* Adjust margin to move up */
+    margin-bottom: 0;
+  }
+  
+  /* Style the last paragraph in card text */
+  .card-text:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Apply spacing between card links */
+  .card-link + .card-link {
+    margin-left: 1rem; /* Apply spacing */
+  }
+  
+  /* Style card image overlays */
+  .card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem; /* Apply padding */
+    border-radius: 0.375rem;
+  }
+  
+  /* Apply consistent styling for card images */
+  .card-img,
+  .card-img-top,
+  .card-img-bottom {
+    width: 100%;
+    border-radius: 0.375rem;
+  }
+  
+  /* Apply margin to the card group */
+  .card-group > .card {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Media query for larger screens */
+  @media (min-width: 576px) {
+    .card-group {
+      display: flex;
+      flex-flow: row wrap;
+    }
+    .card-group > .card {
+      flex: 1 0 0%;
+      margin-bottom: 0;
+    }
+    .card-group > .card + .card {
+      margin-left: 0;
+      border-left: 0;
+    }
+    .card-group > .card:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .card-group > .card:not(:last-child) .card-img-top,
+    .card-group > .card:not(:last-child) .card-header {
+      border-top-right-radius: 0;
+    }
+    .card-group > .card:not(:last-child) .card-img-bottom,
+    .card-group > .card:not(:last-child) .card-footer {
+      border-bottom-right-radius: 0;
+    }
+    .card-group > .card:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .card-group > .card:not(:first-child) .card-img-top,
+    .card-group > .card:not(:first-child) .card-header {
+      border-top-left-radius: 0;
+    }
+    .card-group > .card:not(:first-child) .card-img-bottom,
+    .card-group > .card:not(:first-child) .card-footer {
+      border-bottom-left-radius: 0;
+    }
+  }

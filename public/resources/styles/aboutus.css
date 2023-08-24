@@ -4,7 +4,11 @@
     font-family: 'Rubik', sans-serif;
 }  
 .container {
-    padding: 0px 30px 30px 0px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
 } 
 .jumbotron {
     background-color: #ffffff;
@@ -23,6 +27,11 @@
     border-radius: 0.75em;
     text-decoration: none;
 
+}
+
+.faq a{
+    text-decoration: none;
+    color: #000000;
 }
 .contact{
     background-color: #fa9a27;
@@ -45,3 +54,42 @@
 .about-buttons {
     color:#000000
 }
+
+/* Max 576px (Small screens) */
+@media (max-width: 576px) {
+    .jumbotron {
+      padding: 20px;
+   
+      border-radius: 10px;
+     
+    }
+  }
+  
+  /* Min 577px (Medium screens) */
+  @media (min-width: 577px) {
+    .jumbotron {
+      padding: 30px;
+    }
+  }
+  
+  /* Min 769px (Large screens) */
+  @media (min-width: 769px) {
+    .jumbotron {
+      padding: 40px;
+    }
+  }
+  
+  /* Min 993px (Extra large screens) */
+  @media (min-width: 993px) {
+    .jumbotron {
+      padding: 50px;
+    }
+  }
+  
+  /* Min 1201px (Extra extra large screens) */
+  @media (min-width: 1201px) {
+    .jumbotron {
+      padding: 60px;
+    }
+  }
+  

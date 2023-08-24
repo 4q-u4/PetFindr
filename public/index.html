@@ -10,410 +10,297 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Home - PetFindr </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="/resources/styles/main.css">
-    <link rel="stylesheet" href="/resources/styles/popup.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Home - PetFindr </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/resources/styles/main.css">
+  <script src="https://kit.fontawesome.com/b270433a2b.js" crossorigin="anonymous"></script>
 
 
-    <style> /* STYLE FOR HEADER & FOOTER */
+
+  <style>
+    /* STYLE FOR HEADER & FOOTER */
     /* ============= HEADER STYLE ====================================================================================== */
-      .header {
-        background-color: #fa9a27
-      }
-      .header-container {
-        max-width: auto;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-      .navbar-nav .nav-item .nav-link.link-body-emphasis:hover { /* Style navigation links on hover */
-          padding-left: 12%;
-          border-radius: 10px; /* Add rounded edges */
-          background-color: lightgray; /* Change the background color on hover */
-      }
-      .header-logo img{
-          width: 40px;
-          height: 35px;
-          margin-right: 15px;
-      }
-      .navbar-brand {
-          display: flex;
-          align-items: center;
-        }
-      .nav-item{
-        font-weight: 700;
-      }
-      .navbar-nav {
-          margin-left: auto; 
-      }
-      @media (min-width: 768px) {
+    .header {
+      background-color: #fa9a27
+    }
+
+    .header-container {
+      max-width: auto;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar-nav .nav-item .nav-link.link-body-emphasis:hover {
+      /* Style navigation links on hover */
+      padding-left: 12%;
+      border-radius: 10px;
+      /* Add rounded edges */
+      background-color: lightgray;
+      /* Change the background color on hover */
+    }
+
+    .header-logo img {
+      width: 40px;
+      height: 35px;
+      margin-right: 15px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-weight: 700;
+    }
+
+    .navbar-nav {
+      margin-left: auto;
+    }
+
+    @media (min-width: 768px) {
       .navbar-nav .nav-item {
-          margin-left: autopx;          
-          margin-right: 10px;
-      } }
-      .petfindr-text {
-        font-family:  Impact, Charcoal, sans-serif;
-        font-size: 30px;
-        color: #000000; 
-        font-weight: bolder;
+        margin-left: autopx;
+        margin-right: 10px;
       }
-      .navbar-nav .nav-item .nav-link {
-        white-space: nowrap;
-        padding: 0.5rem 1rem; /* Adjust padding as needed */
-        transition: none; /* Smooth background color transition */
-      }
-      .auth-icon {
-    position: relative;
-    cursor: pointer;
-}
-.auth-icon i {
-    font-size: 28px; /* Adjust the icon size */
-}
+    }
 
-.auth-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    .petfindr-text {
+      font-family: Impact, Charcoal, sans-serif;
+      font-size: 30px;
+      color: #000000;
+      font-weight: bolder;
+    }
 
-.auth-menu.show {
-    display: block;
-}
+    .navbar-nav .nav-item .nav-link {
+      white-space: nowrap;
+      padding: 0.5rem 1rem;
+      /* Adjust padding as needed */
+      transition: none;
+      /* Smooth background color transition */
+    }
 
-.auth-link {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333; 
-    font-size: 14px;
-    white-space: nowrap;/* Adjust color as needed */
-}
+    .auth-icon {
+      position: relative;
+      cursor: pointer;
+    }
 
-.auth-link:hover {
-    background-color: #f0f0f0;
-}
+    .auth-icon i {
+      font-size: 28px;
+      /* Adjust the icon size */
+    }
+
+    .auth-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .auth-menu.show {
+      display: block;
+    }
+
+    .auth-link {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      white-space: nowrap;
+      /* Adjust color as needed */
+    }
+
+    .auth-link:hover {
+      background-color: #f0f0f0;
+    }
 
     /* =========== FOOTER STYLE ======================================================================================== */
-      .bi { /* Style for the social media icons */
-        width: 1em;
-        height: 1em;
-        vertical-align: -0.125em;
-        fill: currentColor;
-        overflow: hidden;
-      }
-      .text-body-secondary { /* Additional styles for icon colors */
-        color: #6c757d; /* Bootstrap's secondary text color */
-      }
-      .icon-twitter,
-      .icon-instagram,
-      .icon-facebook {
-        font-size: 24px; /* Adjust the size as needed */
-        transition: color 0.3s ease-in-out; /* Add a smooth color transition effect */
-      }
-      .icon-twitter:hover {
-        color: #1da1f2; /* Twitter blue color on hover */
-      }
-      .icon-instagram:hover {
-        color: #e1306c; /* Instagram gradient color on hover */
-      }
-      .icon-facebook:hover {
-        color: #1877f2; /* Facebook blue color on hover */
-      }
-      .footer { /* Additional styles for footer */
-        background-color: #fa9a27 !important; /* Bootstrap's default background color */
-        border-top: 1px solid #060607 !important; /* Bootstrap's border color */
-        padding: 20px 0; /* Adjust padding as needed */
-      }
-      .footer-custom {
-        background-color: #fa9a27;
-      }
-      .footer .d-flex { /* Center the footer content horizontally */
-        justify-content: center;
-        flex-wrap: wrap-reverse; /* Wrap the content as needed */
-      }
-      .footer .nav { /* Center the social media icons vertically on larger screens */
-        align-items: center;
-      }
-      .footer-logo img{
-         width: 22px;
-        height: 21px;
-      }
-     /* .popup-button {
-  background-color: #fa9a27;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    .bi {
+      /* Style for the social media icons */
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.125em;
+      fill: currentColor;
+      overflow: hidden;
+    }
 
-.popup-button:hover {
-  background-color: #e6820e;
-}
-#popup-container {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  justify-content: center;
-  align-items: center;
-}
+    .text-body-secondary {
+      /* Additional styles for icon colors */
+      color: #6c757d;
+      /* Bootstrap's secondary text color */
+    }
 
-#popup-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-}
-*/
-    </style>
+    .icon-twitter,
+    .icon-instagram,
+    .icon-facebook {
+      font-size: 24px;
+      /* Adjust the size as needed */
+      transition: color 0.3s ease-in-out;
+      /* Add a smooth color transition effect */
+    }
+
+    .icon-twitter:hover {
+      color: #1da1f2;
+      /* Twitter blue color on hover */
+    }
+
+    .icon-instagram:hover {
+      color: #e1306c;
+      /* Instagram gradient color on hover */
+    }
+
+    .icon-facebook:hover {
+      color: #1877f2;
+      /* Facebook blue color on hover */
+    }
+
+    .footer {
+      /* Additional styles for footer */
+      background-color: #fa9a27 !important;
+      /* Bootstrap's default background color */
+      border-top: 1px solid #060607 !important;
+      /* Bootstrap's border color */
+      padding: 20px 0;
+      /* Adjust padding as needed */
+    }
+
+    .footer-custom {
+      background-color: #fa9a27;
+    }
+
+    .footer .d-flex {
+      /* Center the footer content horizontally */
+      justify-content: center;
+      flex-wrap: wrap-reverse;
+      /* Wrap the content as needed */
+    }
+
+    .footer .nav {
+      /* Center the social media icons vertically on larger screens */
+      align-items: center;
+    }
+
+    .footer-logo img {
+      width: 22px;
+      height: 21px;
+    }
+  </style>
 </head>
 
 <body class="index-background">
-  
+
 
   <header class="header"> <!--! ==== HEADER ==== -->
-      <div class="header-container">
-          <nav class="navbar navbar-expand-lg">
-  
-              <a class="navbar-brand d-flex align-items-center" href="/index.html">
-                  <div class="header-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
-                  <span class="fs-4 petfindr-text">PetFindr</span>
-              </a>
-  
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-  
-              <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav ml-auto nav-pills">
-                      <li class="nav-item"><a href="/index.html" class="nav-link link-body-emphasis">Home</a></li>
-                      <li class="nav-item"><a href="/pages/faqs.html" class="nav-link link-body-emphasis">FAQs</a></li>
-                      <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
-                      <li class="nav-item"><a href="/pages/contactus.html" class="nav-link link-body-emphasis">Contact Us</a></li>
-                     </ul> 
-                     <div class="auth-icon">
-                      <i class="fas fa-user-circle"></i>
-                      <div class="auth-menu">
-                        <a href="#" class="auth-link" data-target="signup">Sign Up</a>
-                        <a href="#" class="auth-link" data-target="login">Login</a>
-                      </div>
-                  </div>
-              </div>
-          </nav>
-      </div>
+    <div class="header-container">
+      <nav class="navbar navbar-expand-lg">
+
+        <a class="navbar-brand d-flex align-items-center" href="/index.html">
+          <div class="header-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
+          <span class="fs-4 petfindr-text">PetFindr</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto nav-pills">
+            <li class="nav-item"><a href="/index.html" class="nav-link link-body-emphasis">Home</a></li>
+            <li class="nav-item"><a href="/pages/faqs.html" class="nav-link link-body-emphasis">FAQs</a></li>
+            <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
+            <li class="nav-item"><a href="/pages/contactus.html" class="nav-link link-body-emphasis">Contact Us</a></li>
+          </ul>
+          <div class="auth-icon">
+            <i class="fas fa-user-circle"></i>
+            <div class="auth-menu">
+              <button id="open-login-popup" class="auth-link">Open Login Popup</button>
+              <button id="open-signup-popup" class="auth-link-one">Open Signup Popup</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <div class="popup-overlay">
-    <!--! LOGIN -->
-    <div id="login-popup" class="popup">
-      <div class="form-container">
-        <p class="title">Login</p>
-        <form class="form">
-          <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" placeholder="">
-          </div>
-          <br>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="">
-            <div class="forgot">
-              <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
-            </div>
-          </div>
-          <br>
-          <button class="sign">Sign in</button>
-        </form>
-        <br>
-        <div class="social-message">
-          <div class="line"></div>
-          <p class="message">Login with social accounts</p>
-          <div class="line"></div>
-        </div>
-        <div class="social-icons">
-          <button aria-label="Log in with Google" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-              <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
-            </svg>
-          </button>
-          <button aria-label="Log in with Twitter" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-              <path d="M31.937 6.093c-1.177 0.516-2.437 0.871-3.765 1.032 1.355-0.813 2.391-2.099 2.885-3.631-1.271 0.74-2.677 1.276-4.172 1.579-1.192-1.276-2.896-2.079-4.787-2.079-3.625 0-6.563 2.937-6.563 6.557 0 0.521 0.063 1.021 0.172 1.495-5.453-0.255-10.287-2.875-13.52-6.833-0.568 0.964-0.891 2.084-0.891 3.303 0 2.281 1.161 4.281 2.916 5.457-1.073-0.031-2.083-0.328-2.968-0.817v0.079c0 3.181 2.26 5.833 5.26 6.437-0.547 0.145-1.131 0.229-1.724 0.229-0.421 0-0.823-0.041-1.224-0.115 0.844 2.604 3.26 4.5 6.14 4.557-2.239 1.755-5.077 2.801-8.135 2.801-0.521 0-1.041-0.025-1.563-0.088 2.917 1.86 6.36 2.948 10.079 2.948 12.067 0 18.661-9.995 18.661-18.651 0-0.276 0-0.557-0.021-0.839 1.287-0.917 2.401-2.079 3.281-3.396z"></path>
-            </svg>
-          </button>
-          <button aria-label="Log in with GitHub" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-current">
-              <path d="M16 0.396c-8.839 0-16 7.167-16 16 0 7.073 4.584 13.068 10.937 15.183 0.803 0.151 1.093-0.344 1.093-0.772 0-0.38-0.009-1.385-0.015-2.719-4.453 0.964-5.391-2.151-5.391-2.151-0.729-1.844-1.781-2.339-1.781-2.339-1.448-0.989 0.115-0.968 0.115-0.968 1.604 0.109 2.448 1.645 2.448 1.645 1.427 2.448 3.744 1.74 4.661 1.328 0.14-1.031 0.557-1.74 1.011-2.135-3.552-0.401-7.287-1.776-7.287-7.907 0-1.751 0.62-3.177 1.645-4.297-0.177-0.401-0.719-2.031 0.141-4.235 0 0 1.339-0.427 4.4 1.641 1.281-0.355 2.641-0.532 4-0.541 1.36 0.009 2.719 0.187 4 0.541 3.043-2.068 4.381-1.641 4.381-1.641 0.859 2.204 0.317 3.833 0.161 4.235 1.015 1.12 1.635 2.547 1.635 4.297 0 6.145-3.74 7.5-7.296 7.891 0.556 0.479 1.077 1.464 1.077 2.959 0 2.14-0.020 3.864-0.020 4.385 0 0.416 0.28 0.916 1.104 0.755 6.4-2.093 10.979-8.093 10.979-15.156 0-8.833-7.161-16-16-16z"></path>
-            </svg>
-          </button>
-        </div>
-        <p class="signup">Don't have an account?
-          <a rel="noopener noreferrer" href="#" class="">Sign up</a>
-        </p>
-      </div>
-      <button class="close-popup">Close</button>
-    </div>
-    <!--! Sign Up-->
-    <div class="popup-overlay">
-      <div id="signup-popup" class="popup">
-        <div class="form-container">
-          <p class="title">Sign Up</p>
-          <form class="form">
-            <div class="input-group">
-              <label for="signup-username">Username</label>
-              <input type="text" name="signup-username" id="signup-username" placeholder="">
-            </div>
-            <br>
-            <div class="input-group">
-              <label for="signup-email">Email</label>
-              <input type="email" name="signup-email" id="signup-email" placeholder="">
-            </div>
-            <br>
-            <div class="input-group">
-              <label for="signup-password">Password</label>
-              <input type="password" name="signup-password" id="signup-password" placeholder="">
-            </div>
-            <br>
-            <button class="sign">Sign Up</button>
-          </form>
-          <br>
-          <p class="signup">Already have an account?
-            <a rel="noopener noreferrer" href="#" class="">Login</a>
-          </p>
-        </div>
-        <button class="close-popup">Close</button>
-      </div>
-    </div>
-  </div>
-   <!--! OTP -->
-   <div id="otp-verification-popup" class="popup">
-    <div class="form">
-      <div class="title">OTP Verification</div>
-      <div class="title">Verification Code</div>
-      <p class="message">We have sent a verification code to your mobile number</p>
-      <div class="inputs">
-        <input id="input1" type="text" maxlength="1">
-        <input id="input2" type="text" maxlength="1">
-        <input id="input3" type="text" maxlength="1">
-        <input id="input4" type="text" maxlength="1">
-      </div>
-      <button class="action" id="verify-button">Verify Me</button>
-    </div>
-  </div>
-  
-
-
-
-<!---
-  <div id="popup-container">
-    <div id="popup-content">
-      <div id="login-form">
-        <h2>Login</h2>
-        <form>
-          <label for="login-username">Username</label>
-          <input type="text" id="login-username" name="login-username" required>
-  
-          <label for="login-password">Password</label>
-          <input type="password" id="login-password" name="login-password" required>
-  
-          <button type="submit">Login</button>
-        </form>      </div>
-      <div id="signup-form">
-        <form>
-          <label for="signup-username">Username</label>
-          <input type="text" id="signup-username" name="signup-username" required>
-  
-          <label for="signup-email">Email</label>
-          <input type="email" id="signup-email" name="signup-email" required>
-  
-          <label for="signup-password">Password</label>
-          <input type="password" id="signup-password" name="signup-password" required>
-  
-          <button type="submit">Sign Up</button>
-        </form>      </div>
-      <!-- ... toggle buttons ... -
-    </div>
-  </div> -->
   <main> <!--! ==== BODY ==== -->
 
-  <section class="hero">
-    <div class="container-fluid"> <!-- todo : FIX Alignment problem-->
-      <div class="row">
-        <div class="col-md-6 d-flex align-items-center">
-          <div class="text-center">
-            <h1 class="hero-title d-none d-md-block">
-              Find Your 
-              Lost <span class="hero-title-highlight">Pet</span>
-            </h1>
-            <h1 class="hero-title d-md-none">
-              Find Your Lost <span class="hero-title-highlight">Pet</span>
-            </h1>
-            <p class="hero-slogan">Helping Lost<span class="hero-title-highlight"> Pets </span>Find Their Way Home</p>
-            <br>
+    <section class="hero">
+      <div class="container-fluid"> <!-- todo : FIX Alignment problem-->
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <div class="text-center">
+              <h1 class="hero-title d-none d-md-block">
+                Find Your
+                Lost <span class="hero-title-highlight">Pet</span>
+              </h1>
+              <h1 class="hero-title d-md-none">
+                Find Your Lost <span class="hero-title-highlight">Pet</span>
+              </h1>
+              <p class="hero-slogan">Helping Lost<span class="hero-title-highlight"> Pets </span>Find Their Way Home</p>
+              <br>
 
-            <button class="scroll-button">Go</button>
+              <button class="scroll-button">Go</button>
 
+            </div>
           </div>
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-center hero-image">
-          <img class="#" src="/resources/images/PetFindr.png" alt="Pet Image">
+          <div class="col-md-6 d-flex align-items-center justify-content-center hero-image">
+            <img class="#" src="/resources/images/PetFindr.png" alt="Pet Image">
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-    
- 
-  
-    
-      <section class="button-section"> <!--todo:  1) CHnage Post A Pet Icon 2) Remove Href underline for links in buttons-->
-        
-        <div class="button-box">
-          <div class="section-content">
-            <br>
-            <h2 class="section-title">Explore Your Options:</h2>      
-          </div>
+    </section>
+
+
+
+
+    <section class="button-section">
+      <!--todo:  1) CHnage Post A Pet Icon -->
+
+      <div class="button-box">
+        <div class="section-content">
+          <br>
+          <h2 class="section-title">Explore Your Options:</h2>
+        </div>
         <div class="button-container">
           <div class="button-one">
             <a href="/pages/search-for-a-pet.html">
-            <img src="/resources/images/Search-for-a-lost-pet.png" alt="Search For Lost Pet Icon" class="button-icon">
-            <p class="button-text">Search for a Lost Pet</p>
-          </a>
+              <img src="/resources/images/Search-for-a-lost-pet.png" alt="Search For Lost Pet Icon" class="button-icon">
+              <p class="button-text">Search for a Lost Pet</p>
+            </a>
           </div>
-    
+
           <div class="button-two">
             <a href="/pages/report-a-pet.html">
-            <img src="/resources/images/Report-pet.png" alt="Report Pet Icon" class="button-icon">
-            <p class="button-text">Report a Pet</p>
+              <img src="/resources/images/Report-pet.png" alt="Report Pet Icon" class="button-icon">
+              <p class="button-text">Report a Pet</p>
             </a>
           </div>
-    
+
           <div class="button-three">
             <a href="/pages/adopt-a-pet.html">
-            <img src="/resources/images/Adopt-a-pet.png" alt="Adopt Pet Icon" class="button-icon">
-            <p class="button-text">Adopt a Pet</p>
+              <img src="/resources/images/Adopt-a-pet.png" alt="Adopt Pet Icon" class="button-icon">
+              <p class="button-text">Adopt a Pet</p>
             </a>
           </div>
-    
+
           <div class="button-four">
             <a href="/pages/post-for-adoption.html">
-            <img src="/resources/images/Adopt-a-pet.png" alt="Post Pet Icon" class="button-icon">
-            <p class="button-text">Post For Adoption</p>
+              <img src="/resources/images/Adopt-a-pet.png" alt="Post Pet Icon" class="button-icon">
+              <p class="button-text">Post For Adoption</p>
             </a>
           </div>
         </div>
-        
-        
+
+
         <br>
         <button class="scroll-button-one">Learn More</button>
         <br>
@@ -425,123 +312,72 @@
         <br>
         <hr class="featurette-divider">
 
-        </div>
-      </section>
-    </div>
-    
-
-  
-<!-- 
-  <section class="report-section">
-    <div class="container">
-      <div id="reportCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col">
-                <div class="carousel-content rounded-box">
-tst                </div>
-              </div>
-              <div class="col">
-                <div class="carousel-content rounded-box">
-test                </div>
-              </div>
-              <!-- Add more columns for additional carousel items -->
-           <!--- </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#reportCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#reportCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </section>  -->
-<!---
-  <section class="report-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="rounded-box">
-            <h2>Report a Lost Pet</h2>
-            <p>If you've lost a pet, you can quickly and easily report it on PetFindr. Provide details about your pet, its last known location, and a photo. Our community and advanced algorithms will help in finding your pet.</p>
-          </div>
-        </div>
-        <br>
-        <div class="col-md-6">
-          <div class="rounded-box">
-            <h2>Search for a Lost Pet</h2>
-            <p>If you've found a lost pet, you can search for its owner on PetFindr. Enter details about the pet, such as its type and location. Our platform will help connect you with the pet's owner and facilitate a safe reunion.</p>
-          </div>
-        </div>
-        <br>
-        <div class="col-md-6">
-          <div class="rounded-box">
-            <h2>Search for a Lost Pet</h2>
-            <p>If you've found a lost pet, you can search for its owner on PetFindr. Enter details about the pet, such as its type and location. Our platform will help connect you with the pet's owner and facilitate a safe reunion.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!--! ))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))-->
-<section class="section-container">
-  <div class="card-container">
-    <h2 class="section-title">Explore Your Options:</h2>      
-
-    <div class="card">
-      <p class="card-title">Search for a Lost Pet</p>
-      <p class="small-desc">
-        Use the power of PetFindr integrated with Google Maps to quickly locate and reunite with your lost pet. Our advanced search features make it easy to search for your beloved furry friend and get real-time directions to their location.
-      </p>
-      <div class="go-corner">
-        <div class="go-arrow">→</div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <p class="card-title">Post Your Pet for Adoption</p>
-      <p class="small-desc">
-        Want to find a loving home for your pet? PetFindr's seamless integration with Google Maps allows you to post your pet's profile and highlight their location on an interactive map. Connect with potential adopters nearby and ensure your pet finds a caring family.
-      </p>
-      <div class="go-corner">
-        <div class="go-arrow">→</div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <p class="card-title">Adopt a Pet</p>
-      <p class="small-desc">
-        Explore adorable pets available for adoption near you using PetFindr's Google Maps integration. Discover pets from local shelters and individuals, view their profiles, and make informed decisions to bring a new furry friend into your family.
-      </p>
-      <div class="go-corner">
-        <div class="go-arrow">→</div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <p class="card-title">Post Your Pet for Help</p>
-      <p class="small-desc">
-        Need assistance finding your lost pet or seeking help for your pet? Utilize PetFindr's collaboration with Google Maps to share your pet's details and location with a supportive community. Connect with fellow pet lovers and receive the help you need.
-      </p>
-      <div class="go-corner">
-        <div class="go-arrow">→</div>
-      </div>
-    </div>
-
-    </div>
     </section>
-</main>
+    </div>
+
+    <!--! ))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))-->
+
+    <section class="section-container">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        <div class="card" style="flex: 1; min-width: 300px; margin: 10px;">
+          <p class="card-title">Search for a Lost Pet</p>
+          <p class="small-desc">
+            Use the power of PetFindr integrated with Google Maps to quickly locate and reunite with your lost pet. Our
+            advanced search features make it easy to search for your beloved furry friend and get real-time directions
+            to their location.
+          </p>
+          <div class="go-corner">
+            <div class="go-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; min-width: 300px; margin: 10px;">
+          <p class="card-title">Post Your Pet for Adoption</p>
+          <p class="small-desc">
+            Want to find a loving home for your pet? PetFindr's seamless integration with Google Maps allows you to post
+            your pet's profile and highlight their location on an interactive map. Connect with potential adopters
+            nearby and ensure your pet finds a caring family.
+          </p>
+          <div class="go-corner">
+            <div class="go-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; min-width: 300px; margin: 10px;">
+          <p class="card-title">Adopt a Pet</p>
+          <p class="small-desc">
+            Explore adorable pets available for adoption near you using PetFindr's Google Maps integration. Discover
+            pets from local shelters and individuals, view their profiles, and make informed decisions to bring a new
+            furry friend into your family.
+          </p>
+          <div class="go-corner">
+            <div class="go-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; min-width: 300px; margin: 10px;">
+          <p class="card-title">Post Your Pet for Help</p>
+          <p class="small-desc">
+            Need assistance finding your lost pet or seeking help for your pet? Utilize PetFindr's collaboration with
+            Google Maps to share your pet's details and location with a supportive community. Connect with fellow pet
+            lovers and receive the help you need.
+          </p>
+          <div class="go-corner">
+            <div class="go-arrow">→</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
 
-<!--! =========================================================================== -->
-  
-<footer class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-custom"> <!--! ==== FOOTER ==== -->
+  <!--! =========================================================================== -->
+
+  <footer
+    class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-custom">
+    <!--! ==== FOOTER ==== -->
     <div class="col-md-4 d-flex align-items-center">
       <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
         <div class="footer-logo"><img src="/resources/images/PetFindr-Logo.png" alt="Pet Findr Logo"></div>
@@ -550,22 +386,32 @@ test                </div>
     </div>
 
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-twitter" width="24" height="24"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a></li>
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-instagram" width="24" height="24">  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-      </svg></a></li>
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="bi" width="24" height="24">  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-      </svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+            class="bi bi-twitter" width="24" height="24">
+            <path
+              d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+          </svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+            class="bi bi-instagram" width="24" height="24">
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+          </svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="bi"
+            width="24" height="24">
+            <path
+              d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+          </svg></a></li>
     </ul>
   </footer>
 
 
-  
-  
-<!--! ====== JAVASCRIPT ====== -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="/resources/scripts/main.js"></script>
-      <script src="/resources/scripts/popup.js"></script>
 
-    </div>
-  </body>
- </html>
+  </div>
+
+  <!--! ====== JAVASCRIPT ====== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/resources/scripts/main.js"></script>
+
+</body>
+
+</html>

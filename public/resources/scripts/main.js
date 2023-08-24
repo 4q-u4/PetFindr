@@ -1,4 +1,6 @@
 //! Frontend Javascript - PetFindr Senior Project
+
+// SCROLL TO 4 ACTION BUTTONS (GO)
 document.addEventListener("DOMContentLoaded", function () {
   const scrollButton = document.querySelector(".scroll-button");
 
@@ -16,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// SCROLL TO INFO CARDS (LEARN MORE)
 document.addEventListener("DOMContentLoaded", function () {
   const scrollButton = document.querySelector(".scroll-button-one");
 
@@ -31,4 +34,25 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+});
+
+//Open Signup/Login Menu In Header
+document.addEventListener("DOMContentLoaded", function () {
+  const authIcon = document.querySelector(".auth-icon");
+
+  authIcon.addEventListener("click", function () {
+    const authMenu = authIcon.querySelector(".auth-menu");
+    authMenu.classList.toggle("show");
+  });
+
+  const loginButton = document.querySelector(".auth-link");
+  const signupButton = document.querySelector(".auth-link-one");
+
+  loginButton.addEventListener("click", function () {
+    window.location.href = "pages/login.html";
+  });
+
+  signupButton.addEventListener("click", function () {
+    window.location.href = "pages/sign-up.html";
+  });
 });
