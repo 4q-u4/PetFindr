@@ -1,131 +1,58 @@
 .body{
-    background-color: #fa9a27;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrollbar */
+  background-color: #fa9a27;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
 }
 
 .form {
-    --input-focus: #2d8cf0;
-    --font-color: #323232;
-    --font-color-sub: #666;
-    --bg-color: #fff !important;
-    --main-color: #323232;
-    padding: 20px;
-    background: #fa9a27;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    gap: 20px;
-    border-radius: 5px;
-    border: 9px solid var(--main-color);
-    box-shadow: 4px 4px var(--main-color);
-  }
-  
-  .title {
-    color: var(--font-color);
-    font-weight: 900;
-    font-size: 20px;
-    margin-bottom: 25px;
-  }
-  
-  .title span {
-    color: var(--font-color-sub);
-    font-weight: 600;
-    font-size: 17px;
-  }
-  
-  .input {
-    width: 250px;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--font-color);
-    padding: 5px 10px;
-    outline: none;
-  }
-  
-  .input::placeholder {
-    color: var(--font-color-sub);
-    opacity: 0.8;
-  }
-  
-  .input:focus {
-    border: 2px solid var(--input-focus);
-  }
-  
-  .login-with {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .button-log {
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    color: var(--font-color);
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--main-color);
-  }
-  
-  .button-log:active, .button-confirm:active {
-    box-shadow: 0px 0px var(--main-color);
-    transform: translate(3px, 3px);
-  }
-  
-  .button-confirm {
-    margin: 50px auto 0 auto;
-    width: 120px;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--font-color);
-    cursor: pointer;
-  }
-  
-  .title {
-    font-family: 'Rubik', sans-serif;
-    font-size: 80px;
-    text-align: center;
-    color: #fff;
-  }
-  
-  .radio-group {
-    display: flex;
-    align-items: center;
-    margin-right: 15px; /* Adjust as needed */
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff !important;
+  --main-color: #323232;
+  padding: 20px;
+  background: #fa9a27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
 }
 
-.radio-group label,
-.radio-group input[type="radio"] {
-    margin: 0;
+.form-one {
+  
+  padding: 20px;
+  background: #fa9a27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid black;
+
+}
+.title {
+  color: var(--font-color);
+  font-weight: 900;
+  font-size: 20px;
+  margin-bottom: 25px;
 }
 
-.inputt {
+.title span {
+  color: var(--font-color-sub);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.input {
   width: 250px;
-  height: 90px;
+  height: 40px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
   background-color: var(--bg-color);
@@ -135,4 +62,222 @@
   color: var(--font-color);
   padding: 5px 10px;
   outline: none;
+}
+
+.input::placeholder {
+  color: var(--font-color-sub);
+  opacity: 0.8;
+}
+
+.input:focus {
+  border: 2px solid var(--input-focus);
+}
+
+.login-with {
+  display: flex;
+  gap: 20px;
+}
+
+.button-log {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  color: var(--font-color);
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--main-color);
+}
+
+.button-log:active, .button-confirm:active {
+  box-shadow: 0px 0px var(--main-color);
+  transform: translate(3px, 3px);
+}
+
+.button-confirm {
+  margin: 50px auto 0 auto;
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+}
+
+.titlee {
+  font-family: 'Rubik', sans-serif;
+  font-size: 60px;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Adjust as needed */
+}
+
+.radio-group label,
+.radio-group input[type="radio"] {
+  margin: 0;
+}
+
+.inputt {
+width: 250px;
+height: 90px;
+border-radius: 5px;
+border: 2px solid var(--main-color);
+background-color: var(--bg-color);
+box-shadow: 4px 4px var(--main-color);
+font-size: 15px;
+font-weight: 600;
+color: var(--font-color);
+padding: 5px 10px;
+outline: none;
+justify-content: space-around;
+
+}
+
+.field-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.fieldset-with-legend {
+  border: 1px solid #000;
+  padding: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.forms-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .field-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  }
+  
+  .field-row label {
+      width: 200px;
+      margin-right: 10px;
+      text-align: left;
+  }
+  
+  .field-row input,
+  .field-row select,
+  .field-row textarea {
+      flex: 1;
+  }
+}
+
+.location-button {
+background: none;
+border: none;
+padding: 0;
+}
+
+
+
+/* =========================== */
+
+
+
+.autocomplete-container {
+/*the container must be positioned relative:*/
+position: relative;
+
+margin-bottom: 20px;
+}
+
+.autocomplete-container input {
+width: 250px;
+height: 40px;
+border-radius: 5px;
+border: 2px solid black;
+background-color: white;
+box-shadow: 4px 4px black;
+font-size: 15px;
+font-weight: 600;
+color: black;
+padding: 5px 10px;
+outline: none;
+
+}
+
+.autocomplete-items {
+font-family: 'Rubik', sans-serif;
+position: absolute;
+/* border: 2px solid black;
+box-shadow: 0px 2px 10px 2px black;
+border-top: solid black;
+z-index: 99; 
+/*position the autocomplete items to be the same width as the container:*/
+width: 250px;
+height: auto;
+
+background-color: #fff;
+}
+
+.autocomplete-items div {
+padding: 10px;
+cursor: pointer;
+}
+
+.autocomplete-items div:hover {
+/*when hovering an item:*/
+background-color: rgba(204, 0, 0, 0.1);
+}
+
+.autocomplete-items .autocomplete-active {
+/*when navigating through the items using the arrow keys:*/
+background-color: rgba(0, 0, 0, 0.1);
+}
+
+.clear-button {
+color: rgba(255, 255, 255, 0.4);
+cursor: pointer;
+
+position: absolute;
+left: 285px;
+top: 0;
+
+height: 100%;
+display: none;
+align-items: center;
+}
+
+.clear-button.visible {
+display: flex;
+}
+
+
+.clear-button:hover {
+color: rgba(0, 0, 0, 0.6);
 }
