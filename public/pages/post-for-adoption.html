@@ -175,12 +175,13 @@
 
     <section class="body">
       <br>
-      <h2 class="text-center titlee"> Post Your Pet For Adoption</h2><br>
+      <h2 class="text-center titlee"> Post Your Pet For Adoption</h2>
+      <br>
       <div class="container forms-container">
 
         <div class="row">
 
-          <div class="col-md-6">
+          <div class="col-12">
             <form class="form" id="reportForm" action="/submitPet" method="POST">
               <fieldset>
                 <legend>Pet Info:</legend>
@@ -257,47 +258,25 @@
                     <textarea id="medicalConditionsTextarea" name="medicalConditions" class="input" rows="3"></textarea>
                   </div>
                 </div>
+                <small id="fullNameHelp" class="form-text text-muted">
+                  Please note: This post will be visible<br>
+                  on our website for a duration of 2 weeks,<br>
+                  beginning from the moment of submission.<br>
+                  If you require an extension of this period,<br> kindly
+                  <a href="/pages/contactus.html">reach out to our administration</a>.
+                </small>
+                <br>
+                <button class="button-confirm" id="submitBothForms">Submit</button>
 
               </fieldset>
             </form>
             <br>
           </div>
 
-          <div class="col-md-6">
-            <form class="form form-one" id="secondForm" action="/submitOther" method="POST">
-              <fieldset>
-                <legend>Contact Info:</legend>
-                <div class="field-row">
-                  <label for="fullName">Full Name: *</label>
-                  <input type="text" id="fullName" name="fullName" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="email">Email: </label>
-                  <input type="text" id="email" name="email" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="phone">Phone: *</label>
-                  <input type="text" id="phone" name="phone" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="address">Address: *</label>
-                  <input type="text" id="address" name="address" class="input">
-                </div>
-              </fieldset>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <button class="button-confirm" id="submitBothForms">Submit</button>
-            </form>
-          </div>
 
         </div>
+
+      </div>
 
       </div>
       <br>

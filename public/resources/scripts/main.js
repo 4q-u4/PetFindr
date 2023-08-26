@@ -53,6 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   signupButton.addEventListener("click", function () {
-    window.location.href = "pages/sign-up.html";
+    window.location.href = "pages/user.html";
   });
 });

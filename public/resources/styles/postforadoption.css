@@ -4,6 +4,11 @@
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scrollbar */
 }
+.forms-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .form {
     --input-focus: #2d8cf0;
@@ -21,6 +26,7 @@
     gap: 20px;
     border-radius: 5px;
     border: 2px solid black;
+    justify-content: center;
   }
   
   .form-one {
@@ -169,12 +175,6 @@
 legend {
     font-weight: bold;
     padding: 0 10px;
-}
-
-.forms-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
 }
 
 @media (min-width: 768px) {

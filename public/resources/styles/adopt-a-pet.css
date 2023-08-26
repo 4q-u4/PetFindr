@@ -1,4 +1,9 @@
-/* Define common card styles */
+
+body {
+  
+background-color: chocolate;
+}
+  /* Define common card styles */
 .card {
     position: relative;
     display: flex;
