@@ -12,7 +12,7 @@
     border-radius: 0.75rem;
     background-color: #fa9a27;
     padding: 2rem;
-    color: #FFF;
+    color: #000;
     text-align: center;
   }
   
@@ -123,4 +123,10 @@
     color: black;
   }
 
-  
+  #sal .iti {
+    display: inline;
+  }
+
+  #phone {
+    width: calc(100% - 16px);
+  }

@@ -194,6 +194,7 @@ function addressAutocomplete(containerElement, callback, options) {
 
     promise.then(
       (data) => {
+        console.log(data);
         currentItems = data.features;
 
         /*create a DIV element that will contain the items (values):*/

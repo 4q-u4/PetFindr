@@ -105,7 +105,16 @@
     }
 
     .auth-menu.show {
-      display: block;
+      display: grid;
+      gap: 5px;
+      place-items: center;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .auth-menu.show>* {
+      width: 100%;
+      margin: 0;
     }
 
     .auth-link {
@@ -219,7 +228,7 @@
             <li class="nav-item"><a href="/pages/about-us.html" class="nav-link link-body-emphasis">About Us</a></li>
             <li class="nav-item"><a href="/pages/contactus.html" class="nav-link link-body-emphasis">Contact Us</a></li>
           </ul>
-          <div class="auth-icon">
+          <div class="auth-icon"><!--! SAL -->
             <i class="fas fa-user-circle"></i>
             <div class="auth-menu">
               <button id="open-login-popup" class="auth-link">Login</button>
