@@ -16,20 +16,21 @@
 
     <div class="form-container">
         <p class="form-title">Sign Up</p>
+
         <form class="form" method="POST" action="/verify-captcha">
             <div class="input-group">
-                <label for="signup-username">First Name</label>
-                <input type="text" name="signup-username" id="signup-username" placeholder="">
+                <label for="signup-fname">First Name</label>
+                <input type="text" name="signup-fname" id="signup-fname" placeholder="">
             </div>
             <br>
             <div class="input-group">
-                <label for="signup-username">Last Name</label>
-                <input type="text" name="signup-username" id="signup-username" placeholder="">
+                <label for="signup-lname">Last Name</label>
+                <input type="text" name="signup-lname" id="signup-lname" placeholder="">
             </div>
             <br>
-            <div id="sal" class="input-group">
-                <label for="signup-username">Phone</label>
-                <input id="phone" type="tel" name="phone" />
+            <div id="int-phone-input" class="input-group">
+                <label for="signup-phone">Phone</label>
+                <input id="phone" type="tel" name="sign-up-phone" />
             </div>
             <br>
             <div class="input-group">
@@ -60,28 +61,48 @@
     </div>
     <script src="/resources/scripts/signup.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script>
+    <!-- <script>
         //utilsScript is technically optional, but it provides a lot of really useful functionality like country specific placeholders and the E.164 formatting we'll use below.
         //Reload the page and you should see the country picker and a placeholder now.
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
             preferredCountries: ["lb"],
-            utilsScript:
-                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
 
         const info = document.querySelector(".alert-info");
 
-        function process(event) {
+        const form = document.querySelector("form"); // Adjust the form selector based on your HTML structure
+
+        form.addEventListener("submit", async function (event) {
             event.preventDefault();
 
             const phoneNumber = phoneInput.getNumber();
 
-            info.style.display = "";
-            info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
-        }
+            if (phoneNumber) {
+                // Include phoneNumber in the form data
+                const formData = new FormData(form);
+                formData.set("sign-up-phone", phoneNumber);
 
-    </script>
+                try {
+                    const response = await fetch("/verify-captcha", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        // Handle success, e.g., show a success message
+                    } else {
+                        // Handle error, e.g., show an error message
+                    }
+                } catch (error) {
+                    // Handle fetch error
+                }
+            } else {
+                // Handle case where phoneNumber is not provided
+            }
+        });
+    </script> -->
 </body>
 
 </html>
