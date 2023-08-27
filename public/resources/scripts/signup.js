@@ -39,14 +39,25 @@ form.addEventListener("submit", async function (event) {
                 // Handle success, e.g., show a success message
                 const successMessage = await response.json(); // Assuming server responds with a JSON object
                 console.log(successMessage); // Log the success message
+                // Show a success message to the user
+                info.innerText = "Signup successful! Redirecting to login page...";
+
+
+                // Redirect to login page after a delay
+                setTimeout(() => {
+                    window.location.href = "/pages/login.html"; // Replace with the actual URL of your login page
+                }, 3000); // Redirect after 3 seconds (adjust as needed)
             } else {
                 // Handle error, e.g., show an error message
                 const errorMessage = await response.json(); // Assuming server responds with a JSON object
                 console.error(errorMessage); // Log the error message
             }
         } catch (error) {
-            // Handle fetch error
-            console.error("Fetch error:", error);
+            if (error instanceof SyntaxError) {
+                console.error("JSON parsing error:", error);
+            } else {
+                console.error("Fetch error:", error);
+            }
         }
     } else {
         // Handle case where phoneNumber is not provided

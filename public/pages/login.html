@@ -11,18 +11,18 @@
 <body class="login-body">
     <div class="form-container">
         <h2 class="form-title">Login</h2>
-        <form class="login-form">
+        <form class="login-form" id="login-form">
             <div class="input-group">
-                <label for="username">Email</label>
-                <input type="text" name="username" id="username" placeholder="">
+                <label for="login-email">Email</label>
+                <input type="email" name="login-email" id="login-email" placeholder="">
             </div>
             <br>
             <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="">
+                <label for="login-password">Password</label>
+                <input type="password" name="login-password" id="login-password" placeholder="">
             </div>
             <br>
-            <button class="login-btn">Login</button>
+            <button class="login-btn" type="submit">Login</button>
         </form>
         <br>
         <!---
@@ -58,6 +58,8 @@
             <a rel="noopener noreferrer" href="/pages/sign-up.html" class="">Sign Up</a>
         </p>
     </div>
+    <script src="/resources/scripts/login.js"></script>
+
 </body>
 
 </html>

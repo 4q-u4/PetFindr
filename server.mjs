@@ -46,8 +46,24 @@ pool.getConnection()
     console.error('Error connecting to MySQL Database:', error.message);
   });
 
-const [result] = await pool.query("SELECT * FROM user_table") //cause imusing modules i used await on top level await (await is out of async) // [result] to return only 1 array
-console.log(result);
+//! TEST 
+// async function insertData() {
+//   try {
+//     const [result] = await pool.query(
+//       "INSERT INTO user_table (fname, lname, email, password, phone) VALUES (?, ?, ?, ?, ?)",
+//       ['John', 'Doe', 'john@example.com', 'hashed_password', '1234567890']
+//     );
+
+//     console.log('Data inserted successfully:', result);
+//   } catch (error) {
+//     console.error('Error inserting data:', error);
+//   }
+// }
+
+// insertData();
+
+// const [result] = await pool.query("SELECT * FROM user_table") //cause imusing modules i used await on top level await (await is out of async) // [result] to return only 1 array
+// console.log(result);
 
 // Define the verify_captcha function
 async function verify_captcha(token) {
@@ -82,6 +98,8 @@ app.post('/verify-captcha', async (req, res) => {
 
   try {
     // Verify CAPTCHA response using your async function
+
+
     const [captchaData, captchaError] = await verify_captcha(captchaResponse);
 
     if (captchaError) {
@@ -92,16 +110,29 @@ app.post('/verify-captcha', async (req, res) => {
       return res.status(400).json({ error: 'CAPTCHA verification failed' });
     }
 
+    // Check if email already exists in the database
+    const emailExistsQuery = 'SELECT COUNT(*) AS count FROM user_table WHERE email = ?';
+    const [emailExistsResult] = await pool.query(emailExistsQuery, [email]);
+
+    if (emailExistsResult[0].count > 0) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
+
     // CAPTCHA verification successful, proceed with form submission
-    const sql = 'INSERT INTO user_table (fname, lname, email, password, phone) VALUES (?, ?, ?, ?, ?)';
+
+
+    const sql = "INSERT INTO user_table (fname, lname, email, password, phone) VALUES (?, ?, ?, ?, ?)";
     try {
       // Check for undefined values and replace with null if necessary
       const values = [fname, lname, email, password, phone || null];
 
       // Perform database insertion logic here
-
+      const [result] = await pool.query(sql, values);
       console.log('Data inserted successfully');
+
+      // Send a success JSON response
       res.status(200).json({ message: 'Signup successful' });
+
     } catch (error) {
       console.error('Error inserting data:', error);
       res.status(500).json({ error: 'Error signing up' });
@@ -117,7 +148,7 @@ app.post('/verify-captcha', async (req, res) => {
 
 
 // async function verify_captcha(token) {
-//   // verify captcha
+//    verify captcha
 //   const params = new URLSearchParams({
 //     secret: process.env.hCaptchaSecret,
 //     response: token,
@@ -154,10 +185,40 @@ app.post('/verify-captcha', async (req, res) => {
 // });
 
 // app.post("/submitPet", (req, res) => {
-//   const petInfo = req.body;
+//   const petInfo = req.body;const userData = {
+//   first_name: 'test',
+//   last_name: 'test',
+//   email: 'ssal@gmaill.com',
+//   password: 'ionklk'
+// };
+
+// const query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)';
+// const values = [userData.first_name, userData.last_name, userData.email, userData.password];
+
 //   // Process the petInfo and store it, e.g., in a database
 //   return res.json({ message: "Pet submitted successfully!" });
 // });
+// //! =======LOGIN ==========================================================================
+
+app.post('/login', async (req, res) => {
+  const { 'login-email': email, 'login-password': password } = req.body;
+
+  // Check email and password against the database
+  const loginQuery = 'SELECT COUNT(*) AS count FROM user_table WHERE email = ? AND password = ?';
+  const [loginResult] = await pool.query(loginQuery, [email, password]);
+
+  if (loginResult[0].count > 0) {
+    // Successful login
+    res.status(200).json({ message: 'Login successful' });
+  } else {
+    // Failed login
+    res.status(401).json({ error: 'Invalid credentials' });
+  }
+});
+
+
+
+// //! =================================================================================
 
 app.use((req, res) => {
   return res.status(404).sendFile(path.join(__dirname, "public", "404.html")); // at the end cause it works from top to buttom
