@@ -289,7 +289,7 @@ app.put('/update-profile', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-//! =================================================================================
+//! ============delete acc=====================================================================
 
 app.delete('/delete-account', async (req, res) => {
   const userId = req.query.id;
@@ -316,7 +316,7 @@ app.delete('/delete-account', async (req, res) => {
   }
 });
 
-// //! =================================================================================
+// //! ======= chnage password ==========================================================================
 
 
 app.post('/change-password', async (req, res) => {
@@ -343,6 +343,21 @@ app.post('/change-password', async (req, res) => {
 });
 
 
+// //! ========= send location long lat (user.html)========================================================================
+app.post('/save-location', async (req, res) => {
+  try {
+    const { userId, latitude, longitude } = req.body;
+
+    // Insert the location data into the user's row in the database
+    const insertQuery = 'UPDATE user_table SET lat = ?, lon = ? WHERE id = ?';
+    await pool.execute(insertQuery, [latitude, longitude, userId]);
+
+    res.status(200).json({ message: 'Location data saved successfully' });
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Failed to save location data' });
+  }
+});
 
 
 

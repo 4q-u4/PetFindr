@@ -1,228 +1,3 @@
-// function addressAutocomplete(containerElement, callback, options) {
-//     // create input element
-//     var inputElement = document.createElement("input");
-//     inputElement.setAttribute("type", "text");
-//     inputElement.setAttribute("placeholder", options.placeholder);
-//     containerElement.appendChild(inputElement);
-
-//     // add input field clear button
-//     var clearButton = document.createElement("div");
-//     clearButton.classList.add("clear-button");
-//     addIcon(clearButton);
-//     clearButton.addEventListener("click", (e) => {
-//         e.stopPropagation();
-//         inputElement.value = "";
-//         callback(null);
-//         clearButton.classList.remove("visible");
-//         closeDropDownList();
-//     });
-//     containerElement.appendChild(clearButton);
-
-//     /* Current autocomplete items data (GeoJSON.Feature) */
-//     var currentItems;
-
-//     /* Active request promise reject function. To be able to cancel the promise when a new request comes */
-//     var currentPromiseReject;
-
-//     /* Focused item in the autocomplete list. This variable is used to navigate with buttons */
-//     var focusedItemIndex;
-
-//     /* Execute a function when someone writes in the text field: */
-//     inputElement.addEventListener("input", function (e) {
-//         var currentValue = this.value;
-
-//         /* Close any already open dropdown list */
-//         closeDropDownList();
-
-//         // Cancel previous request promise
-//         if (currentPromiseReject) {
-//             currentPromiseReject({
-//                 canceled: true,
-//             });
-//         }
-
-//         if (!currentValue) {
-//             clearButton.classList.remove("visible");
-//             return false;
-//         }
-
-//         // Show clearButton when there is a text
-//         clearButton.classList.add("visible");
-
-//         /* Create a new promise and send geocoding request */
-//         var promise = new Promise((resolve, reject) => {
-//             currentPromiseReject = reject;
-
-//             var apiKey = "33c271685e3e4ca4a992aaf2c0a2f88b";
-//             var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
-//                 currentValue
-//             )}&limit=5&apiKey=${apiKey}`;
-
-//             if (options.type) {
-//                 url += `&type=${options.type}`;
-//             }
-
-//             fetch(url).then((response) => {
-//                 // check if the call was successful
-//                 if (response.ok) {
-//                     response.json().then((data) => resolve(data));
-//                 } else {
-//                     response.json().then((data) => reject(data));
-//                 }
-//             });
-//         });
-
-//         promise.then(
-//             (data) => {
-//                 currentItems = data.features;
-
-//                 /*create a DIV element that will contain the items (values):*/
-//                 var autocompleteItemsElement = document.createElement("div");
-//                 autocompleteItemsElement.setAttribute("class", "autocomplete-items");
-//                 containerElement.appendChild(autocompleteItemsElement);
-
-//                 /* For each item in the results */
-//                 data.features.forEach((feature, index) => {
-//                     /* Create a DIV element for each element: */
-//                     var itemElement = document.createElement("DIV");
-//                     /* Set formatted address as item value */
-//                     itemElement.innerHTML = feature.properties.formatted;
-
-//                     /* Set the value for the autocomplete text field and notify: */
-//                     itemElement.addEventListener("click", function (e) {
-//                         inputElement.value = currentItems[index].properties.formatted;
-
-//                         callback(currentItems[index]);
-
-//                         /* Close the list of autocompleted values: */
-//                         closeDropDownList();
-//                     });
-
-//                     autocompleteItemsElement.appendChild(itemElement);
-//                 });
-//             },
-//             (err) => {
-//                 if (!err.canceled) {
-//                     console.log(err);
-//                 }
-//             }
-//         );
-//     });
-
-//     /* Add support for keyboard navigation */
-//     inputElement.addEventListener("keydown", function (e) {
-//         var autocompleteItemsElement = containerElement.querySelector(
-//             ".autocomplete-items"
-//         );
-//         if (autocompleteItemsElement) {
-//             var itemElements = autocompleteItemsElement.getElementsByTagName("div");
-//             if (e.keyCode == 40) {
-//                 e.preventDefault();
-//                 /*If the arrow DOWN key is pressed, increase the focusedItemIndex variable:*/
-//                 focusedItemIndex =
-//                     focusedItemIndex !== itemElements.length - 1
-//                         ? focusedItemIndex + 1
-//                         : 0;
-//                 /*and and make the current item more visible:*/
-//                 setActive(itemElements, focusedItemIndex);
-//             } else if (e.keyCode == 38) {
-//                 e.preventDefault();
-
-//                 /*If the arrow UP key is pressed, decrease the focusedItemIndex variable:*/
-//                 focusedItemIndex =
-//                     focusedItemIndex !== 0
-//                         ? focusedItemIndex - 1
-//                         : (focusedItemIndex = itemElements.length - 1);
-//                 /*and and make the current item more visible:*/
-//                 setActive(itemElements, focusedItemIndex);
-//             } else if (e.keyCode == 13) {
-//                 /* If the ENTER key is pressed and value as selected, close the list*/
-//                 e.preventDefault();
-//                 if (focusedItemIndex > -1) {
-//                     closeDropDownList();
-//                 }
-//             }
-//         } else {
-//             if (e.keyCode == 40) {
-//                 /* Open dropdown list again */
-//                 var event = document.createEvent("Event");
-//                 event.initEvent("input", true, true);
-//                 inputElement.dispatchEvent(event);
-//             }
-//         }
-//     });
-
-//     function setActive(items, index) {
-//         if (!items || !items.length) return false;
-
-//         for (var i = 0; i < items.length; i++) {
-//             items[i].classList.remove("autocomplete-active");
-//         }
-
-//         /* Add class "autocomplete-active" to the active element*/
-//         items[index].classList.add("autocomplete-active");
-
-//         // Change input value and notify
-//         inputElement.value = currentItems[index].properties.formatted;
-//         callback(currentItems[index]);
-//     }
-
-//     function closeDropDownList() {
-//         var autocompleteItemsElement = containerElement.querySelector(
-//             ".autocomplete-items"
-//         );
-//         if (autocompleteItemsElement) {
-//             containerElement.removeChild(autocompleteItemsElement);
-//         }
-
-//         focusedItemIndex = -1;
-//     }
-
-//     function addIcon(buttonElement) {
-//         var svgElement = document.createElementNS(
-//             "http://www.w3.org/2000/svg",
-//             "svg"
-//         );
-//         svgElement.setAttribute("viewBox", "0 0 24 24");
-//         svgElement.setAttribute("height", "24");
-
-//         var iconElement = document.createElementNS(
-//             "http://www.w3.org/2000/svg",
-//             "path"
-//         );
-//         iconElement.setAttribute(
-//             "d",
-//             "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-//         );
-//         iconElement.setAttribute("fill", "currentColor");
-//         svgElement.appendChild(iconElement);
-//         buttonElement.appendChild(svgElement);
-//     }
-
-//     /* Close the autocomplete dropdown when the document is clicked. 
-//           Skip, when a user clicks on the input field */
-//     document.addEventListener("click", function (e) {
-//         if (e.target !== inputElement) {
-//             closeDropDownList();
-//         } else if (!containerElement.querySelector(".autocomplete-items")) {
-//             // open dropdown list again
-//             var event = document.createEvent("Event");
-//             event.initEvent("input", true, true);
-//             inputElement.dispatchEvent(event);
-//         }
-//     });
-// }
-
-// addressAutocomplete(
-//     document.getElementById("autocomplete-container"),
-//     (data) => {
-//         console.log("Selected option: ");
-//         console.log(data);
-//     },
-//     {
-//         placeholder: "Enter an address here",
-//     }
-// );
 
 //logout btn logic 
 
@@ -426,4 +201,307 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Fetch error:', error);
         }
     });
+});
+
+
+// location api
+//search autocomplete location
+/* 
+    The addressAutocomplete takes as parameters:
+  - a container element (div)
+  - callback to notify about address selection
+  - geocoder options:
+         - placeholder - placeholder text for an input element
+     - type - location type
+*/
+function addressAutocomplete(containerElement, callback, options) {
+    // create input element
+    var inputElement = document.createElement("input");
+    inputElement.setAttribute("type", "text");
+    inputElement.setAttribute("placeholder", options.placeholder);
+    containerElement.appendChild(inputElement);
+
+    // add input field clear button
+    var clearButton = document.createElement("div");
+    clearButton.classList.add("clear-button");
+    addIcon(clearButton);
+    clearButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        inputElement.value = "";
+        callback(null);
+        clearButton.classList.remove("visible");
+        closeDropDownList();
+    });
+    containerElement.appendChild(clearButton);
+
+    /* Current autocomplete items data (GeoJSON.Feature) */
+    var currentItems;
+
+    /* Active request promise reject function. To be able to cancel the promise when a new request comes */
+    var currentPromiseReject;
+
+    /* Focused item in the autocomplete list. This variable is used to navigate with buttons */
+    var focusedItemIndex;
+
+    /* Execute a function when someone writes in the text field: */
+    inputElement.addEventListener("input", function (e) {
+        var currentValue = this.value;
+
+        /* Close any already open dropdown list */
+        closeDropDownList();
+
+        // Cancel previous request promise
+        if (currentPromiseReject) {
+            currentPromiseReject({
+                canceled: true,
+            });
+        }
+
+        if (!currentValue) {
+            clearButton.classList.remove("visible");
+            return false;
+        }
+
+        // Show clearButton when there is a text
+        clearButton.classList.add("visible");
+
+        /* Create a new promise and send geocoding request */
+        var promise = new Promise((resolve, reject) => {
+            currentPromiseReject = reject;
+
+            var apiKey = "33c271685e3e4ca4a992aaf2c0a2f88b";
+            var url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
+                currentValue
+            )}&limit=5&apiKey=${apiKey}`;
+
+            if (options.type) {
+                url += `&type=${options.type}`;
+            }
+
+            fetch(url).then((response) => {
+                // check if the call was successful
+                if (response.ok) {
+                    response.json().then((data) => resolve(data));
+                } else {
+                    response.json().then((data) => reject(data));
+                }
+            });
+        });
+
+        promise.then(
+            (data) => {
+                console.log(data);
+                currentItems = data.features;
+
+                /*create a DIV element that will contain the items (values):*/
+                var autocompleteItemsElement = document.createElement("div");
+                autocompleteItemsElement.setAttribute("class", "autocomplete-items");
+                containerElement.appendChild(autocompleteItemsElement);
+
+                /* For each item in the results */
+                data.features.forEach((feature, index) => {
+                    /* Create a DIV element for each element: */
+                    var itemElement = document.createElement("DIV");
+                    /* Set formatted address as item value */
+                    itemElement.innerHTML = feature.properties.formatted;
+
+                    /* Set the value for the autocomplete text field and notify: */
+                    itemElement.addEventListener("click", function (e) {
+                        inputElement.value = currentItems[index].properties.formatted;
+
+                        callback(currentItems[index]);
+
+                        /* Close the list of autocompleted values: */
+                        closeDropDownList();
+                    });
+
+                    autocompleteItemsElement.appendChild(itemElement);
+                });
+            },
+            (err) => {
+                if (!err.canceled) {
+                    console.log(err);
+                }
+            }
+        );
+    });
+
+    /* Add support for keyboard navigation */
+    inputElement.addEventListener("keydown", function (e) {
+        var autocompleteItemsElement = containerElement.querySelector(
+            ".autocomplete-items"
+        );
+        if (autocompleteItemsElement) {
+            var itemElements = autocompleteItemsElement.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                e.preventDefault();
+                /*If the arrow DOWN key is pressed, increase the focusedItemIndex variable:*/
+                focusedItemIndex =
+                    focusedItemIndex !== itemElements.length - 1
+                        ? focusedItemIndex + 1
+                        : 0;
+                /*and and make the current item more visible:*/
+                setActive(itemElements, focusedItemIndex);
+            } else if (e.keyCode == 38) {
+                e.preventDefault();
+
+                /*If the arrow UP key is pressed, decrease the focusedItemIndex variable:*/
+                focusedItemIndex =
+                    focusedItemIndex !== 0
+                        ? focusedItemIndex - 1
+                        : (focusedItemIndex = itemElements.length - 1);
+                /*and and make the current item more visible:*/
+                setActive(itemElements, focusedItemIndex);
+            } else if (e.keyCode == 13) {
+                /* If the ENTER key is pressed and value as selected, close the list*/
+                e.preventDefault();
+                if (focusedItemIndex > -1) {
+                    closeDropDownList();
+                }
+            }
+        } else {
+            if (e.keyCode == 40) {
+                /* Open dropdown list again */
+                var event = document.createEvent("Event");
+                event.initEvent("input", true, true);
+                inputElement.dispatchEvent(event);
+            }
+        }
+    });
+
+    function setActive(items, index) {
+        if (!items || !items.length) return false;
+
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove("autocomplete-active");
+        }
+
+        /* Add class "autocomplete-active" to the active element*/
+        items[index].classList.add("autocomplete-active");
+
+        // Change input value and notify
+        inputElement.value = currentItems[index].properties.formatted;
+        callback(currentItems[index]);
+    }
+
+    function closeDropDownList() {
+        var autocompleteItemsElement = containerElement.querySelector(
+            ".autocomplete-items"
+        );
+        if (autocompleteItemsElement) {
+            containerElement.removeChild(autocompleteItemsElement);
+        }
+
+        focusedItemIndex = -1;
+    }
+
+    function addIcon(buttonElement) {
+        var svgElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+        );
+        svgElement.setAttribute("viewBox", "0 0 24 24");
+        svgElement.setAttribute("height", "24");
+
+        var iconElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+        iconElement.setAttribute(
+            "d",
+            "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        );
+        iconElement.setAttribute("fill", "currentColor");
+        svgElement.appendChild(iconElement);
+        buttonElement.appendChild(svgElement);
+    }
+
+    /* Close the autocomplete dropdown when the document is clicked. 
+        Skip, when a user clicks on the input field */
+    document.addEventListener("click", function (e) {
+        if (e.target !== inputElement) {
+            closeDropDownList();
+        } else if (!containerElement.querySelector(".autocomplete-items")) {
+            // open dropdown list again
+            var event = document.createEvent("Event");
+            event.initEvent("input", true, true);
+            inputElement.dispatchEvent(event);
+        }
+    });
+}
+
+// Set up the addressAutocomplete function
+addressAutocomplete(
+    document.getElementById("autocomplete-container"),
+    (data) => {
+        // Get references to the necessary elements
+        const saveLocationButton = document.getElementById("save-location");
+
+        if (data) {
+            // Extract latitude and longitude from the selected location
+            const latitude = data.geometry.coordinates[1];
+            const longitude = data.geometry.coordinates[0];
+
+            console.log("Selected option:");
+            console.log("Formatted Address:", data.properties.formatted);
+            console.log("Latitude:", latitude);
+            console.log("Longitude:", longitude);
+
+            // Enable the "Save Location" button once a location is selected
+            saveLocationButton.disabled = false;
+
+            // Store the selected location data
+            selectedLocation = {
+                userId: localStorage.getItem('userId'), // Get the user's ID from localStorage
+
+                latitude: latitude,
+                longitude: longitude,
+            };
+        } else {
+            // Disable the "Save Location" button if no location is selected
+            saveLocationButton.disabled = true;
+
+            // Clear the selected location data
+            selectedLocation = null;
+        }
+    },
+    {
+        placeholder: "Enter an address here",
+    }
+);
+
+// Initialize variable to store selected location data
+let selectedLocation = null;
+
+document.getElementById("save-location").addEventListener("click", async () => {
+    console.log("Save Location button clicked");
+
+    if (selectedLocation) {
+        // Get the user's ID from local storage
+        const userId = localStorage.getItem("userId"); // Replace with your actual key
+
+        // Add the user's ID to the selectedLocation object
+        selectedLocation.userId = userId;
+
+        // Send the location data to the server and save it in the database
+        try {
+            const response = await fetch("/save-location", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(selectedLocation),
+            });
+
+            if (response.ok) {
+                console.log("Location data saved successfully");
+                // Reload the page to reflect the changes in UI
+                location.reload();
+            } else {
+                console.error("Error saving location data");
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+    }
 });

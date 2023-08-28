@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(`Logged in as user ID: ${userId}`);
                 // Redirect to the desired page after a short delay
                 // setTimeout(() => {
-                //     window.location.href = "/"; // Change to your desired URL
+                window.location.href = "/"; // Change to your desired URL
                 // }, 3000); // 3-second delay
             } else {
                 // Handle login failure
