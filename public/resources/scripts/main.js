@@ -53,6 +53,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   signupButton.addEventListener("click", function () {
+
+    if (signupButton) {
+      signupButton.addEventListener('click', () => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        if (!isLoggedIn) {
+          // Redirect to the login page
+          window.location.href = '/pages/login.html';
+        } else {
+          // User is logged in, perform your desired action
+          window.location.href = 'pages/user.html';
+        }
+      });
+    }
     window.location.href = "pages/user.html";
   });
 });
@@ -66,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
     postPetButton.addEventListener("click", function () {
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-      if (!isLoggedIn) {
+      if (!isLoggedIn) {   //user cant access my account unless logged in
+
         // Redirect to login page
         window.location.href = "/pages/login.html"; // Replace with your login page URL
       } else {
@@ -100,3 +115,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Other event listeners and logic
 })
+
+
