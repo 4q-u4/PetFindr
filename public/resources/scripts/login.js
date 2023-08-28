@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (response.ok) {
+                // Set isLoggedIn flag in LocalStorage
+                localStorage.setItem('isLoggedIn', 'true');
+
                 // Redirect to the desired page after successful login
                 window.location.href = "/"; // Change to your desired URL
             } else {
@@ -34,3 +37,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 });
+

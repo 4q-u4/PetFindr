@@ -56,3 +56,18 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "pages/user.html";
   });
 });
+
+//check if the user is logged in and redirect them to the login page if not:
+
+const postPetButton = document.getElementById("post-for-adoption-button");
+
+if (postPetButton) {
+  postPetButton.addEventListener("click", function () {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (!isLoggedIn) {
+      // Redirect to login page
+      window.location.href = "/pages/login.html"; // Replace with your login page URL
+    }
+  });
+}
