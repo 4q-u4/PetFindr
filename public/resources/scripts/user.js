@@ -328,3 +328,102 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+// Delete btn Account
+
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteAccountButton = document.getElementById("delete-account-button");
+
+    if (deleteAccountButton) {
+        deleteAccountButton.addEventListener("click", async () => {
+            const userId = localStorage.getItem('userId');
+
+            if (!userId) {
+                console.error("User ID not available");
+                return;
+            }
+
+            const confirmation = confirm("Are you sure you want to delete your account?");
+            if (!confirmation) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/delete-account?id=${userId}`, {
+                    method: "DELETE",
+                });
+
+                if (response.ok) {
+                    // Clear user data from LocalStorage
+                    localStorage.removeItem('userId');
+
+                    // Redirect to a different page or show a success message
+                    // For example:
+                    window.location.href = "/"; // Redirect to home page
+                } else {
+                    console.error("Account deletion failed");
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        });
+    }
+
+    // Other event listeners and logic
+});
+
+
+// password chnage
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const oldPasswordInput = document.getElementById('old-password');
+    const newPasswordInput = document.getElementById('new-password');
+    const confirmNewPasswordInput = document.getElementById('confirm-new-password');
+    const updatePasswordButton = document.getElementById('update-password-button');
+
+    updatePasswordButton.addEventListener('click', async () => {
+        const oldPassword = oldPasswordInput.value;
+        const newPassword = newPasswordInput.value;
+        const confirmNewPassword = confirmNewPasswordInput.value;
+
+        if (newPassword !== confirmNewPassword) {
+            console.error('New passwords do not match');
+            return;
+        }
+
+        // Get user ID from localStorage
+        const userId = localStorage.getItem('userId');
+
+        const payload = {
+            userId,
+            oldPassword,
+            newPassword,
+        };
+
+        try {
+            const response = await fetch('/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                console.log('Password changed successfully');
+                // Display a success message to the user
+                alert('Password updated successfully.');
+                // Reload the page after a short delay (e.g., 2 seconds)
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                const errorMessage = await response.json();
+                console.error(errorMessage);
+                // Display an error message to the user
+                alert('Password update failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    });
+});

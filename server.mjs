@@ -289,6 +289,63 @@ app.put('/update-profile', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+//! =================================================================================
+
+app.delete('/delete-account', async (req, res) => {
+  const userId = req.query.id;
+
+  if (!userId) {
+    return res.status(400).json({ error: 'User ID not provided' });
+  }
+
+  try {
+    // Delete the user's account from the database based on the provided user ID
+    const deleteQuery = 'DELETE FROM user_table WHERE id = ?';
+    const [result] = await pool.query(deleteQuery, [userId]);
+
+    if (result.affectedRows > 0) {
+      // Account deletion successful
+      res.status(200).json({ message: 'Account deleted successfully' });
+    } else {
+      // No rows were affected, likely due to non-existent user ID
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// //! =================================================================================
+
+
+app.post('/change-password', async (req, res) => {
+  const { userId, oldPassword, newPassword } = req.body;
+
+  try {
+    // Check if the provided old password matches the stored password for the user
+    const checkPasswordQuery = 'SELECT COUNT(*) AS count FROM user_table WHERE id = ? AND password = ?';
+    const [passwordCheckResult] = await pool.query(checkPasswordQuery, [userId, oldPassword]);
+
+    if (passwordCheckResult[0].count === 0) {
+      return res.status(401).json({ error: 'Invalid old password' });
+    }
+
+    // Update the user's password with the new one
+    const updatePasswordQuery = 'UPDATE user_table SET password = ? WHERE id = ?';
+    await pool.query(updatePasswordQuery, [newPassword, userId]);
+
+    res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
+
 // //! =================================================================================
 
 app.use((req, res) => {

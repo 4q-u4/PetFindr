@@ -129,7 +129,7 @@
                                 <button type="button" class="btn btn-primary" id="update-button">Update Profile</button>
                                 <!-- <button type="reset" class="btn btn-dark">Reset Changes</button> -->
                                 <button id="logout-button" class="btn btn-dark" type="button">Logout</button>
-                                <button class="btn btn-dark" type="button">Home</button>
+                                <a href="/"><button class="btn btn-dark" type="button">Home</button></a>
 
 
                             </form>
@@ -159,7 +159,8 @@
                                     <p class="text-muted font-size-sm">Once you delete your account, there is no going
                                         back. Please be certain.</p>
                                 </div>
-                                <button class="btn btn-danger" type="button">Delete Account</button>
+                                <button id="delete-account-button" class="btn btn-danger" type="button">Delete
+                                    Account</button>
                             </form>
                         </div>
 
@@ -172,13 +173,18 @@
                             <form>
                                 <div class="form-group">
                                     <label class="d-block">Change Password</label>
-                                    <input type="text" class="form-control" placeholder="Enter your old password">
-                                    <input type="text" class="form-control mt-1" placeholder="New password">
-                                    <input type="text" class="form-control mt-1" placeholder="Confirm new password">
+                                    <input id="old-password" type="text" class="form-control"
+                                        placeholder="Enter your old password">
+                                    <input id="new-password" type="text" class="form-control mt-1"
+                                        placeholder="New password">
+                                    <input id="confirm-new-password" type="text" class="form-control mt-1"
+                                        placeholder="Confirm new password">
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-primary">Update Password</button>
-                                <a href="/pages/contactus.html">Forgot Password Contact Website Admin</a>
+                                <button id="update-password-button" type="button" class="btn btn-primary">Update
+                                    Password</button>
+                                <a href="/pages/contactus.html"><button type="button" class="btn btn-dark">Forgot
+                                        Password</button></a>
 
                             </form>
                             <hr>
