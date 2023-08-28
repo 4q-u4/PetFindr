@@ -23,11 +23,20 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (response.ok) {
-                // Set isLoggedIn flag in LocalStorage
+                // Get user ID from the server response (assuming the server sends it)
+                const responseData = await response.json();
+                const userId = responseData.userId;
+                console.log('Received user ID:', userId)
+                // Set isLoggedIn flag and user ID in LocalStorage
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userId', userId);
 
-                // Redirect to the desired page after successful login
-                window.location.href = "/"; // Change to your desired URL
+                // Display a console message with user ID
+                console.log(`Logged in as user ID: ${userId}`);
+                // Redirect to the desired page after a short delay
+                setTimeout(() => {
+                    window.location.href = "/"; // Change to your desired URL
+                }, 3000); // 3-second delay
             } else {
                 // Handle login failure
                 console.error("Login failed");
@@ -35,6 +44,5 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error("Fetch error:", error);
         }
-    })
+    });
 });
-

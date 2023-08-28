@@ -258,6 +258,73 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Display user info & Update 
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
 
+    // Get user ID from localStorage
+    const userId = localStorage.getItem('userId');
+
+    // Fetch user info from the server
+    try {
+        const response = await fetch(`/user-info?id=${userId}`);
+        if (response.ok) {
+            const userInfo = await response.json();
+            // Pre-fill input fields with user data as placeholders
+            firstNameInput.placeholder = userInfo.fname;
+            lastNameInput.placeholder = userInfo.lname;
+            phoneInput.placeholder = userInfo.phone;
+            emailInput.placeholder = userInfo.email;
+        } else {
+            console.error('Failed to fetch user info');
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+
+    // Update profile form submission logic
+    const updateButton = document.getElementById('update-button');
+    updateButton.addEventListener('click', async () => {
+        // Retrieve updated values from input fields
+        const updatedFirstName = firstNameInput.value;
+        const updatedLastName = lastNameInput.value;
+        const updatedPhone = phoneInput.value;
+        const updatedEmail = emailInput.value;
+
+        // Construct the JSON payload with updated data
+        const payload = {
+            id: userId,
+            fname: updatedFirstName,
+            lname: updatedLastName,
+            phone: updatedPhone,
+            email: updatedEmail,
+        };
+
+        try {
+            const response = await fetch('/update-profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                // Profile update successful, show a success message
+                console.log('Profile updated successfully');
+                // You can also show a success message to the user on the page
+            } else {
+                // Handle profile update failure
+                console.error('Profile update failed');
+                // You can also show an error message to the user on the page
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    });
+});
 

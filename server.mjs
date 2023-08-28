@@ -204,20 +204,91 @@ app.post('/login', async (req, res) => {
   const { 'login-email': email, 'login-password': password } = req.body;
 
   // Check email and password against the database
-  const loginQuery = 'SELECT COUNT(*) AS count FROM user_table WHERE email = ? AND password = ?';
+  const loginQuery = 'SELECT id FROM user_table WHERE email = ? AND password = ?';
   const [loginResult] = await pool.query(loginQuery, [email, password]);
 
-  if (loginResult[0].count > 0) {
+  if (loginResult.length > 0) {
+    const userId = loginResult[0].id; // Get user ID from the query result
+
     // Successful login
-    res.status(200).json({ message: 'Login successful' });
+    res.status(200).json({ message: 'Login successful', userId: userId }); // Include userId in the response
   } else {
     // Failed login
     res.status(401).json({ error: 'Invalid credentials' });
   }
 });
 
+//! =================================================================================
 
+// Fetch user info based on user ID
+app.get('/user-info', async (req, res) => {
+  const userId = req.query.id;
+  console.log('Received User ID:', userId);
 
+  if (!userId) {
+    return res.status(400).json({ error: 'User ID not provided' });
+  }
+
+  try {
+
+    const [rows] = await pool.query('SELECT * FROM user_table WHERE id = ?', [userId]);
+
+    if (rows.length > 0) {
+      const userInfo = rows[0];
+      res.status(200).json(userInfo);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update user profile
+app.put('/update-profile', async (req, res) => {
+  const userId = req.body.id; // Use userId instead of id
+  const firstName = req.body.fname; // Use fname instead of firstName
+  const lastName = req.body.lname; // Use lname instead of lastName
+  const phone = req.body.phone;
+  const email = req.body.email;
+
+  try {
+    // Construct the SQL query dynamically based on the provided data
+    let query = 'UPDATE user_table SET';
+    const values = [];
+    if (firstName !== '') {
+      query += ' fname=?,';
+      values.push(firstName);
+    }
+    if (lastName !== '') {
+      query += ' lname=?,';
+      values.push(lastName);
+    }
+    if (phone !== '') {
+      query += ' phone=?,';
+      values.push(phone);
+    }
+    if (email !== '') {
+      query += ' email=?,';
+      values.push(email);
+    }
+    // Remove the trailing comma and add the WHERE clause
+    query = query.slice(0, -1) + ' WHERE id=?';
+    values.push(userId);
+
+    const [result] = await pool.query(query, values);
+
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: 'Profile updated successfully' });
+    } else {
+      res.status(500).json({ error: 'Profile update failed' });
+    }
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 // //! =================================================================================
 
 app.use((req, res) => {

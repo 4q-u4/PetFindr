@@ -22,6 +22,8 @@ form.addEventListener("submit", async function (event) {
             'signup-password': form['signup-password'].value,
             'h-captcha-response': form['h-captcha-response'].value,
             'sign-up-phone': phoneNumber,
+            'id': localStorage.getItem('userId'), // Include the user ID from LocalStorage
+
         };
 
         console.log(payload); // Before sending the fetch request
