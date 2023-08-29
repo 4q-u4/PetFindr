@@ -45,32 +45,107 @@ function updateBreeds() {
   }
 }
 
-//medical conditons
+//! ================
 
-document
-  .getElementById("medicalConditionsOption")
-  .addEventListener("change", function () {
-    var textareaContainer = document.getElementById(
-      "medicalConditionsTextareaContainer"
-    );
-    if (this.value === "yes") {
-      textareaContainer.style.display = "block";
-      document
-        .getElementById("medicalConditionsTextarea")
-        .setAttribute("required", "");
+document.getElementById('submitForm').addEventListener('click', async function (event) {
+  event.preventDefault();
+
+  const petType = document.getElementById('petType');
+  const ageRange = document.getElementById('ageRange');
+  const petSize = document.getElementById('petSize');
+  const petSex = document.getElementById('petSex');
+  const vaccinated = document.getElementById('vaccinated');
+
+  // Check if any dropdown has the "Select" option selected
+  if (petType.value === 'none' || ageRange.value === 'none' || petSize.value === 'none' || petSex.value === 'none' || vaccinated.value === 'none') {
+    const optionsToSelect = [];
+
+    if (petType.value === 'none') optionsToSelect.push('Pet Type');
+    if (ageRange.value === 'none') optionsToSelect.push('Approximate Age');
+    if (petSize.value === 'none') optionsToSelect.push('Pet Size');
+    if (petSex.value === 'none') optionsToSelect.push('Pet Sex');
+    if (vaccinated.value === 'none') optionsToSelect.push('Vaccinated');
+
+    alert(`Please select an option for the following: ${optionsToSelect.join(', ')}`);
+    return;
+  }
+
+  // Get user ID from localStorage
+  const userId = localStorage.getItem('userId');
+
+  // Get the selected image file
+  const petPhotoInput = document.getElementById('petPhoto');
+  const petPhotoFile = petPhotoInput.files[0];
+
+  // Check if an image file is selected
+  if (!petPhotoFile) {
+    alert('Please select an image.');
+    return;
+  }
+
+  try {
+    // Upload the image file and get the URL
+    const imageUrl = await uploadImage(petPhotoFile);
+
+    // Construct the petInfo object
+    const petInfo = {
+      petName: document.getElementById('petName').value,
+      petType: document.getElementById('petType').value,
+      petBreed: document.getElementById('petBreedSelect').value,
+      petColor: document.getElementById('petColor').value,
+      ageRange: document.getElementById('ageRange').value,
+      petSize: document.getElementById('petSize').value,
+      petSex: document.getElementById('petSex').value,
+      vaccinated: document.getElementById('vaccinated').value,
+      medicalcondition: document.getElementById('medicalcondition').value
+    };
+
+    // Send the data to the server
+    const response = await fetch('/submitPet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' // Indicate that you're sending JSON
+      },
+      body: JSON.stringify({ userId, petInfo, photoUrl: imageUrl })
+    });
+
+    if (response.ok) {
+      // Handle success
+      alert('Pet information submitted successfully.');
+      window.location.href = '/'; // Redirect to the home URL
+
     } else {
-      textareaContainer.style.display = "none";
-      document
-        .getElementById("medicalConditionsTextarea")
-        .removeAttribute("required");
+      // Handle error
+      alert('Failed to submit pet information.');
     }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
+async function uploadImage(imageFile) {
+  const formData = new FormData();
+  formData.append('petPhoto', imageFile);
+
+  const response = await fetch('/uploadImage', {
+    method: 'POST',
+    body: formData
   });
 
-//submit for both forma
+  const result = await response.json();
+  return result.imageUrl; // Assuming the server responds with the image URL
+}
 
-document
-  .getElementById("submitBothForms")
-  .addEventListener("click", function () {
-    document.getElementById("reportForm").submit(); // Submit the first form
-    document.getElementById("secondForm").submit(); // Submit the second form
+//! === Image ENDPOINT === //
+async function uploadImage(imageFile) {
+  const formData = new FormData();
+  formData.append('petPhoto', imageFile);
+
+  const response = await fetch('/uploadImage', {
+    method: 'POST',
+    body: formData
   });
+
+  const result = await response.json();
+  return result.imageUrl; // Assuming the server responds with the image URL
+}

@@ -183,7 +183,7 @@
         <div class="row">
 
           <div class="col-12">
-            <form class="form" id="reportForm" action="/submitPet" method="POST">
+            <form class="form" id="reportForm" action="/submitPet" method="POST" enctype="multipart/form-data">
               <fieldset>
                 <legend>Pet Info:</legend>
                 <div class="field-row">
@@ -246,19 +246,12 @@
                     <option value="no">No</option>
                   </select>
                 </div>
-                <div class="field-row">
-                  <label for="medicalConditions">Any Medical Conditions?:</label>
-                  <select id="medicalConditionsOption" name="medicalConditionsOption" class="input">
-                    <option value="none">Select</option>
-                    <option value="no">No</option>
-                    <option value="yes">Yes</option>
-                  </select>
 
-                  <div id="medicalConditionsTextareaContainer" style="display: none;">
-                    <label for="medicalConditionsTextarea">Medical Conditions:</label>
-                    <textarea id="medicalConditionsTextarea" name="medicalConditions" class="input" rows="3"></textarea>
-                  </div>
+                <div class="field-row">
+                  <label for="medicalcondition">Medical Conditions:</label>
+                  <input type="text" id="medicalcondition" name="medicalcondition" class="input">
                 </div>
+
                 <small id="fullNameHelp" class="form-text text-muted">
                   Please note: This post will be visible<br>
                   on our website for a duration of 2 weeks,<br>
@@ -267,7 +260,7 @@
                   <a href="/pages/contactus.html">reach out to our administration</a>.
                 </small>
                 <br>
-                <button class="button-confirm" id="submitBothForms">Submit</button>
+                <button class="button-confirm" id="submitForm">Submit</button>
 
               </fieldset>
             </form>

@@ -6,6 +6,7 @@ import fetch from "node-fetch"; //EXP: Import node-fetch for making HTTP request
 import path from "path"; //EXP: Import path module for handling file paths
 import mysql from "mysql2"; //EXP: Import MySQL module for database interaction
 import { fileURLToPath } from "url"; //EXP: Import utility function for working with file URLs
+import multer from 'multer';
 
 //! === Create an instance of the Express application === //
 const app = express();
@@ -294,7 +295,6 @@ app.post('/save-location', async (req, res) => {
 });
 
 //! === Contact Us === //
-
 app.post("/submit-form", async (req, res) => {
   try {
     const { fname, lname, email, message } = req.body;
@@ -309,6 +309,50 @@ app.post("/submit-form", async (req, res) => {
     res.status(500).json({ error: 'Failed to submit form data' });
   }
 });
+
+//! === Post A Pet For Adoption === //
+//EXP: Set up storage for multer
+const storage = multer.diskStorage({
+  destination: './public/resources/images/pets-for-adoption',
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
+});
+const upload = multer({ storage });
+
+//! Handle image uploads
+app.post('/uploadImage', upload.single('petPhoto'), (req, res) => {
+  // Here you can process the uploaded image and get its URL
+  const imageUrl = `/resources/images/pets-for-adoption/${req.file.filename}`;
+
+  // Respond with the image URL
+  res.json({ imageUrl });
+});
+
+//! Handle form submission
+app.post('/submitPet', async (req, res) => {
+  const { userId, petInfo, photoUrl } = req.body; // Assuming you're sending the image URL from the client
+
+  try {
+    const connection = await pool.getConnection();
+
+    // Insert the pet information into the database along with the user ID and photo URL
+    await connection.query(
+      'INSERT INTO post_for_adoption (photo_url, name, type, breed, color, age_range, size, sex, vaccinated, medical_condition, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [photoUrl, petInfo.petName, petInfo.petType, petInfo.petBreed, petInfo.petColor, petInfo.ageRange, petInfo.petSize, petInfo.petSex, petInfo.vaccinated, petInfo.medicalcondition, userId]
+    );
+
+    connection.release();
+
+    // Respond to the client
+    res.send('Pet information submitted successfully.');
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Error submitting pet information.');
+  }
+});
+
+
 
 //! === Handle 404 Not Found === //
 
