@@ -352,6 +352,26 @@ app.post('/submitPet', async (req, res) => {
   }
 });
 
+//!=== Pets For Adoption Page === / 
+
+// Define a route to fetch pet data one at a time
+app.get('/api/getPetData', async (req, res) => {
+  try {
+    const connection = await pool.getConnection();
+
+    // Query to fetch pet data from the post_for_adoption table
+    const query = 'SELECT * FROM post_for_adoption';
+    const [petData] = await connection.query(query);
+
+    connection.release();
+
+    // Send the fetched data as JSON response
+    res.json(petData);
+  } catch (error) {
+    console.error('Error fetching pet data:', error);
+    res.status(500).json({ error: 'Failed to fetch pet data' });
+  }
+});
 
 
 //! === Handle 404 Not Found === //

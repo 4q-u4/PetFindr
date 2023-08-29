@@ -1,7 +1,7 @@
 
 body {
   
-background-color: chocolate;
+background-color: #fa9a27;
 }
   /* Define common card styles */
 .card {
@@ -13,8 +13,9 @@ background-color: chocolate;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.175);
-    border-radius: 0.375rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 4px 4px black;
   }
   
   /* Remove margins from horizontal rules within cards */
