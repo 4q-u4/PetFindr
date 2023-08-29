@@ -1,4 +1,9 @@
+
+const submitButton = document.getElementById('submit-button');
+
 document.getElementById("submit-button").addEventListener("click", async () => {
+    console.log("Submit button clicked"); // Add this line
+
     const fname = document.getElementById("fname").value;
     const lname = document.getElementById("lname").value;
     const email = document.getElementById("email").value;
@@ -10,7 +15,7 @@ document.getElementById("submit-button").addEventListener("click", async () => {
         email: email,
         message: message,
     };
-
+    console.log("Before fetch request"); // Add this line
     try {
         const response = await fetch("/submit-form", {
             method: "POST",
@@ -31,6 +36,9 @@ document.getElementById("submit-button").addEventListener("click", async () => {
         } else {
             console.error("Error submitting form data");
         }
+
+        console.log("After fetch request"); // Add this line
+
     } catch (error) {
         console.error("Fetch error:", error);
     }

@@ -359,21 +359,21 @@ app.post('/save-location', async (req, res) => {
   }
 });
 
-// //! ===== contact us form ============================================================================
+// //! ===== contact us sform ============================================================================
 
-app.post("/submit-form", (req, res) => {
-  const { fname, lname, email, message } = req.body;
+app.post("/submit-form", async (req, res) => {
+  try {
+    const { fname, lname, email, message } = req.body;
 
-  // Insert the form data into the "contact_us" table
-  const insertQuery = 'INSERT INTO contact_us (first_name, last_name, email, message) VALUES (?, ?, ?, ?)';
-  pool.execute(insertQuery, [fname, lname, email, message], (error, results) => {
-    if (error) {
-      console.error('Database error:', error);
-      res.status(500).json({ error: 'Failed to submit form data' });
-    } else {
-      res.status(200).json({ message: 'Form data submitted successfully' });
-    }
-  });
+    // Insert the form data into the "contact_us" table
+    const insertQuery = 'INSERT INTO contact_us (first_name, last_name, email, message) VALUES (?, ?, ?, ?)';
+    const [results, fields] = await pool.execute(insertQuery, [fname, lname, email, message]);
+
+    res.status(200).json({ message: 'Form data submitted successfully' });
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Failed to submit form data' });
+  }
 });
 
 // //! =================================================================================

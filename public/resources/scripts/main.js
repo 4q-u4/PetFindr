@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//Open Signup/Login Menu In Header
+// ===========================================================
+
 document.addEventListener("DOMContentLoaded", function () {
   const authIcon = document.querySelector(".auth-icon");
 
@@ -53,24 +54,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   signupButton.addEventListener("click", function () {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-    if (signupButton) {
-      signupButton.addEventListener('click', () => {
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-        if (!isLoggedIn) {
-          // Redirect to the login page
-          window.location.href = '/pages/login.html';
-        } else {
-          // User is logged in, perform your desired action
-          window.location.href = 'pages/user.html';
-        }
-      });
+    if (!isLoggedIn) {
+      // Prevent the default link behavior
+      event.preventDefault();
+      // Redirect to the login page
+      window.location.href = '/pages/login.html';
+    } else {
+      // User is logged in, perform your desired action
+      window.location.href = 'pages/user.html';
     }
-    window.location.href = "pages/user.html";
   });
 });
-
 //check if the user is logged in and redirect them to the login page if not:
 //! POST FOR ADOPTION
 document.addEventListener("DOMContentLoaded", function () {
