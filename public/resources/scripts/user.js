@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Please login first.");
 
                 // Wait 3000ms (3 seconds) and then redirect to login page
-                setTimeout(function () {
-                    window.location.href = "/pages/login.html"; // Redirect to login page after 3000ms
-                }, 3000);
+                // setTimeout(function () {
+                window.location.href = "/pages/login.html"; // Redirect to login page after 3000ms
+                // }, 3000);
             }
         });
     }

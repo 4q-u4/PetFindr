@@ -1,34 +1,35 @@
-import dotenv from "dotenv";
+//! === Module Imports === //
+import dotenv from "dotenv"; //EXP: Load environment variables from .env file
 dotenv.config();
-import express from "express";
-import fetch from "node-fetch";
-import path from "path"; // path module
-import mysql from "mysql2";
-import { fileURLToPath } from "url";
+import express from "express"; //EXP: Import Express web framework
+import fetch from "node-fetch"; //EXP: Import node-fetch for making HTTP requests
+import path from "path"; //EXP: Import path module for handling file paths
+import mysql from "mysql2"; //EXP: Import MySQL module for database interaction
+import { fileURLToPath } from "url"; //EXP: Import utility function for working with file URLs
 
-
+//! === Create an instance of the Express application === //
 const app = express();
-app.use(express.json())
 
+//! === Middleware === //
+app.use(express.json()); //EXP: Middleware to parse JSON in request bodies
+
+//! === Port Configuration === //
 const port = process.env.PORT || 4000;
 
-// Wait for Requests from {PORT}
+//! === Start Server === //
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
-});
+}); //EXP: Start the server and listen for requests on the defined port
 
-//! =================================================================================
+//! === Directory Configuration === //
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+//! === Middleware Configuration === //
+app.use(express.urlencoded({ extended: true })); //EXP: Middleware to parse URL-encoded data in request bodies
+app.use(express.static("public")); //EXP: Middleware to serve static files from the "public" directory
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
-
-
-//! ======= DB CONNECTION ========================================================================== //
-
-const pool = mysql.createPool({
+//! === MySQL Connection Pool Configuration === //
+const pool = mysql.createPool({ //EXP: Create a pool of connections to MySQL database
   // pool of connections that can be reused //promise will allow to use promise api version of mysql instead of call back version
   host: process.env.HOST,
   user: process.env.DBUSER,
@@ -36,73 +37,68 @@ const pool = mysql.createPool({
   database: process.env.DB
 }).promise();
 
-pool.getConnection()
+//! === Establish Connection and Handle Result === //
+pool.getConnection() //EXP: Acquire a connection from the pool
   .then(connection => {
     console.log('MySQL Database Connected Successfully!');
-    // Release the connection back to the pool
-    connection.release();
+    connection.release(); //EXP: Release the connection back to pool for reuse
   })
   .catch(error => {
     console.error('Error connecting to MySQL Database:', error.message);
   });
 
-//! TEST 
+//! TEST 001 Insert Data 
+
 // async function insertData() {
 //   try {
 //     const [result] = await pool.query(
 //       "INSERT INTO user_table (fname, lname, email, password, phone) VALUES (?, ?, ?, ?, ?)",
 //       ['John', 'Doe', 'john@example.com', 'hashed_password', '1234567890']
 //     );
-
 //     console.log('Data inserted successfully:', result);
 //   } catch (error) {
 //     console.error('Error inserting data:', error);
 //   }
 // }
-
 // insertData();
-
+// TEST Select Data
 // const [result] = await pool.query("SELECT * FROM user_table") //cause imusing modules i used await on top level await (await is out of async) // [result] to return only 1 array
 // console.log(result);
 
-// Define the verify_captcha function
-async function verify_captcha(token) {
+
+//! === Captcha Verification === //
+async function verify_captcha(token) { //EXP: Verify the user's captcha token
   const params = new URLSearchParams({
     secret: captchaSecretKey,
     response: token,
   });
-
   try {
     const response = await fetch("https://hcaptcha.com/siteverify", {
-      method: "POST",
+      method: "POST",     //EXP: Send a POST request to hCaptcha's verification endpoint
       body: params,
     });
-
     const data = await response.json();
-    return [data, null];
+    return [data, null];     //EXP: Parse and return the response data
   } catch (error) {
     console.error(error);
     return [null, error.message];
   }
 }
 
-//! ======= CAPTCHA Verification and Form Submission Route ========================================================================== //
-// Initialize hCaptcha with your hCaptcha secret key
-const captchaSecretKey = process.env.hCaptchaSecret;
+//! === sign-up.html === CAPTCHA Verification and Form Submission Route === //
+const captchaSecretKey = process.env.hCaptchaSecret; //EXP: Initialize hCaptcha with your hCaptcha secret key
 
-
-app.post('/verify-captcha', async (req, res) => {
+app.post('/verify-captcha', async (req, res) => { //EXP: POST route for verifying captcha and handling form submission
   console.log('Received data:', req.body);
 
+  //EXP: Extract form data and captcha response from request body 
   const { 'signup-fname': fname, 'signup-lname': lname, 'sign-up-phone': phone, 'signup-email': email, 'signup-password': password, 'h-captcha-response': captchaResponse } = req.body;
 
   try {
-    // Verify CAPTCHA response using your async function
-
-
+    //EXP: Verify CAPTCHA response using your async function
     const [captchaData, captchaError] = await verify_captcha(captchaResponse);
 
-    if (captchaError) {
+    if (captchaError) {     //EXP: Handle CAPTCHA verification error
       return res.status(500).json({ error: 'CAPTCHA verification error' });
     }
 
@@ -110,7 +106,7 @@ app.post('/verify-captcha', async (req, res) => {
       return res.status(400).json({ error: 'CAPTCHA verification failed' });
     }
 
-    // Check if email already exists in the database
+    //EXP: Check if email already exists in the database
     const emailExistsQuery = 'SELECT COUNT(*) AS count FROM user_table WHERE email = ?';
     const [emailExistsResult] = await pool.query(emailExistsQuery, [email]);
 
@@ -118,19 +114,17 @@ app.post('/verify-captcha', async (req, res) => {
       return res.status(400).json({ error: 'Email already exists' });
     }
 
-    // CAPTCHA verification successful, proceed with form submission
-
-
+    //EXP: CAPTCHA verification successful, proceed with form submission
     const sql = "INSERT INTO user_table (fname, lname, email, password, phone) VALUES (?, ?, ?, ?, ?)";
     try {
-      // Check for undefined values and replace with null if necessary
+      //EXP: Check for undefined values and replace with null if necessary
       const values = [fname, lname, email, password, phone || null];
 
-      // Perform database insertion logic here
+      //EXP: Perform database insertion logic here
       const [result] = await pool.query(sql, values);
       console.log('Data inserted successfully');
 
-      // Send a success JSON response
+      //EXP: Send a success JSON response
       res.status(200).json({ message: 'Signup successful' });
 
     } catch (error) {
@@ -143,70 +137,15 @@ app.post('/verify-captcha', async (req, res) => {
   }
 });
 
-
-//! =================================================================================
-
-
-// async function verify_captcha(token) {
-//    verify captcha
-//   const params = new URLSearchParams({
-//     secret: process.env.hCaptchaSecret,
-//     response: token,
-//   });
-
-//   try {
-//     const response = await fetch("https://hcaptcha.com/siteverify", {
-//       method: "POST",
-//       body: params,
-//     });
-
-//     const data = await response.json();
-//     return [data, null];
-//   } catch (error) {
-//     console.error(error);
-//     return [null, error.message];
-//   }
-// }
-// //! =================================================================================
-
-// async function verify_form_inputs(json) {
-// verify form input
-//   console.log(json);
-//   const [verify, error] = await verify_captcha(json["h-captcha-response"]);
-//   if (error || !verify.success) {
-//     return false;
-//   }
-//   return true;
-// }
-// check if email is found in db
-
-// app.post("/signup", async (req, res) => {
-//   await verify_form_inputs(req.body);
-// });
-
-// app.post("/submitPet", (req, res) => {
-//   const petInfo = req.body;const userData = {
-//   first_name: 'test',
-//   last_name: 'test',
-//   email: 'ssal@gmaill.com',
-//   password: 'ionklk'
-// };
-
-// const query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)';
-// const values = [userData.first_name, userData.last_name, userData.email, userData.password];
-
-//   // Process the petInfo and store it, e.g., in a database
-//   return res.json({ message: "Pet submitted successfully!" });
-// });
-// //! =======LOGIN ==========================================================================
-
-app.post('/login', async (req, res) => {
+//! === LOGIN === //
+app.post('/login', async (req, res) => { //EXP: POST route for handling user login
   const { 'login-email': email, 'login-password': password } = req.body;
 
-  // Check email and password against the database
+  //EXP: Check email and password against the database
   const loginQuery = 'SELECT id FROM user_table WHERE email = ? AND password = ?';
   const [loginResult] = await pool.query(loginQuery, [email, password]);
 
+  //EXP: Check if login was successful
   if (loginResult.length > 0) {
     const userId = loginResult[0].id; // Get user ID from the query result
 
@@ -218,24 +157,22 @@ app.post('/login', async (req, res) => {
   }
 });
 
-//! =================================================================================
-
-// Fetch user info based on user ID
+//! === Fetch User Info by User ID === //
 app.get('/user-info', async (req, res) => {
   const userId = req.query.id;
   console.log('Received User ID:', userId);
 
-  if (!userId) {
+  if (!userId) {   //EXP: Check if user ID is provided
     return res.status(400).json({ error: 'User ID not provided' });
   }
 
   try {
-
+    //EXP: Execute a SELECT query to retrieve user info based on user ID
     const [rows] = await pool.query('SELECT * FROM user_table WHERE id = ?', [userId]);
 
-    if (rows.length > 0) {
+    if (rows.length > 0) {     //EXP: Check if user info is found based on the query result
       const userInfo = rows[0];
-      res.status(200).json(userInfo);
+      res.status(200).json(userInfo); //EXP: Send user info as JSON
     } else {
       res.status(404).json({ error: 'User not found' });
     }
@@ -245,17 +182,16 @@ app.get('/user-info', async (req, res) => {
   }
 });
 
-// Update user profile
+//! === Update User Profile === //
 app.put('/update-profile', async (req, res) => {
-  const userId = req.body.id; // Use userId instead of id
-  const firstName = req.body.fname; // Use fname instead of firstName
-  const lastName = req.body.lname; // Use lname instead of lastName
+  const userId = req.body.id;
+  const firstName = req.body.fname;
+  const lastName = req.body.lname;
   const phone = req.body.phone;
   const email = req.body.email;
 
   try {
-    // Construct the SQL query dynamically based on the provided data
-    let query = 'UPDATE user_table SET';
+    let query = 'UPDATE user_table SET';     //EXP: Construct the SQL query dynamically based on the provided data
     const values = [];
     if (firstName !== '') {
       query += ' fname=?,';
@@ -277,9 +213,10 @@ app.put('/update-profile', async (req, res) => {
     query = query.slice(0, -1) + ' WHERE id=?';
     values.push(userId);
 
+    //EXP: Execute the dynamic UPDATE query
     const [result] = await pool.query(query, values);
 
-    if (result.affectedRows > 0) {
+    if (result.affectedRows > 0) {     //EXP: Check if the profile update was successful
       res.status(200).json({ message: 'Profile updated successfully' });
     } else {
       res.status(500).json({ error: 'Profile update failed' });
@@ -289,12 +226,12 @@ app.put('/update-profile', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-//! ============delete acc=====================================================================
 
-app.delete('/delete-account', async (req, res) => {
+//! === Delete User Account === //
+app.delete('/delete-account', async (req, res) => { //EXP: Delete user account based on provided user ID
   const userId = req.query.id;
 
-  if (!userId) {
+  if (!userId) {   //EXP: Check if user ID is provided
     return res.status(400).json({ error: 'User ID not provided' });
   }
 
@@ -316,10 +253,8 @@ app.delete('/delete-account', async (req, res) => {
   }
 });
 
-// //! ======= chnage password ==========================================================================
-
-
-app.post('/change-password', async (req, res) => {
+//! === Change User Password === //
+app.post('/change-password', async (req, res) => { //EXP: Change user password based on provided user ID, old password, and new password
   const { userId, oldPassword, newPassword } = req.body;
 
   try {
@@ -342,8 +277,7 @@ app.post('/change-password', async (req, res) => {
   }
 });
 
-
-// //! ========= send location long lat (user.html)========================================================================
+//! === Send User Location Data long lat (user.html)========================================================================
 app.post('/save-location', async (req, res) => {
   try {
     const { userId, latitude, longitude } = req.body;
@@ -359,7 +293,7 @@ app.post('/save-location', async (req, res) => {
   }
 });
 
-// //! ===== contact us sform ============================================================================
+//! === Contact Us === //
 
 app.post("/submit-form", async (req, res) => {
   try {
@@ -376,30 +310,10 @@ app.post("/submit-form", async (req, res) => {
   }
 });
 
-// //! =================================================================================
+//! === Handle 404 Not Found === //
 
-app.use((req, res) => {
+app.use((req, res) => { //EXP: Handle requests that do not match any defined routes with a 404 error page
   return res.status(404).sendFile(path.join(__dirname, "public", "404.html")); // at the end cause it works from top to buttom
 });
 
-// =================================================================================
-
-//? Connection to DB
-//? Put signupform info into db table
-//? Make some buttons on website, redirect to login page wehn pressed
-//? When user presses on My account , he can update delete his info or account
-//? Info entred in post a pet for adoption, needs to posted in pet adoption page (like ecom page)
-//? If user presses on more info about a dog for example, this specfic dog will open in single item page
 //?search bar functionality
-
-//= mysql2 {address: database: user: pass: }
-//= mysql2.nonquery("INSERT VALUES (a, b, c, d) INTO (``)") [Search for  Add Parameter Prevent SQL Injection]
-//= return res.redirect("/page/")
-//= "UPDATE"
-//= "INSERT" in db bas | ecom page -> GET request from db all adoptions
-//=
-
-//
-// <html><body> {{REPLACE_ME}} </body></html>
-// string = fs.readFileSync("eco page")
-// string.replace("{{REPLACE_ME}}", "<script></script>")
