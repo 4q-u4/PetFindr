@@ -57,7 +57,7 @@ async function generatePetCards() {
           <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
               <!-- "More" button that links to the single-item.html page with pet's id -->
-              <a class="btn btn-outline-dark btn-sm mt-auto" href="single-item.html?id=${id}">More</a>
+              <a class="btn btn-dark btn-sm mt-auto" href="single-item.html?id=${id}">More</a>
             </div>
           </div>
         </div>
