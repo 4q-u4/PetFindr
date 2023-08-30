@@ -410,6 +410,7 @@ app.get('/api/getOwnerInfo', async (req, res) => {
 
   try {
     const connection = await pool.getConnection();
+
     const [rows] = await connection.query('SELECT fname, lname, phone, lat,lon FROM user_table WHERE id = ?', [userId]);
     connection.release();
 
@@ -417,7 +418,7 @@ app.get('/api/getOwnerInfo', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const ownerInfo = rows[0];
+    const ownerInfo = rows[0]; 2
     console.log('Owner Info:', ownerInfo); // Log owner information
 
 

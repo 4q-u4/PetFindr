@@ -114,7 +114,7 @@ async function populatePetDetails(petData) {
     }
 
     // Add event listener to the "Contact Owner" button
-    const contactOwnerButton = petDetailsContainer.querySelector('.btn.btn-outline-dark');
+    const contactOwnerButton = petDetailsContainer.querySelector('.btn.btn-primary');
     contactOwnerButton.addEventListener('click', async () => {
         try {
             const response = await fetch(`/api/getOwnerInfo?userId=${petData.user_id}`);
@@ -124,6 +124,9 @@ async function populatePetDetails(petData) {
                 // Get lat and lon from ownerInfo
                 const ownerLat = parseFloat(ownerInfo.lat);
                 const ownerLon = parseFloat(ownerInfo.lon);
+
+                console.log('Latitude:', ownerInfo.lat);
+                console.log('Longitude:', ownerInfo.lon);
 
                 // Fetch owner's address using reverse geocoding
                 const ownerAddress = await fetchOwnerAddress(ownerLat, ownerLon);
@@ -153,5 +156,4 @@ async function populatePetDetails(petData) {
 }
 
 
-//!-- loader
 
