@@ -63,11 +63,12 @@ async function populatePetDetails(petData) {
     petDetailsContainer.innerHTML =
         `
     <div class="col-md-6">
-        <img class="card-img-top mb-5 mb-md-0" src="${petData.photo_url}" alt="${petData.name}" />
+    <img class="card-img-top mb-5 mb-md-0" src="${petData.photo_url}" alt="${petData.name}" style="border: 1px solid black;" />
     </div>
     <div class="col-md-6">
         <div class="small mb-1">Pet ID: ${petData.id}</div>
         <h1 class="display-5 fw-bolder">${petData.name}</h1>
+        <hr>
         <div class="fs-5 mb-5">
             <p><strong>Breed:</strong> ${petData.breed || 'N/A'}</p>
             <p><strong>Color:</strong> ${petData.color || 'N/A'}</p>
@@ -79,10 +80,14 @@ async function populatePetDetails(petData) {
         <p><strong>Date Posted:</strong> ${formatRelativeTime(petData.submission_timestamp) || 'N/A'}</p>
         </div>
         <div class="d-flex">
-            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+            <button class="btn btn-primary flex-shrink-0" type="button">
                 Contact Owner
             </button>
+            <button class="btn btn-outline-dark flex-shrink-0 ms-3" type="button" onclick="window.location.href='adopt-a-pet.html'">
+        Check Other Pets
+    </button>
         </div>
+        <hr>
     </div>
     `;
 
