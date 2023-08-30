@@ -217,6 +217,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 function addressAutocomplete(containerElement, callback, options) {
     // create input element
     var inputElement = document.createElement("input");
+    var options = {
+        placeholder: "Update Your Current Address"
+    };
+
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("placeholder", options.placeholder);
     containerElement.appendChild(inputElement);
