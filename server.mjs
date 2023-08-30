@@ -373,6 +373,71 @@ app.get('/api/getPetData', async (req, res) => {
   }
 });
 
+//! === Singleitem === //
+
+
+app.get('/api/getPetDetails', async (req, res) => {
+  const petId = req.query.id;
+
+  if (!petId) {
+    return res.status(400).json({ error: 'Missing pet ID' });
+  }
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.query('SELECT * FROM post_for_adoption WHERE id = ?', [petId]);
+    connection.release();
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Pet not found' });
+    }
+
+    const petDetails = rows[0];
+    res.json(petDetails);
+  } catch (error) {
+    console.error('Error fetching pet details:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+//! === GET CONTACT INFO == //
+
+app.get('/api/getOwnerInfo', async (req, res) => {
+  const userId = req.query.userId;
+
+  if (!userId) {
+    return res.status(400).json({ error: 'Missing user ID' });
+  }
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.query('SELECT fname, lname, phone, lat,lon FROM user_table WHERE id = ?', [userId]);
+    connection.release();
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const ownerInfo = rows[0];
+    console.log('Owner Info:', ownerInfo); // Log owner information
+
+
+    // Use the Geoapify API to get address
+    const response = await fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${ownerInfo.lat}&lon=${ownerInfo.lon}&apiKey=3b1a78a94f3142a0b5785bd428e4a91d`);
+    const geoapifyData = await response.json();
+
+    if (response.ok) {
+      ownerInfo.address = geoapifyData.features[0].properties.formatted;
+    }
+
+    res.json(ownerInfo);
+  } catch (error) {
+    console.error('Error fetching owner information:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 //! === Handle 404 Not Found === //
 
