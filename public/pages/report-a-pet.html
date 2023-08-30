@@ -195,24 +195,41 @@
         <div class="row">
 
           <div class="col-md-6">
-            <form class="form" id="reportForm" action="/submitPet" method="POST">
+            <form class="form" id="lostPetForm" action="/submitLostPet" method="POST">
               <fieldset>
                 <legend>Lost Pet Info:</legend>
                 <div class="field-row">
-                  <label for="petPhoto">Upload a Photo of the Pet:</label>
+                  <label for="petPhoto">Upload a Photo of the Pet You Found:</label>
                   <input type="file" id="petPhoto" name="petPhoto" accept="image/*" required class="input">
                 </div>
                 <div class="field-row">
-                  <label for="breed">Location Found *</label>
-                  <div class="autocomplete-container" id="autocomplete-container"></div>
+                  <br>
+                  <label for="locationType"></label>
+                  <div id="locationTypeContainer">
+                    <label class="custom-radio-label">
+                      <div class="custom-radio" id="manualLocationRadio"></div>
+                      Manual Input
+                    </label>
+                    <label class="custom-radio-label">
+                      <div class="custom-radio" id="currentLocationRadio"></div>
+                      Use Current Location
+                    </label>
+                  </div>
+
                 </div>
                 <div class="field-row">
-                  <label for="breed"></label>
+                  <label for="locationInput">Location Found:</label>
+                  <input type="text" id="locationInput" class="input" placeholder="Enter location" autocomplete="off">
+                </div>
+                <div class="field-row">
+                  <label></label>
                   <div id="locationInputContainer">
                     <a href="#" id="showLocationLink" class="location-link">Get Current Location</a>
-                    <input type="text" id="location" class="input" style="display: none;">
+                    <input type="hidden" id="selectedLatitude" name="selectedLatitude">
+                    <input type="hidden" id="selectedLongitude" name="selectedLongitude">
                   </div>
                 </div>
+
 
 
 
@@ -260,19 +277,7 @@
                     <option value="female">Female</option>
                   </select>
                 </div>
-                <div class="field-row">
-                  <label for="vaccinated">Vaccinated<span class="required">*</span>:</label>
-                  <select id="vaccinated" name="vaccinated" class="input" required>
-                    <option value="none">Select</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                  </select>
-                </div>
-                <div class="field-row">
-                  <label for="medicalConditions">Any Medical Conditions?:</label>
-                  <input type="text" id="medicalConditions" name="medicalConditions" class="input">
 
-                </div>
 
               </fieldset>
             </form>
@@ -282,10 +287,14 @@
           <div class="col-md-6">
             <form class="form form-one" id="secondForm" action="/submitOther" method="POST">
               <fieldset>
-                <legend>Contact Info:</legend>
+                <legend>Your Contact Info:</legend>
                 <div class="field-row">
-                  <label for="fullName">Full Name: *</label>
-                  <input type="text" id="fullName" name="fullName" class="input">
+                  <label for="firstName">First Name: *</label>
+                  <input type="text" id="firstName" name="firstName" class="input">
+                </div>
+                <div class="field-row">
+                  <label for="lastName">Last Name: *</label>
+                  <input type="text" id="lastName" name="lastName" class="input">
                 </div>
                 <div class="field-row">
                   <label for="email">Email: </label>

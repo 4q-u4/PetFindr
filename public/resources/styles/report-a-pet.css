@@ -1,3 +1,53 @@
+ /* Hide default radio buttons */
+ input[type="radio"] {
+  display: none;
+}
+
+/* Custom radio button style */
+.custom-radio {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ff9900; /* Orange color */
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Checked radio button style */
+.custom-radio.checked::before {
+  content: "\f00c"; /* Checkmark icon from Font Awesome */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff9900; /* Orange color */
+  font-size: 16px;
+}
+
+/* Hover effect */
+.custom-radio:hover {
+  border-color: #e67600; /* Darker shade of orange on hover */
+}
+
+/* Label style */
+label.custom-radio-label {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.location-link {
+  color: #ff9900;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/*========================*/
 .body{
   background-color: #fa9a27;
   margin: 0;

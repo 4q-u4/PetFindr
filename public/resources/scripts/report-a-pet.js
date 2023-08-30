@@ -109,13 +109,57 @@ document
     document.getElementById("secondForm").submit(); // Submit the second form
   });
 
+//! testing so
+
+
+// Get location type radio buttons
+const manualLocationRadio = document.getElementById('manualLocationRadio');
+const currentLocationRadio = document.getElementById('currentLocationRadio');
+
+// Input and link elements
+const locationInput = document.getElementById('locationInput');
+const showLocationLink = document.getElementById('showLocationLink');
+const selectedLatitudeInput = document.getElementById('selectedLatitude');
+const selectedLongitudeInput = document.getElementById('selectedLongitude');
+
+// Event listener for location type change
+manualLocationRadio.addEventListener('click', () => {
+  locationInput.style.display = 'block';
+  showLocationLink.style.display = 'none';
+  selectedLatitudeInput.value = '';
+  selectedLongitudeInput.value = '';
+});
+
+currentLocationRadio.addEventListener('click', () => {
+  locationInput.style.display = 'none';
+  showLocationLink.style.display = 'inline';
+});
+
+// Get current location
+showLocationLink.addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // Update the hidden inputs with current location
+      selectedLatitudeInput.value = latitude;
+      selectedLongitudeInput.value = longitude;
+    });
+  }
+});
+
+
+
+
+
 //search autocomplete location
 /* 
-	The addressAutocomplete takes as parameters:
+  The addressAutocomplete takes as parameters:
   - a container element (div)
   - callback to notify about address selection
   - geocoder options:
-  	 - placeholder - placeholder text for an input element
+     - placeholder - placeholder text for an input element
      - type - location type
 */
 function addressAutocomplete(containerElement, callback, options) {
@@ -321,7 +365,7 @@ function addressAutocomplete(containerElement, callback, options) {
   }
 
   /* Close the autocomplete dropdown when the document is clicked. 
-  	Skip, when a user clicks on the input field */
+    Skip, when a user clicks on the input field */
   document.addEventListener("click", function (e) {
     if (e.target !== inputElement) {
       closeDropDownList();
