@@ -80,3 +80,52 @@ async function fetchPetData() { // Function to fetch pet data from the server
     throw new Error('Failed to fetch pet data');
   }
 }
+
+//! SEARCH BAR FUNCTIONAILTY
+
+const searchInput = document.getElementById('searchInput');
+const filterSelect = document.getElementById('filterSelect');
+const petList = document.querySelector('.pet-list');
+
+// Sample pet data (replace this with your actual data)
+const pets = [
+  { name: 'Buddy', type: 'dog' },
+  { name: 'Whiskers', type: 'cat' },
+  // Add more pet data
+];
+
+function displayPets(petsToDisplay) {
+  petList.innerHTML = '';
+
+  petsToDisplay.forEach((pet) => {
+    const petItem = document.createElement('div');
+    petItem.classList.add('pet-item');
+    petItem.textContent = `${pet.name} (${pet.type})`;
+    petList.appendChild(petItem);
+  });
+}
+
+function filterPets(searchTerm, filterType) {
+  const filteredPets = pets.filter((pet) => {
+    const nameMatch = pet.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const typeMatch = filterType === 'all' || pet.type === filterType;
+    return nameMatch && typeMatch;
+  });
+
+  displayPets(filteredPets);
+}
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value;
+  const selectedType = filterSelect.value;
+  filterPets(searchTerm, selectedType);
+});
+
+filterSelect.addEventListener('change', () => {
+  const searchTerm = searchInput.value;
+  const selectedType = filterSelect.value;
+  filterPets(searchTerm, selectedType);
+});
+
+// Initial display
+displayPets(pets);
