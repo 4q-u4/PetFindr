@@ -320,3 +320,43 @@ https://prod.liveshare.vsengsaas.visualstudio.com/join?A145B594D7319FFBE253A6D0A
         </div>
     </div>
 </section>
+
+
+
+
+<!-- <div class="col-md-6">
+            <form class="form form-one" id="secondForm" action="/submitOther" method="POST">
+              <fieldset>
+                <legend>Your Contact Info:</legend>
+                <div class="field-row">
+                  <label for="firstName">First Name: *</label>
+                  <input type="text" id="firstName" name="firstName" class="input">
+                </div>
+                <div class="field-row">
+                  <label for="lastName">Last Name: *</label>
+                  <input type="text" id="lastName" name="lastName" class="input">
+                </div>
+                <div class="field-row">
+                  <label for="email">Email: </label>
+                  <input type="text" id="email" name="email" class="input">
+                </div>
+                <div class="field-row">
+                  <label for="phone">Phone: *</label>
+                  <input type="text" id="phone" name="phone" class="input">
+                </div>
+                <div class="field-row">
+                  <label for="address">Address: *</label>
+                  <input type="text" id="address" name="address" class="input">
+                </div>
+              </fieldset>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+            </form> 
+        </div> -->

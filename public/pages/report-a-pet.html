@@ -188,33 +188,28 @@
             <fieldset>
               <legend>Lost Pet Info:</legend>
 
-              <div class="field-row">
+              <div class="field-row"> <!--! -->
                 <label for="petPhoto">Upload a Photo of the Pet You Found:</label>
                 <input type="file" id="lostPetPhoto" name="petPhoto" accept="image/*" required class="input">
               </div>
               <div class="field-row">
-                <label for="locationType">Location Type:</label>
-                <div id="locationTypeContainer">
-                  <label class="custom-radio-label">
-                    <div class="custom-radio" id="manualLocationRadio"></div>
-                    Manual Input
-                    <input type="radio" name="locationType" id="manualLocation" value="manual">
-                  </label>
-                  <label class="custom-radio-label">
-                    <div class="custom-radio" id="currentLocationRadio"></div>
-                    Use Current Location
-                    <input type="radio" name="locationType" id="currentLocation" value="current">
-                  </label>
+                <label>Location:</label>
+                <div id="locationTypeContainer" class="button-options">
+                  <button class="custom-button" id="manualLocationButton" onclick="openManualInput()">Enter The
+                    Location</button>
+                  <button class="custom-button" id="currentLocationButton" onclick="useCurrentLocation()">Use Current
+                    Location</button>
                 </div>
               </div>
-              <div class="field-row" id="locationInputContainer">
-                <label for="locationInput"></label>
+              <hr class="breakline">
+              <div class="field-row" id="locationInputContainer" style="display: none;">
                 <input type="text" id="locationInput" class="input" placeholder="Enter location" autocomplete="off">
-                <button id="showLocationLink" class="location-link">Get Current Location</button>
+                <div class="autocomplete-container" id="autocomplete-container"></div>
+
               </div>
 
 
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="petType">Pet Type: *</label>
                 <select id="petType" name="petType" class="input" required onchange="updateBreeds()">
                   <option value="none">Select</option>
@@ -223,15 +218,15 @@
                   <option value="other">Other</option>
                 </select>
               </div>
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="petBreed">Pet Breed/Mix:</label>
                 <select id="petBreedSelect" name="petBreed" class="input"></select>
               </div>
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="petColor">Pet Color/Coat:</label>
                 <input type="text" id="petColor" name="petColor" required class="input">
               </div>
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="age">Approximate Age: *</label>
                 <select id="ageRange" name="ageRange" class="input">
                   <option value="none">Select</option>
@@ -241,7 +236,7 @@
                   <option value="senior">Senior (11+ years)</option>
                 </select>
               </div>
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="size">Pet Size: *</label>
                 <select id="petSize" name="petSize" class="input">
                   <option value="none">Select</option>
@@ -250,7 +245,7 @@
                   <option value="large">Large</option>
                 </select>
               </div>
-              <div class="field-row">
+              <div class="field-row"><!--! -->
                 <label for="sex">Pet Sex<span class="required">*</span>:</label>
                 <select id="petSex" name="petSex" class="input" required>
                   <option value="none">Select</option>

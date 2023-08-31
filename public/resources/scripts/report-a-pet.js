@@ -133,55 +133,63 @@ async function uploadImage(imageFile) {
   return result.imageUrl; // Assuming the server responds with the image URL
 }
 
-//==========================================================================================
-
-
-
 //! === Location 2 Way ===// 
+function openManualInput() {
+  document.getElementById("locationInputContainer").style.display = "block";
+  document.getElementById("locationInput").style.display = "none";
 
+  const autocompleteContainer = document.getElementById("autocomplete-container");
+  autocompleteContainer.style.display = "block";
 
-// Get location type radio buttons
-const manualLocationRadio = document.getElementById('manualLocationRadio');
-const currentLocationRadio = document.getElementById('currentLocationRadio');
+  // Initialize your autocomplete functionality here
+  // For example, you can call a function to set up the autocomplete behavior:
+  initializeAutocomplete();
+}
 
-// Input and link elements
-const locationInput = document.getElementById('locationInput');
-const showLocationLink = document.getElementById('showLocationLink');
-const selectedLatitudeInput = document.getElementById('selectedLatitude');
-const selectedLongitudeInput = document.getElementById('selectedLongitude');
-
-// Hide location input and show location link by default
-locationInput.style.display = 'none';
-showLocationLink.style.display = 'none';
-
-// Event listener for location type change
-manualLocationRadio.addEventListener('click', () => {
-  locationInput.style.display = 'block';
-  showLocationLink.style.display = 'none';
-  selectedLatitudeInput.value = '';
-  selectedLongitudeInput.value = '';
-});
-
-currentLocationRadio.addEventListener('click', () => {
-  locationInput.style.display = 'none';
-  showLocationLink.style.display = 'inline';
-});
-
-// Get current location
-showLocationLink.addEventListener('click', () => {
+function useCurrentLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-
-      // Update the hidden inputs with current location
-      selectedLatitudeInput.value = latitude;
-      selectedLongitudeInput.value = longitude;
-    });
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("Geolocation is not supported by this browser.");
   }
-});
+}
 
+function showPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
 
+  const locationInputContainer = document.getElementById("locationInputContainer");
+  const locationInput = document.getElementById("locationInput");
+
+  locationInputContainer.style.display = "block";
+  locationInput.style.display = "block";
+  locationInput.value = `Latitude: ${latitude}, Longitude: ${longitude}`;
+  document.getElementById("autocomplete-container").style.display = "none";
+  locationInput.focus();
+}
+// function openManualInput() {
+//   var locationInputContainer = document.getElementById("locationInputContainer");
+//   locationInputContainer.style.display = "block";
+// }
+
+// function useCurrentLocation() {
+//   // Check if geolocation is available in the browser
+//   if ("geolocation" in navigator) {
+//     navigator.geolocation.getCurrentPosition(function (position) {
+//       var latitude = position.coords.latitude;
+//       var longitude = position.coords.longitude;
+
+//       // Now you can use the latitude and longitude to perform actions
+//       console.log("Latitude:", latitude);
+//       console.log("Longitude:", longitude);
+//     }, function (error) {
+//       // Handle geolocation error
+//       console.error("Error getting location:", error.message);
+//     });
+//   } else {
+//     console.error("Geolocation is not available in this browser.");
+//   }
+// }
 
 //! locaiton
 
