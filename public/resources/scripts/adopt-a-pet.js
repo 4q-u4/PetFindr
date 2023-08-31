@@ -115,17 +115,18 @@ function filterPets(searchTerm, filterType) {
   displayPets(filteredPets);
 }
 
-searchInput.addEventListener('input', () => {
-  const searchTerm = searchInput.value;
-  const selectedType = filterSelect.value;
-  filterPets(searchTerm, selectedType);
-});
+// Remove the existing event listeners for searchInput and filterSelect
+searchInput.removeEventListener('input', handleSearchInput);
+filterSelect.removeEventListener('change', handleFilterSelect);
 
-filterSelect.addEventListener('change', () => {
+const searchForm = document.getElementById('searchForm');
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevent form submission
+
   const searchTerm = searchInput.value;
   const selectedType = filterSelect.value;
   filterPets(searchTerm, selectedType);
 });
 
 // Initial display
-displayPets(pets);
+displayPets(pets); 
