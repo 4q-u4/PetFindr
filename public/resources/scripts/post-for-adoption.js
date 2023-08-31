@@ -123,19 +123,7 @@ document.getElementById('submitForm').addEventListener('click', async function (
   }
 });
 
-async function uploadImage(imageFile) {
-  const formData = new FormData();
-  formData.append('petPhoto', imageFile);
-
-  const response = await fetch('/uploadImage', {
-    method: 'POST',
-    body: formData
-  });
-
-  const result = await response.json();
-  return result.imageUrl; // Assuming the server responds with the image URL
-}
-
+// i deletc upoladfucntionhere ,sameas this down 
 //! === Image ENDPOINT === //
 async function uploadImage(imageFile) {
   const formData = new FormData();

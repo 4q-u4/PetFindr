@@ -1,57 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const reportForm = document.getElementById("reportForm");
-
-  reportForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(reportForm);
-
-    try {
-      const response = await fetch("/submitPet", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        alert("Pet report submitted successfully!");
-        reportForm.reset();
-      } else {
-        alert("An error occurred while submitting the pet report.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred while submitting the pet report.");
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const reportForm = document.getElementById("reportForm");
-  const getLocationBtn = document.getElementById("getLocationBtn");
-  const locationInput = document.getElementById("location");
-
-  getLocationBtn.addEventListener("click", function () {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          locationInput.value = `${latitude}, ${longitude}`;
-        },
-        function (error) {
-          console.error("Error getting location:", error);
-          alert("An error occurred while getting the location.");
-        }
-      );
-    } else {
-      alert("Geolocation is not supported by your browser.");
-    }
-  });
-
-  reportForm.addEventListener("submit", async function (event) {
-    // Rest of your form submission code...
-  });
-});
+//! === Dynamic Type-Breed Function === /
 
 function updateBreeds() {
   var selectedOption = document.getElementById("petType").value;
@@ -100,16 +47,97 @@ function updateBreeds() {
   }
 }
 
-//submit for both forma
+document.getElementById('submitLostPet').addEventListener('click', async function (event) {
+  event.preventDefault();
 
-document
-  .getElementById("submitBothForms")
-  .addEventListener("click", function () {
-    document.getElementById("reportForm").submit(); // Submit the first form
-    document.getElementById("secondForm").submit(); // Submit the second form
+  const petType = document.getElementById('petType');
+  const ageRange = document.getElementById('ageRange');
+  const petSize = document.getElementById('petSize');
+  const petSex = document.getElementById('petSex');
+
+  // Check if any dropdown has the "Select" option selected
+  if (petType.value === 'none' || ageRange.value === 'none' || petSize.value === 'none' || petSex.value === 'none') {
+    const optionsToSelect = [];
+
+    if (petType.value === 'none') optionsToSelect.push('Pet Type');
+    if (ageRange.value === 'none') optionsToSelect.push('Approximate Age');
+    if (petSize.value === 'none') optionsToSelect.push('Pet Size');
+    if (petSex.value === 'none') optionsToSelect.push('Pet Sex');
+    alert(`Please select an option for the following: ${optionsToSelect.join(', ')}`);
+    return;
+  }
+
+  // Get user ID from localStorage
+  const userId = localStorage.getItem('userId');
+
+  // Get the selected image file
+  const lostPetPhotoInput = document.getElementById('lostPetPhoto');
+  const lostPetPhotoFile = lostPetPhotoInput.files[0];
+
+  // Check if an image file is selected
+  if (!lostPetPhotoFile) {
+    alert('Please select an image.');
+    return;
+  }
+
+  try {
+    // Upload the image file and get the URL
+    const imageUrl = await uploadImage(lostPetPhotoFile);
+
+    // Construct the lostPetInfo object
+    const lostPetInfo = {
+      petType: document.getElementById('petType').value,
+      petBreed: document.getElementById('petBreedSelect').value,
+      petColor: document.getElementById('petColor').value,
+      ageRange: document.getElementById('ageRange').value,
+      petSize: document.getElementById('petSize').value,
+      petSex: document.getElementById('petSex').value,
+
+    };
+
+    //! Send the data to the server
+
+    const response = await fetch('/submitLostPet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' // Indicate that you're sending JSON
+      },
+      body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl })
+    });
+
+    if (response.ok) {
+      // Handle success
+      alert('Pet information submitted successfully.');
+      window.location.href = '/'; // Redirect to the home URL
+
+    } else {
+      // Handle error
+      alert('Failed to submit lost pet information.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
+//! === Image ENDPOINT === //
+async function uploadImage(imageFile) {
+  const formData = new FormData();
+  formData.append('lostPetPhoto', imageFile);
+
+  const response = await fetch('/uploadLostPetImage', {
+    method: 'POST',
+    body: formData
   });
 
-//! testing so
+  const result = await response.json();
+  return result.imageUrl; // Assuming the server responds with the image URL
+}
+
+//==========================================================================================
+
+
+
+//! === Location 2 Way ===// 
 
 
 // Get location type radio buttons
@@ -155,9 +183,38 @@ showLocationLink.addEventListener('click', () => {
 
 
 
+//! locaiton
+
+document.addEventListener("DOMContentLoaded", function () {
+  const reportForm = document.getElementById("reportForm");
+  const getLocationBtn = document.getElementById("getLocationBtn");
+  const locationInput = document.getElementById("location");
+
+  getLocationBtn.addEventListener("click", function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          locationInput.value = `${latitude}, ${longitude}`;
+        },
+        function (error) {
+          console.error("Error getting location:", error);
+          alert("An error occurred while getting the location.");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+  });
+
+  reportForm.addEventListener("submit", async function (event) {
+    // Rest of your form submission code...
+  });
+});
 
 
-//search autocomplete location
+//! Search autocomplete location
 /* 
   The addressAutocomplete takes as parameters:
   - a container element (div)
@@ -392,21 +449,3 @@ addressAutocomplete(
     placeholder: "Enter an address here",
   }
 );
-
-// //hide location
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const manualLocationRadio = document.getElementById("manualLocationRadio");
-//   const currentLocationRadio = document.getElementById("currentLocationRadio");
-//   const manualLocationInput = document.getElementById("locationInputContainer");
-
-//   manualLocationInput.style.display = "none"; // Hide the manual location input initially
-
-//   manualLocationRadio.addEventListener("click", function () {
-//     manualLocationInput.style.display = "block"; // Show the manual location input
-//   });
-
-//   currentLocationRadio.addEventListener("click", function () {
-//     manualLocationInput.style.display = "none"; // Hide the manual location input
-//   });
-// });

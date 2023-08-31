@@ -1,8 +1,8 @@
 body{
-  background-color:#fa9a27 !important;
+  background-color: white !important;
 }
 .body{ /*!  For Section */
-  background-color: #fa9a27;
+  background-color: white;
   margin: 0;
   padding: 0;
   overflow-x: hidden; /*EXP: Prevent horizontal scrollbar */
@@ -25,7 +25,7 @@ body{
   text-align: center;
   justify-content: center;
   gap: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 2px solid black;
 }
 

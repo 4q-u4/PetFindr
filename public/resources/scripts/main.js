@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-//check if the user is logged in and redirect them to the login page if not:
+
+//EXP: check if the user is logged in and redirect them to the login page if not:
 //! POST FOR ADOPTION
 document.addEventListener("DOMContentLoaded", function () {
   const postPetButton = document.getElementById("post-for-adoption-button");
@@ -105,6 +106,28 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         // If logged in, redirect to the "post a pet" page
         window.location.href = "/pages/adopt-a-pet.html"; // Replace with your desired URL
+      }
+    });
+  }
+
+  // Other event listeners and logic
+})
+
+//! REPORT A PET
+
+document.addEventListener("DOMContentLoaded", function () {
+  const postPetButton = document.getElementById("report-a-pet-button");
+
+  if (postPetButton) {
+    postPetButton.addEventListener("click", function () {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (!isLoggedIn) {
+        // Redirect to login page
+        window.location.href = "/pages/login.html"; // Replace with your login page URL
+      } else {
+        // If logged in, redirect to the "post a pet" page
+        window.location.href = "/pages/report-a-pet.html"; // Replace with your desired URL
       }
     });
   }
