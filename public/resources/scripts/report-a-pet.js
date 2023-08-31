@@ -122,6 +122,10 @@ const showLocationLink = document.getElementById('showLocationLink');
 const selectedLatitudeInput = document.getElementById('selectedLatitude');
 const selectedLongitudeInput = document.getElementById('selectedLongitude');
 
+// Hide location input and show location link by default
+locationInput.style.display = 'none';
+showLocationLink.style.display = 'none';
+
 // Event listener for location type change
 manualLocationRadio.addEventListener('click', () => {
   locationInput.style.display = 'block';
@@ -389,35 +393,20 @@ addressAutocomplete(
   }
 );
 
-//hide location
+// //hide location
 
-document.addEventListener("DOMContentLoaded", function () {
-  const locationInputContainer = document.getElementById(
-    "locationInputContainer"
-  );
-  const showLocationLink = document.getElementById("showLocationLink");
-  const locationInput = document.getElementById("location");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const manualLocationRadio = document.getElementById("manualLocationRadio");
+//   const currentLocationRadio = document.getElementById("currentLocationRadio");
+//   const manualLocationInput = document.getElementById("locationInputContainer");
 
-  showLocationLink.addEventListener("click", function (event) {
-    event.preventDefault();
-    locationInputContainer.removeChild(showLocationLink);
-    locationInputContainer.removeChild(locationInput);
+//   manualLocationInput.style.display = "none"; // Hide the manual location input initially
 
-    const getCurrentLocationBtn = document.createElement("button");
-    getCurrentLocationBtn.setAttribute("type", "button");
-    getCurrentLocationBtn.setAttribute("id", "getLocationBtn");
-    getCurrentLocationBtn.setAttribute("class", "location-button");
-    getCurrentLocationBtn.textContent = "Get Current Location";
-    locationInputContainer.appendChild(getCurrentLocationBtn);
+//   manualLocationRadio.addEventListener("click", function () {
+//     manualLocationInput.style.display = "block"; // Show the manual location input
+//   });
 
-    const newLocationInput = document.createElement("input");
-    newLocationInput.setAttribute("type", "text");
-    newLocationInput.setAttribute("id", "location");
-    newLocationInput.setAttribute("class", "input");
-    locationInputContainer.appendChild(newLocationInput);
-
-    getCurrentLocationBtn.addEventListener("click", function () {
-      // Code to get the current location
-    });
-  });
-});
+//   currentLocationRadio.addEventListener("click", function () {
+//     manualLocationInput.style.display = "none"; // Hide the manual location input
+//   });
+// });

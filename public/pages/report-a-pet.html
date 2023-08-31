@@ -180,157 +180,99 @@
 
     <section class="body">
       <br>
-      <h2 class="text-center titlee"> Report A Lost Pet You Found</h2><br>
-      <div class="container forms-container">
+      <h2 class="text-center h2-title"> Report A Lost Pet You Found</h2><br>
+      <div class="row">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+
+          <form class="form" id="lostPetForm" action="/submitLostPet" method="POST">
+            <fieldset>
+              <legend>Lost Pet Info:</legend>
+
+              <div class="field-row">
+                <label for="petPhoto">Upload a Photo of the Pet You Found:</label>
+                <input type="file" id="petPhoto" name="petPhoto" accept="image/*" required class="input">
+              </div>
+              <div class="field-row">
+                <label for="locationType">Location Type:</label>
+                <div id="locationTypeContainer">
+                  <label class="custom-radio-label">
+                    <div class="custom-radio" id="manualLocationRadio"></div>
+                    Manual Input
+                    <input type="radio" name="locationType" id="manualLocation" value="manual">
+                  </label>
+                  <label class="custom-radio-label">
+                    <div class="custom-radio" id="currentLocationRadio"></div>
+                    Use Current Location
+                    <input type="radio" name="locationType" id="currentLocation" value="current">
+                  </label>
+                </div>
+              </div>
+              <div class="field-row" id="locationInputContainer">
+                <label for="locationInput"></label>
+                <input type="text" id="locationInput" class="input" placeholder="Enter location" autocomplete="off">
+                <button id="showLocationLink" class="location-link">Get Current Location</button>
+              </div>
 
 
-        <!--- <div class="field-row">
-          <label for="currentLocation">Send Current Location</label>
-          <button type="button" id="getLocationBtn" class="location-button">Send Current Location</button>
-          <input type="text" id="location">
-      </div> -->
+              <div class="field-row">
+                <label for="petType">Pet Type: *</label>
+                <select id="petType" name="petType" class="input" required onchange="updateBreeds()">
+                  <option value="none">Select</option>
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="petBreed">Pet Breed/Mix:</label>
+                <select id="petBreedSelect" name="petBreed" class="input"></select>
+              </div>
+              <div class="field-row">
+                <label for="petColor">Pet Color/Coat:</label>
+                <input type="text" id="petColor" name="petColor" required class="input">
+              </div>
+              <div class="field-row">
+                <label for="age">Approximate Age: *</label>
+                <select id="ageRange" name="ageRange" class="input">
+                  <option value="none">Select</option>
+                  <option value="Junior">Junior (0-2 years)</option>
+                  <option value="adult">Adult (3-6 years)</option>
+                  <option value="mature">Mature (7-10 years)</option>
+                  <option value="senior">Senior (11+ years)</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="size">Pet Size: *</label>
+                <select id="petSize" name="petSize" class="input">
+                  <option value="none">Select</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="sex">Pet Sex<span class="required">*</span>:</label>
+                <select id="petSex" name="petSex" class="input" required>
+                  <option value="none">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
 
+              <button class="submit-lostpet-button" id="submitBothForms">Submit</button>
 
-
-        <div class="row">
-
-          <div class="col-md-6">
-            <form class="form" id="lostPetForm" action="/submitLostPet" method="POST">
-              <fieldset>
-                <legend>Lost Pet Info:</legend>
-                <div class="field-row">
-                  <label for="petPhoto">Upload a Photo of the Pet You Found:</label>
-                  <input type="file" id="petPhoto" name="petPhoto" accept="image/*" required class="input">
-                </div>
-                <div class="field-row">
-                  <br>
-                  <label for="locationType"></label>
-                  <div id="locationTypeContainer">
-                    <label class="custom-radio-label">
-                      <div class="custom-radio" id="manualLocationRadio"></div>
-                      Manual Input
-                    </label>
-                    <label class="custom-radio-label">
-                      <div class="custom-radio" id="currentLocationRadio"></div>
-                      Use Current Location
-                    </label>
-                  </div>
-
-                </div>
-                <div class="field-row">
-                  <label for="locationInput">Location Found:</label>
-                  <input type="text" id="locationInput" class="input" placeholder="Enter location" autocomplete="off">
-                </div>
-                <div class="field-row">
-                  <label></label>
-                  <div id="locationInputContainer">
-                    <a href="#" id="showLocationLink" class="location-link">Get Current Location</a>
-                    <input type="hidden" id="selectedLatitude" name="selectedLatitude">
-                    <input type="hidden" id="selectedLongitude" name="selectedLongitude">
-                  </div>
-                </div>
-
-
-
-
-                <div class="field-row">
-                  <label for="petType">Pet Type: *</label>
-                  <select id="petType" name="petType" class="input" required onchange="updateBreeds()">
-                    <option value="none">Select</option>
-                    <option value="dog">Dog</option>
-                    <option value="cat">Cat</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="field-row">
-                  <label for="petBreed">Pet Breed/Mix:</label>
-                  <select id="petBreedSelect" name="petBreed" class="input"></select>
-                </div>
-                <div class="field-row">
-                  <label for="petColor">Pet Color/Coat:</label>
-                  <input type="text" id="petColor" name="petColor" required class="input">
-                </div>
-                <div class="field-row">
-                  <label for="age">Approximate Age: *</label>
-                  <select id="ageRange" name="ageRange" class="input">
-                    <option value="none">Select</option>
-                    <option value="Junior">Junior (0-2 years)</option>
-                    <option value="adult">Adult (3-6 years)</option>
-                    <option value="mature">Mature (7-10 years)</option>
-                    <option value="senior">Senior (11+ years)</option>
-                  </select>
-                </div>
-                <div class="field-row">
-                  <label for="size">Pet Size: *</label>
-                  <select id="petSize" name="petSize" class="input">
-                    <option value="none">Select</option>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                  </select>
-                </div>
-                <div class="field-row">
-                  <label for="sex">Pet Sex<span class="required">*</span>:</label>
-                  <select id="petSex" name="petSex" class="input" required>
-                    <option value="none">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-
-
-              </fieldset>
-            </form>
-            <br>
-          </div>
-
-          <div class="col-md-6">
-            <form class="form form-one" id="secondForm" action="/submitOther" method="POST">
-              <fieldset>
-                <legend>Your Contact Info:</legend>
-                <div class="field-row">
-                  <label for="firstName">First Name: *</label>
-                  <input type="text" id="firstName" name="firstName" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="lastName">Last Name: *</label>
-                  <input type="text" id="lastName" name="lastName" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="email">Email: </label>
-                  <input type="text" id="email" name="email" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="phone">Phone: *</label>
-                  <input type="text" id="phone" name="phone" class="input">
-                </div>
-                <div class="field-row">
-                  <label for="address">Address: *</label>
-                  <input type="text" id="address" name="address" class="input">
-                </div>
-              </fieldset>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <button class="button-confirm" id="submitBothForms">Submit</button>
-            </form>
-          </div>
-
+            </fieldset>
+          </form>
         </div>
-
       </div>
-      <br>
+
     </section>
 
+
+
   </main>
-  <footer
-    class=" container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-custom">
+  <br>
+  <footer class=" container d-flex flex-wrap justify-content-between align-items-center py-3 footer-custom">
     <!--! ==== FOOTER ==== -->
     <div class="col-md-4 d-flex align-items-center">
       <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
