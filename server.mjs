@@ -486,16 +486,30 @@ app.get('/getMarkersData', async (req, res) => {
   try {
     const connection = await pool.getConnection();
 
-    const [results] = await connection.query('SELECT * FROM lost_pet'); // Use your table name
+    const query = `
+      SELECT lp.lost_pet_photo_url, lp.lost_pet_type, lp.time_found, u.phone, lp.latitude, lp.longitude
+      FROM lost_pet lp
+      JOIN user_table u ON lp.user_Id = u.Id
+    `;
 
+    const [rows] = await connection.query(query);
     connection.release();
-    res.json(results);
+
+    const markersData = rows.map(row => ({
+      lost_pet_photo_url: row.lost_pet_photo_url,
+      lost_pet_type: row.lost_pet_type,
+      time_found: row.time_found,
+      contactNumber: row.phone,
+      latitude: row.latitude,
+      longitude: row.longitude,
+    }));
+
+    res.json(markersData);
   } catch (error) {
-    console.error('Error fetching marker data:', error);
-    res.status(500).send('Error fetching marker data');
+    console.error('Error fetching data:', error);
+    res.status(500).send('Error fetching data');
   }
 });
-
 
 
 //! === Handle 404 Not Found === //
