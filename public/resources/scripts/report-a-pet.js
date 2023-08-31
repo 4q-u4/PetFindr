@@ -92,32 +92,60 @@ document.getElementById('submitLostPet').addEventListener('click', async functio
       ageRange: document.getElementById('ageRange').value,
       petSize: document.getElementById('petSize').value,
       petSex: document.getElementById('petSex').value,
-
     };
 
-    //! Send the data to the server
+    let latitude = null;
+    let longitude = null;
 
-    const response = await fetch('/submitLostPet', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json' // Indicate that you're sending JSON
-      },
-      body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl })
-    });
+    // Get the combined latitude and longitude value from the input field
+    const locationInput = document.getElementById('locationInput');
+    const locationValue = locationInput.value; // Assuming the value is in the format "Latitude: xxx, Longitude: yyy"
 
-    if (response.ok) {
-      // Handle success
-      alert('Pet information submitted successfully.');
-      window.location.href = '/'; // Redirect to the home URL
+    // If user entered a location manually
+    if (locationValue) {
+      // Extract latitude and longitude from the input value
+      const matches = locationValue.match(/Latitude: (.+), Longitude: (.+)/);
+      if (matches) {
+        latitude = matches[1];
+        longitude = matches[2];
+      }
+    } else if (navigator.geolocation) {
+      // If user selected to use current location
+      try {
+        navigator.geolocation.getCurrentPosition(async position => {
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
 
-    } else {
-      // Handle error
-      alert('Failed to submit lost pet information.');
+          // Send the data to the server
+          const response = await fetch('/submitLostPet', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json' // Indicate that you're sending JSON
+            },
+            body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl, latitude, longitude })
+          });
+
+          if (response.ok) {
+            // Handle success
+            alert('Pet information submitted successfully.');
+
+            // Redirect to the home URL
+            window.location.href = '/'; // Replace with the actual home page URL
+          } else {
+            // Handle error
+            alert('Failed to submit lost pet information.');
+          }
+
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   } catch (error) {
     console.error('Error:', error);
   }
 });
+
 
 //! === Image ENDPOINT === //
 async function uploadImage(imageFile) {
@@ -191,35 +219,35 @@ function showPosition(position) {
 //   }
 // }
 
-//! locaiton
+// //! locaiton
 
-document.addEventListener("DOMContentLoaded", function () {
-  const reportForm = document.getElementById("reportForm");
-  const getLocationBtn = document.getElementById("getLocationBtn");
-  const locationInput = document.getElementById("location");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const reportForm = document.getElementById("reportForm");
+//   const getLocationBtn = document.getElementById("getLocationBtn");
+//   const locationInput = document.getElementById("location");
 
-  getLocationBtn.addEventListener("click", function () {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          locationInput.value = `${latitude}, ${longitude}`;
-        },
-        function (error) {
-          console.error("Error getting location:", error);
-          alert("An error occurred while getting the location.");
-        }
-      );
-    } else {
-      alert("Geolocation is not supported by your browser.");
-    }
-  });
+//   getLocationBtn.addEventListener("click", function () {
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(
+//         function (position) {
+//           const latitude = position.coords.latitude;
+//           const longitude = position.coords.longitude;
+//           locationInput.value = `${latitude}, ${longitude}`;
+//         },
+//         function (error) {
+//           console.error("Error getting location:", error);
+//           alert("An error occurred while getting the location.");
+//         }
+//       );
+//     } else {
+//       alert("Geolocation is not supported by your browser.");
+//     }
+//   });
 
-  reportForm.addEventListener("submit", async function (event) {
-    // Rest of your form submission code...
-  });
-});
+//   reportForm.addEventListener("submit", async function (event) {
+//     // Rest of your form submission code...
+//   });
+// });
 
 
 //! Search autocomplete location

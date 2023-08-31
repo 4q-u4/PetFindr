@@ -458,27 +458,27 @@ app.post('/uploadLostPetImage', upload.single('lostPetPhoto'), (req, res) => {
 
 //! Handle form submission
 app.post('/submitLostPet', async (req, res) => {
-  const { userId, lostPetInfo, photoUrl } = req.body; // Assuming you're sending the image URL from the client
+  const { userId, lostPetInfo, photoUrl, latitude, longitude } = req.body;
 
   try {
+    console.log('Received submission request:', req.body); // Logging the received data
+
     const connection = await pool.getConnection();
 
-    // Insert the pet information into the database along with the user ID and photo URL
     await connection.query(
-      'INSERT INTO lost_pet (lost_pet_photo_url, lost_pet_type, lost_pet_breed, lost_pet_color, lost_pet_approximate_age, lost_pet_size, lost_pet_sex, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [photoUrl, lostPetInfo.petType, lostPetInfo.petBreed, lostPetInfo.petColor, lostPetInfo.ageRange, lostPetInfo.petSize, lostPetInfo.petSex, userId]
+      'INSERT INTO lost_pet (lost_pet_photo_url, lost_pet_type, lost_pet_breed, lost_pet_color, lost_pet_approximate_age, lost_pet_size, lost_pet_sex, user_id, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [photoUrl, lostPetInfo.petType, lostPetInfo.petBreed, lostPetInfo.petColor, lostPetInfo.ageRange, lostPetInfo.petSize, lostPetInfo.petSex, userId, latitude, longitude]
     );
 
     connection.release();
 
-    // Respond to the client
-    res.send('Lost Pet information submitted successfully.');
+    // Send a JSON response
+    res.json({ message: 'Lost Pet information submitted successfully.' });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).send('Error submitting Lost pet information.');
+    res.status(500).json({ error: 'Error submitting Lost pet information.' });
   }
 });
-
 
 //! === Handle 404 Not Found === //
 
