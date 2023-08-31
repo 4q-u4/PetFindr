@@ -437,20 +437,20 @@ app.get('/api/getOwnerInfo', async (req, res) => {
   }
 });
 
-//! === Report A Lost Pet === //
-//EXP: Set up storage for multer
-const storageone = multer.diskStorage({
-  destination: './public/resources/images/lostpets',
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  }
-});
-const uploadone = multer({ storageone });
+// //! === Report A Lost Pet === //
+// //EXP: Set up storage for multer
+// const storageone = multer.diskStorage({
+//   destination: './public/resources/images/lost-pets',
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}_${file.originalname}`);
+//   }
+// });
+// const uploadone = multer({ storageone });
 
 //! Handle image uploads
 app.post('/uploadLostPetImage', upload.single('lostPetPhoto'), (req, res) => {
   // Here you can process the uploaded image and get its URL
-  const imageUrl = `/resources/images/lostpets/${req.file.filename}`;
+  const imageUrl = `/resources/images/pets-for-adoption/${req.file.filename}`;
 
   // Respond with the image URL
   res.json({ imageUrl });
@@ -479,6 +479,24 @@ app.post('/submitLostPet', async (req, res) => {
     res.status(500).json({ error: 'Error submitting Lost pet information.' });
   }
 });
+
+//! === Marker Data
+
+app.get('/getMarkersData', async (req, res) => {
+  try {
+    const connection = await pool.getConnection();
+
+    const [results] = await connection.query('SELECT * FROM lost_pet'); // Use your table name
+
+    connection.release();
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching marker data:', error);
+    res.status(500).send('Error fetching marker data');
+  }
+});
+
+
 
 //! === Handle 404 Not Found === //
 
