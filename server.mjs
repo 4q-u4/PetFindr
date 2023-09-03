@@ -7,6 +7,7 @@ import path from "path"; //EXP: Import path module for handling file paths
 import mysql from "mysql2"; //EXP: Import MySQL module for database interaction
 import { fileURLToPath } from "url"; //EXP: Import utility function for working with file URLs
 import multer from 'multer';
+// import rateLimit from 'express-rate-limit';
 
 //! === Create an instance of the Express application === //
 const app = express();
@@ -47,6 +48,14 @@ pool.getConnection() //EXP: Acquire a connection from the pool
   .catch(error => {
     console.error('Error connecting to MySQL Database:', error.message);
   });
+
+//! === Rate Limiter For IP === /
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, //EXP: Limit each IP to 100 requests per windowMs
+// });
+
+// app.use(limiter); // Apply the rate limiter to all requests
 
 //! TEST 001 Insert Data 
 
@@ -489,7 +498,7 @@ app.get('/getMarkersData', async (req, res) => {
     const query = `
       SELECT lp.lost_pet_photo_url, lp.lost_pet_type, lp.time_found, u.phone, lp.latitude, lp.longitude
       FROM lost_pet lp
-      JOIN user_table u ON lp.user_Id = u.Id
+      JOIN user_table u ON lp.user_id = u.id
     `;
 
     const [rows] = await connection.query(query);

@@ -30,7 +30,7 @@ fetch('/getMarkersData') //EXP: Fetch data from the server
   .then(response => response.json())
   .then(data => {
 
-    data.forEach(markerData => {     //EXP: Create markers for each data point (loop)
+    data.forEach(markersData => {     //EXP: Create markers for each data point (loop)
       const markerIconUrl = `https://api.geoapify.com/v1/icon?size=xx-large&type=awesome&color=%233e9cfe&icon=paw&apiKey=${markerIconAPIKey}`;
       const markerIcon = L.icon({
         iconUrl: markerIconUrl,
@@ -41,7 +41,7 @@ fetch('/getMarkersData') //EXP: Fetch data from the server
 
       //! Calculate the time difference in milliseconds
       const currentTime = new Date();
-      const foundTime = new Date(markerData.time_found);
+      const foundTime = new Date(markersData.time_found);
       const timeDifference = currentTime - foundTime;
 
       // Calculate the time difference in days, hours, minutes
@@ -59,16 +59,21 @@ fetch('/getMarkersData') //EXP: Fetch data from the server
         timeAgo = `Found: ${minutes} minutes ago`;
       }
       const markerPopupContent = `
-        <img src="${markerData.lost_pet_photo_url}" alt="Marker Image" width="100"><br>
-        Type: ${markerData.lost_pet_type}<br>
+        <img src="${markersData.lost_pet_photo_url}" alt="Marker Image" width="100"><br>
+        Type: ${markersData.lost_pet_type}<br>
         ${timeAgo}<br>
-        Contact: <a href="tel:${markerData.phone}">${markerData.phone}</a><br>
+        Contact: <a href="tel:${markersData.phone}">${markersData.phone}</a><br>
 
       `;
+      console.log('Latitude:', markersData.latitude);
+      console.log('Longitude:', markersData.longitude);
+      const latitude = markersData.latitude; // Replace with the appropriate field from your data
+      const longitude = markersData.longitude;
 
       //EXP: Contact: <a href="tel:${markerData.contactNumber}">${markerData.contactNumber}</a><br>
 
-      const marker = L.marker([markerData.latitude, markerData.longitude], {
+
+      const marker = L.marker([latitude, longitude], {
         icon: markerIcon
       }).bindPopup(markerPopupContent).addTo(map);
     });
