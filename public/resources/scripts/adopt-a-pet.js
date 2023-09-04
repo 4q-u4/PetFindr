@@ -18,6 +18,8 @@
 // Redirect the user to the product details page
 // window.location.href = productDetailsPage;
 // }
+
+
 //! === ADOPTAPET.HTML Functionality === //
 
 document.addEventListener('DOMContentLoaded', () => { // When the DOM is fully loaded...
@@ -49,9 +51,9 @@ async function generatePetCards() {
             <div class="text-center">
               <h5 class="fw-bolder">${name}</h5>
               <hr>
-              <p><b>Animal Type:</b> ${type}</p>
-              <p><b>Breed:</b>       ${breed}</p>
-              <p><b>Sex:</b>         ${sex}</p>
+              <p class="type"><b>Animal Type:</b> ${type}</p>
+              <p class="breed"><b>Breed:</b>       ${breed}</p>
+              <p class="sex"><b>Sex:</b>         ${sex}</p>
             </div>
           </div>
           <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
@@ -83,50 +85,70 @@ async function fetchPetData() { // Function to fetch pet data from the server
 
 //! SEARCH BAR FUNCTIONAILTY
 
-const searchInput = document.getElementById('searchInput');
-const filterSelect = document.getElementById('filterSelect');
-const petList = document.querySelector('.pet-list');
 
-// Sample pet data (replace this with your actual data)
-const pets = [
-  { name: 'Buddy', type: 'dog' },
-  { name: 'Whiskers', type: 'cat' },
-  // Add more pet data
-];
+//Call the generatePetCards function to populate the page with pet cards
 
-function displayPets(petsToDisplay) {
-  petList.innerHTML = '';
+// const searchButton = document.getElementById('searchButton'); // Get the search button element
 
-  petsToDisplay.forEach((pet) => {
-    const petItem = document.createElement('div');
-    petItem.classList.add('pet-item');
-    petItem.textContent = `${pet.name} (${pet.type})`;
-    petList.appendChild(petItem);
-  });
+// if (searchButton) { // If the search button exists...
+//   searchButton.addEventListener('click', (event) => { // Add a click event listener to it
+//     myFunction(); // Call your search function
+//   });}}
+
+
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
 }
 
-function filterPets(searchTerm, filterType) {
-  const filteredPets = pets.filter((pet) => {
-    const nameMatch = pet.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const typeMatch = filterType === 'all' || pet.type === filterType;
-    return nameMatch && typeMatch;
-  });
+// function myFunction() {
+//   // Declare variables
+//   petCards = document.getElementById('productList');
 
-  displayPets(filteredPets);
-}
+//   var input, filter, petCards, cardDivs, i, type, breed, sex;
+//   input = document.getElementById('myInput');
+//   filter = input.value.toUpperCase();
+//   petCards = document.getElementById('petCards');
+//   cardDivs = petCards.getElementsByClassName('col'); // Get all card divs
 
-// Remove the existing event listeners for searchInput and filterSelect
-searchInput.removeEventListener('input', handleSearchInput);
-filterSelect.removeEventListener('change', handleFilterSelect);
+//   // Get the selected filter option
+//   var filterSelect = document.getElementById('filterSelect');
+//   var selectedFilter = filterSelect.value;
 
-const searchForm = document.getElementById('searchForm');
-searchForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevent form submission
+//   // Loop through all card divs and hide those that don't match the search query and selected filter
+//   for (i = 0; i < cardDivs.length; i++) {
+//     var cardDiv = cardDivs[i];
+//     type = cardDiv.getElementsByClassName('type')[0].innerText || ''; // Get type from card
+//     breed = cardDiv.getElementsByClassName('breed')[0].innerText || ''; // Get breed from card
+//     sex = cardDiv.getElementsByClassName('sex')[0].innerText || ''; // Get sex from card
 
-  const searchTerm = searchInput.value;
-  const selectedType = filterSelect.value;
-  filterPets(searchTerm, selectedType);
-});
+//     // Check if the selected filter matches the card's property
+//     if (
+//       selectedFilter === 'all' ||
+//       (selectedFilter === 'type' && type.toUpperCase().indexOf(filter) > -1) ||
+//       (selectedFilter === 'breed' && breed.toUpperCase().indexOf(filter) > -1) ||
+//       (selectedFilter === 'sex' && sex.toUpperCase().indexOf(filter) > -1)
+//     ) {
+//       cardDiv.style.display = '';
+//     } else {
+//       cardDiv.style.display = 'none';
+//     }
+//   }
+// }
 
-// Initial display
-displayPets(pets); 
+

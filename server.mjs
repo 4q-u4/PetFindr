@@ -472,22 +472,46 @@ app.post('/submitLostPet', async (req, res) => {
   try {
     console.log('Received submission request:', req.body); // Logging the received data
 
+    // Add data validation to ensure required fields are present
+    if (!userId || !lostPetInfo || !photoUrl || !latitude || !longitude) {
+      return res.status(400).json({ error: 'Invalid request data.' });
+    }
+
+    const lostPet = {
+      photoUrl,
+      petType: lostPetInfo.petType,
+      petBreed: lostPetInfo.petBreed,
+      petColor: lostPetInfo.petColor,
+      ageRange: lostPetInfo.ageRange,
+      petSize: lostPetInfo.petSize,
+      petSex: lostPetInfo.petSex,
+      latitude,
+      longitude,
+    };
+
     const connection = await pool.getConnection();
 
-    await connection.query(
+    // Use parameterized queries to prevent SQL injection
+    await connection.execute(
       'INSERT INTO lost_pet (lost_pet_photo_url, lost_pet_type, lost_pet_breed, lost_pet_color, lost_pet_approximate_age, lost_pet_size, lost_pet_sex, user_id, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [photoUrl, lostPetInfo.petType, lostPetInfo.petBreed, lostPetInfo.petColor, lostPetInfo.ageRange, lostPetInfo.petSize, lostPetInfo.petSex, userId, latitude, longitude]
+      [lostPet.photoUrl, lostPet.petType, lostPet.petBreed, lostPet.petColor, lostPet.ageRange, lostPet.petSize, lostPet.petSex, userId, lostPet.latitude, lostPet.longitude]
     );
 
     connection.release();
 
-    // Send a JSON response
-    res.json({ message: 'Lost Pet information submitted successfully.' });
+    // Send a JSON response indicating success
+    res.status(201).json({ message: 'Lost Pet information submitted successfully.', lostPet });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ error: 'Error submitting Lost pet information.' });
+    // Handle specific errors, e.g., duplicate entries
+    if (error.code === 'ER_DUP_ENTRY') {
+      res.status(400).json({ error: 'Duplicate entry. This pet may have already been submitted.' });
+    } else {
+      res.status(500).json({ error: 'Error submitting Lost pet information.' });
+    }
   }
 });
+
 
 //! === Marker Data
 

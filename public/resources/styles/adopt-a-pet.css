@@ -1,26 +1,3 @@
-/* Seacrh Bar Functinality */
-
-.search-container {
-  text-align: center;
-  margin: 20px 0;
-}
-
-#searchInput {
-  padding: 10px;
-  width: 300px;
-}
-
-#filterSelect {
-  padding: 8px;
-  margin-left: 10px;
-}
-
-.pet-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 
 /*================================================*/
 
@@ -169,4 +146,38 @@ background-color: #fa9a27;
     .card-group > .card:not(:first-child) .card-footer {
       border-bottom-left-radius: 0;
     }
+  }
+
+  /*====================*/
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align the container in the middle horizontally */
+    justify-content: center; /* Align the container in the middle vertically */
+    /* height: 100vh; Set the height of the container to the full viewport height */
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+  }
+  
+  input[type="text"],
+  select,
+  button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
   }

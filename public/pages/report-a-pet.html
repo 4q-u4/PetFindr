@@ -195,16 +195,21 @@
               <div class="field-row">
                 <label>Location:</label>
                 <div id="locationTypeContainer" class="button-options">
-                  <button class="custom-button" id="manualLocationButton" onclick="openManualInput()">Enter The
-                    Location</button>
+                  <div class="autocomplete-container" id="autocomplete-container"></div>
+
                   <button class="custom-button" id="currentLocationButton" onclick="useCurrentLocation()">Use Current
                     Location</button>
                 </div>
+
+                <div id="locationStatus" style="display: none;">
+                  <span id="locationReceived">&#10004; Location Received</span>
+                  <hr class="breakline">
+                </div>
               </div>
-              <hr class="breakline">
-              <div class="field-row" id="locationInputContainer" style="display: none;">
-                <input type="text" id="locationInput" class="input" placeholder="Enter location" autocomplete="off">
-                <div class="autocomplete-container" id="autocomplete-container"></div>
+              <div class="field-row" id="locationInputContainer">
+                <input type="text" id="locationInput" class="input" placeholder="Output" autocomplete="off">
+                <!-- <div class="autocomplete-container" id="autocomplete-container"></div> -->
+                <hr class="breakline">
 
               </div>
 

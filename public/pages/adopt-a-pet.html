@@ -183,37 +183,30 @@
     </div>
   </header>
   <main>
-    <div class="search-container">
-      <form id="searchForm">
-        <input type="text" id="searchInput" placeholder="Search pets...">
+
+    <div class="container">
+      <div class="search-container">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
         <select id="filterSelect">
           <option value="all">All</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
+          <option value="type">Type</option>
+          <option value="breed">Breed</option>
+          <option value="sex">Sex</option>
         </select>
-        <button type="submit" id="searchButton">Search</button>
-      </form>
-    </div>
-    <div class="pet-list"></div>
+        <button id="searchButton">Search</button>
+      </div>
 
-    <!--! Product reviews-
-                    <div class="d-flex justify-content-center small text-warning mb-2">
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                      <div class="bi-star-fill"></div>
-                    </div> -->
+    </div>
+
     <!--! ==== PRODUCTS CODE ==== -->
     <section class="py-5">
-      <div class="container px-4 px-lg-5 mt-5" id="productList">
+      <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="petCards">
-
-
-
+          <!-- Your pet card divs -->
         </div>
       </div>
     </section>
+
   </main>
   <!--! ==== FOOTER ==== -->
 

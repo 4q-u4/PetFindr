@@ -48,7 +48,7 @@ legend {
 }
 
 .input { /*!  For Inputs*/
-  width: 250px;
+  width: 400px;
   height: 40px;
   border-radius: 5px;
   border: 2px solid black;
@@ -79,12 +79,14 @@ legend {
 }
 
 .custom-button {
+  width: 150px;
+  height: 40px;
   padding: 5px 10px;
   border-radius: 5px;
   border: 2px solid black;
   background-color: white;
   box-shadow: 4px 4px black;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 600;
   color: black;
   padding: 5px 10px;

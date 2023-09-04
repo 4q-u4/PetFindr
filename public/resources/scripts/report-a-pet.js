@@ -1,3 +1,5 @@
+const locationInfo = { lat: null, lon: null, label: null };
+
 //! === Dynamic Type-Breed Function === /
 
 function updateBreeds() {
@@ -47,15 +49,17 @@ function updateBreeds() {
   }
 }
 
+//! === Submit Button === //lat
+
 document.getElementById('submitLostPet').addEventListener('click', async function (event) {
   event.preventDefault();
 
+  //EXP: Check if any dropdown has the "Select" option selected
   const petType = document.getElementById('petType');
   const ageRange = document.getElementById('ageRange');
   const petSize = document.getElementById('petSize');
   const petSex = document.getElementById('petSex');
 
-  // Check if any dropdown has the "Select" option selected
   if (petType.value === 'none' || ageRange.value === 'none' || petSize.value === 'none' || petSex.value === 'none') {
     const optionsToSelect = [];
 
@@ -67,83 +71,85 @@ document.getElementById('submitLostPet').addEventListener('click', async functio
     return;
   }
 
-  // Get user ID from localStorage
-  const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId');  // Get user ID from localStorage
 
-  // Get the selected image file
-  const lostPetPhotoInput = document.getElementById('lostPetPhoto');
+  //! === Check If Image === ///
+
+  const lostPetPhotoInput = document.getElementById('lostPetPhoto'); // Get the selected image file
   const lostPetPhotoFile = lostPetPhotoInput.files[0];
-
-  // Check if an image file is selected
-  if (!lostPetPhotoFile) {
+  if (!lostPetPhotoFile) {   // Check if an image file is selected
     alert('Please select an image.');
     return;
   }
 
-  try {
-    // Upload the image file and get the URL
-    const imageUrl = await uploadImage(lostPetPhotoFile);
+  //! === Upload Image + Construct lostPetInfo === ///
+  // try {
+  const imageUrl = await uploadImage(lostPetPhotoFile);    // Upload the image file and get the URL
+  const lostPetInfo = {
+    petType: petType.value, // Use the value property directly
+    petBreed: document.getElementById('petBreedSelect').value,
+    petColor: document.getElementById('petColor').value,
+    ageRange: document.getElementById('ageRange').value,
+    petSize: document.getElementById('petSize').value,
+    petSex: document.getElementById('petSex').value,
+  };
 
-    // Construct the lostPetInfo object
-    const lostPetInfo = {
-      petType: document.getElementById('petType').value,
-      petBreed: document.getElementById('petBreedSelect').value,
-      petColor: document.getElementById('petColor').value,
-      ageRange: document.getElementById('ageRange').value,
-      petSize: document.getElementById('petSize').value,
-      petSex: document.getElementById('petSex').value,
-    };
+  //! === Get the combined latitude and longitude value from the input field === //
+  // let latitude = null;
+  // let longitude = null;
 
-    let latitude = null;
-    let longitude = null;
+  // locationInput.addEventListener('keydown', function (event) {
+  //   if (event.key === 'Enter') {
+  //     event.preventDefault(); // Prevent the default form submission behavior
+  //   }
+  // });
 
-    // Get the combined latitude and longitude value from the input field
-    const locationInput = document.getElementById('locationInput');
-    const locationValue = locationInput.value; // Assuming the value is in the format "Latitude: xxx, Longitude: yyy"
+  // // No Location
+  // function updateLocationDisplay() {
+  //   const locationInput = document.getElementById('locationInput');
+  //   if (locationInfo.lat === null && locationInfo.lon === null) {
+  //     locationInput.value = `Latitude: ${latitude}, Longitude: ${longitude}`;
 
-    // If user entered a location manually
-    if (locationValue) {
-      // Extract latitude and longitude from the input value
-      const matches = locationValue.match(/Latitude: (.+), Longitude: (.+)/);
-      if (matches) {
-        latitude = matches[1];
-        longitude = matches[2];
-      }
-    } else if (navigator.geolocation) {
-      // If user selected to use current location
-      try {
-        navigator.geolocation.getCurrentPosition(async position => {
-          latitude = position.coords.latitude;
-          longitude = position.coords.longitude;
+  //   } else {
+  //     locationInput.value = ''; // Clear the input if no location is available
+  //   }
 
-          // Send the data to the server
-          const response = await fetch('/submitLostPet', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json' // Indicate that you're sending JSON
-            },
-            body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl, latitude, longitude })
-          });
+  // Check if the user entered a location manually
+  // if (locationValue) {
+  // Extract latitude and longitude from the input value
+  // const matches = locationValue.match(/Latitude: (.+), Longitude: (.+)/);
+  // if (matches) {
+  // latitude = matches[1];
+  // longitude = matches[2];
+  // }
+  // } else if (navigator.geolocation) {
+  // try {
+  // navigator.geolocation.getCurrentPosition(async position => {
+  // latitude = position.coords.latitude;
+  // longitude = position.coords.longitude;
 
-          if (response.ok) {
-            // Handle success
-            alert('Pet information submitted successfully.');
-
-            // Redirect to the home URL
-            window.location.href = '/'; // Replace with the actual home page URL
-          } else {
-            // Handle error
-            alert('Failed to submit lost pet information.');
-          }
-
-        });
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-  } catch (error) {
-    console.error('Error:', error);
+  //! === Send Data To The Server Submit ENDPOINT === //
+  const response = await fetch('/submitLostPet', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl, latitude, longitude })
+  });
+  if (response.ok) {
+    alert('Pet information submitted successfully.');// Handle success
+    window.location.href = '/';// Redirect to the home URL
+  } else {
+    alert('Failed to submit lost pet information.');// Handle error
   }
+  // });
+  // } catch (error) {
+  // console.error('Error:', error);
+  // }
+  // }
+  // } catch (error) {
+  // console.error('Error:', error);
+  // }
 });
 
 
@@ -162,111 +168,73 @@ async function uploadImage(imageFile) {
 }
 
 //! === Location 2 Way ===// 
-function openManualInput() {
-  document.getElementById("locationInputContainer").style.display = "block";
-  document.getElementById("locationInput").style.display = "none";
+// function getCurrentLocation() {
+//   return new Promise((resolve, reject) => {
+//     navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true });
+//   });
+// }
 
-  const autocompleteContainer = document.getElementById("autocomplete-container");
-  autocompleteContainer.style.display = "block";
-
-  // Initialize your autocomplete functionality here
-  // For example, you can call a function to set up the autocomplete behavior:
-  initializeAutocomplete();
+function getCurrentLocation() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        resolve({ lat: latitude, lon: longitude });
+      },
+      (error) => reject(error.message),
+      {
+        enableHighAccuracy: true
+      }
+    );
+  });
 }
 
-function useCurrentLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    alert("Geolocation is not supported by this browser.");
+//! === Use Current Location Fucntion === //
+async function useCurrentLocation() {
+  // Hide location input and autocomplete
+  document.getElementById('locationInputContainer').style.display = 'none';
+  document.getElementById('autocomplete-container').style.display = 'none';
+
+  // Show location status
+  const locationStatus = document.getElementById('locationStatus');
+  locationStatus.style.display = 'block';
+
+  try {
+    const position = await getCurrentLocation();
+    showPosition(position);
+  } catch (error) {
+    if (error.code === 1) {
+      // User denied geolocation access
+      locationStatus.textContent = 'Location Access Denied';
+    } else {
+      // Handle other geolocation errors
+      handleGeolocationError(error);
+    }
   }
 }
 
-function showPosition(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
+//! === Open Manual Function === //
+function openManualInput() {
+  //EXP Hide location status and clear text
+  const locationStatus = document.getElementById('locationStatus');
+  locationStatus.style.display = 'none';
+  locationStatus.textContent = '';
 
-  const locationInputContainer = document.getElementById("locationInputContainer");
-  const locationInput = document.getElementById("locationInput");
-
-  locationInputContainer.style.display = "block";
-  locationInput.style.display = "block";
-  locationInput.value = `Latitude: ${latitude}, Longitude: ${longitude}`;
-  document.getElementById("autocomplete-container").style.display = "none";
-  locationInput.focus();
+  //EXP Show location input and autocomplete
+  document.getElementById('locationInputContainer').style.display = 'block';
+  document.getElementById('autocomplete-container').style.display = 'block';
 }
-// function openManualInput() {
-//   var locationInputContainer = document.getElementById("locationInputContainer");
-//   locationInputContainer.style.display = "block";
-// }
-
-// function useCurrentLocation() {
-//   // Check if geolocation is available in the browser
-//   if ("geolocation" in navigator) {
-//     navigator.geolocation.getCurrentPosition(function (position) {
-//       var latitude = position.coords.latitude;
-//       var longitude = position.coords.longitude;
-
-//       // Now you can use the latitude and longitude to perform actions
-//       console.log("Latitude:", latitude);
-//       console.log("Longitude:", longitude);
-//     }, function (error) {
-//       // Handle geolocation error
-//       console.error("Error getting location:", error.message);
-//     });
-//   } else {
-//     console.error("Geolocation is not available in this browser.");
-//   }
-// }
-
-// //! locaiton
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const reportForm = document.getElementById("reportForm");
-//   const getLocationBtn = document.getElementById("getLocationBtn");
-//   const locationInput = document.getElementById("location");
-
-//   getLocationBtn.addEventListener("click", function () {
-//     if (navigator.geolocation) {
-//       navigator.geolocation.getCurrentPosition(
-//         function (position) {
-//           const latitude = position.coords.latitude;
-//           const longitude = position.coords.longitude;
-//           locationInput.value = `${latitude}, ${longitude}`;
-//         },
-//         function (error) {
-//           console.error("Error getting location:", error);
-//           alert("An error occurred while getting the location.");
-//         }
-//       );
-//     } else {
-//       alert("Geolocation is not supported by your browser.");
-//     }
-//   });
-
-//   reportForm.addEventListener("submit", async function (event) {
-//     // Rest of your form submission code...
-//   });
-// });
-
 
 //! Search autocomplete location
-/* 
-  The addressAutocomplete takes as parameters:
-  - a container element (div)
-  - callback to notify about address selection
-  - geocoder options:
-     - placeholder - placeholder text for an input element
-     - type - location type
-*/
+
 function addressAutocomplete(containerElement, callback, options) {
-  // create input element
+  //EXP create input element
   var inputElement = document.createElement("input");
   inputElement.setAttribute("type", "text");
   inputElement.setAttribute("placeholder", options.placeholder);
   containerElement.appendChild(inputElement);
 
-  // add input field clear button
+  //EXP add input field clear button
   var clearButton = document.createElement("div");
   clearButton.classList.add("clear-button");
   addIcon(clearButton);
