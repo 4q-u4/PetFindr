@@ -152,11 +152,16 @@ padding: 0;
 /*the container must be positioned relative:*/
 position: relative;
 
+display: flex;
+align-items: center;
+gap: 5px;
+
 margin-bottom: 20px;
 }
 
 .autocomplete-container input {
-width: 250px;
+/* width: 250px; */
+width: 200px;
 height: 40px;
 border-radius: 5px;
 border: 2px solid black;
@@ -203,13 +208,18 @@ background-color: rgba(0, 0, 0, 0.1);
 color: rgba(255, 255, 255, 0.4);
 cursor: pointer;
 
-position: absolute;
+/* position: absolute;
 left: 285px;
-top: 0;
+top: 0; */
+right: 0;
 
 height: 100%;
-display: none;
-align-items: center;
+/* display: none; */
+/* align-items: center; */
+display: grid;
+border: 1px solid red;
+  width: fit-content;
+  height: fit-content;
 }
 
 .clear-button.visible {

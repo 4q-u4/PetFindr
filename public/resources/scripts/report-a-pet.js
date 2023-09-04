@@ -134,7 +134,7 @@ document.getElementById('submitLostPet').addEventListener('click', async functio
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl, latitude, longitude })
+    body: JSON.stringify({ userId, lostPetInfo, photoUrl: imageUrl, latitude: locationInfo.lat, longitude: locationInfo.lon })
   });
   if (response.ok) {
     alert('Pet information submitted successfully.');// Handle success
@@ -189,28 +189,57 @@ function getCurrentLocation() {
   });
 }
 
-//! === Use Current Location Fucntion === //
-async function useCurrentLocation() {
-  // Hide location input and autocomplete
-  document.getElementById('locationInputContainer').style.display = 'none';
-  document.getElementById('autocomplete-container').style.display = 'none';
+const locationInput = document.getElementById('locationInput');
+if (locationInput === null) {
+  throw new Error("locationInput not found.");
+}
+locationInput.disabled = true;
 
-  // Show location status
-  const locationStatus = document.getElementById('locationStatus');
-  locationStatus.style.display = 'block';
-
-  try {
-    const position = await getCurrentLocation();
-    showPosition(position);
-  } catch (error) {
-    if (error.code === 1) {
-      // User denied geolocation access
-      locationStatus.textContent = 'Location Access Denied';
-    } else {
-      // Handle other geolocation errors
-      handleGeolocationError(error);
-    }
+function updateLocationOutput() {
+  let text = `${locationInfo.lat}, ${locationInfo.lon}`;
+  if (locationInfo.label) {
+    text += ` (${locationInfo.label})`
   }
+  locationInput.value = text;
+}
+
+//! === Use Current Location Fucntion === //
+// async function useCurrentLocation() {
+//   // Hide location input and autocomplete
+//   document.getElementById('locationInputContainer').style.display = 'none';
+//   document.getElementById('autocomplete-container').style.display = 'none';
+
+//   // Show location status
+//   const locationStatus = document.getElementById('locationStatus');
+//   locationStatus.style.display = 'block';
+
+//   try {
+//     const position = await getCurrentLocation();
+//     showPosition(position);
+//   } catch (error) {
+//     if (error.code === 1) {
+//       // User denied geolocation access
+//       locationStatus.textContent = 'Location Access Denied';
+//     } else {
+//       // Handle other geolocation errors
+//       handleGeolocationError(error);
+//     }
+//   }
+// }
+async function useCurrentLocation() {
+  try {
+    const location = await getCurrentLocation();
+    locationInfo.lat = location.lat;
+    locationInfo.lon = location.lon;
+    locationInfo.label = null;
+  } catch (error) {
+    locationInfo.lat = null;
+    locationInfo.lon = null;
+    locationInfo.label = null;
+    console.error(error);
+    alert(error.message);
+  }
+  updateLocationOutput();
 }
 
 //! === Open Manual Function === //
@@ -227,7 +256,7 @@ function openManualInput() {
 
 //! Search autocomplete location
 
-function addressAutocomplete(containerElement, callback, options) {
+function addressAutocomplete(containerElement, callback, errorCallback, options) {
   //EXP create input element
   var inputElement = document.createElement("input");
   inputElement.setAttribute("type", "text");
@@ -333,7 +362,8 @@ function addressAutocomplete(containerElement, callback, options) {
       },
       (err) => {
         if (!err.canceled) {
-          console.log(err);
+          // console.log(err);
+          errorCallback(err);
         }
       }
     );
@@ -448,8 +478,20 @@ addressAutocomplete(
   (data) => {
     console.log("Selected option: ");
     console.log(data);
+    locationInfo.lat = data.properties.lat;
+    locationInfo.lon = data.properties.lon;
+    locationInfo.label = data.properties.formatted;
+    updateLocationOutput();
+  },
+  (error) => {
+    locationInfo.lat = null;
+    locationInfo.lon = null;
+    locationInfo.label = null;
+    console.error(error);
+    alert(error.message);
+    updateLocationOutput();
   },
   {
-    placeholder: "Enter an address here",
+    placeholder: "Enter A Location Here",
   }
 );
