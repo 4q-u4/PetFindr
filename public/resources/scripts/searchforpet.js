@@ -62,7 +62,7 @@ fetch('/getMarkersData') //EXP: Fetch data from the server
         <img src="${markersData.lost_pet_photo_url}" alt="Marker Image" width="100"><br>
         Type: ${markersData.lost_pet_type}<br>
         ${timeAgo}<br>
-        Contact: <a href="tel:${markersData.phone}">${markersData.phone}</a><br>
+        Contact: <a href="tel:${markersData.contactNumber}">${markersData.contactNumber}</a><br>
 
       `;
       console.log('Latitude:', markersData.latitude);

@@ -527,6 +527,7 @@ app.get('/getMarkersData', async (req, res) => {
 
     const [rows] = await connection.query(query);
     connection.release();
+    console.log(rows[0]);
 
     const markersData = rows.map(row => ({
       lost_pet_photo_url: row.lost_pet_photo_url,
