@@ -1,24 +1,3 @@
-// //EXP: Attach click event handlers to product buttons
-// const viewProductButtons = document.querySelectorAll(".view-product-btn");
-
-// // Loop through each "View Product" button and add a click event listener
-// viewProductButtons.forEach((button) => {
-//   // When the button is clicked, call the handleViewProductClick function
-//   button.addEventListener("click", handleViewProductClick);
-// });
-
-// Function that handles the "View Product" button click event
-// function handleViewProductClick(event) {
-//   // Prevent the default behavior of the link (navigating to a new page)
-//   event.preventDefault();
-
-// Get the value of the 'href' attribute of the clicked button
-// const productDetailsPage = this.getAttribute("href");
-
-// Redirect the user to the product details page
-// window.location.href = productDetailsPage;
-// }
-
 
 //! === ADOPTAPET.HTML Functionality === //
 
@@ -82,15 +61,6 @@ async function fetchPetData() { // Function to fetch pet data from the server
 //! SEARCH BAR FUNCTIONAILTY
 
 
-//Call the generatePetCards function to populate the page with pet cards
-
-// const searchButton = document.getElementById('searchButton'); // Get the search button element
-
-// if (searchButton) { // If the search button exists...
-//   searchButton.addEventListener('click', (event) => { // Add a click event listener to it
-//     myFunction(); // Call your search function
-//   });
-// }
 
 function myFunction() {
   // Declare variables
@@ -104,6 +74,9 @@ function myFunction() {
   var filterSelect = document.getElementById('filterSelect');
   var selectedFilter = filterSelect.value;
 
+  console.log('Filter:', filter);
+  console.log('Selected Filter:', selectedFilter);
+
   // Loop through all card divs and hide those that don't match the search query and selected filter
   for (i = 0; i < cardDivs.length; i++) {
     var cardDiv = cardDivs[i];
@@ -111,9 +84,13 @@ function myFunction() {
     var breedElement = cardDiv.querySelector('p:nth-child(3)'); // Assuming breed is the third <p> element
     var sexElement = cardDiv.querySelector('p:nth-child(4)'); // Assuming sex is the fourth <p> element
 
-    var type = typeElement ? typeElement.textContent.trim() : '';
-    var breed = breedElement ? breedElement.textContent.trim() : '';
-    var sex = sexElement ? sexElement.textContent.trim() : '';
+    var type = typeElement ? typeElement.textContent.trim().split(': ')[1] : '';
+    var breed = breedElement ? breedElement.textContent.trim().split(': ')[1] : '';
+    var sex = sexElement ? sexElement.textContent.trim().split(': ')[1] : '';
+
+    console.log('Card ' + i + ' - Type:', type);
+    console.log('Card ' + i + ' - Breed:', breed);
+    console.log('Card ' + i + ' - Sex:', sex);
 
     // Check if the selected filter matches the card's property
     if (
@@ -123,8 +100,12 @@ function myFunction() {
       (selectedFilter === 'sex' && sex.toUpperCase().indexOf(filter) > -1)
     ) {
       cardDiv.style.display = '';
+      console.log('Card ' + i + ' - Display: Block');
+
     } else {
       cardDiv.style.display = 'none';
+      console.log('Card ' + i + ' - Display: None');
+
     }
   }
 }
