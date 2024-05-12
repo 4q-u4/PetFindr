@@ -2,6 +2,10 @@
 
 Unite Lost Pets with Their Families - Find Lost pets - Adopt Pets
 
+![screenshot of pet finder app](/PetFindr.png)
+![screenshot of pet finder app](/PetFindry.png)
+
+
 PetFIndr is a web application designed to assist users in finding their missing pets and simplifying the process of reporting lost pets. It provides a user-friendly interface for both pet owners and individuals searching for lost pets.
 
 ## 🐾 Pages
